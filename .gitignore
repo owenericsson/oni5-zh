@@ -1,0 +1,16 @@
+# Local Python environment
+.venv/
+__pycache__/
+*.py[cod]
+
+# ROM images and emulator save data
+*.gb
+*.gbc
+*.sav
+
+# Generated ROM-analysis output
+reports/tiles/
+reports/ascii_strings.txt
+
+# macOS metadata
+.DS_Store
