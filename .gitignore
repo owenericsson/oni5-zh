@@ -7,6 +7,7 @@ __pycache__/
 *.gb
 *.gbc
 *.sav
+roms/*.s[0-9]
 
 # Generated ROM-analysis output
 reports/tiles/
