@@ -10,6 +10,7 @@
 - `kind` 使用 `control`、`macro_ref`、`glyph_code`、`special_glyph`、`terminator` 或 `unknown`。无法确认的字节必须保留为 `unknown`，不得静默转成字符或丢弃。
 - `display` 和 `meaning` 只记录有证据支持的解释。宏展开信息可选，只有确认后才填写；未确认的译文用 `null` 表示。
 - `observations` 记录模拟器中实际观察到的屏幕文本及其正文子范围；`translation.segments` 与这些范围对应。译文与原始字节分开保存，不覆盖 ROM 数据或控制码。
+- 提取器使用 `data/text_manifest.json` 保存人工确认的范围和 token 注释；没有注释的正文 byte 会输出为 `unknown`，同时加入 `diagnostics.unknown_tokens` 并向标准错误报告。
 
 ## 字段
 
@@ -26,6 +27,9 @@
 | `observations` | 经模拟器或画面核实的原文片段和对应字节范围。 |
 | `translation` | 译文状态及按原文范围对应的译文片段。 |
 | `verification` | 支持边界和解释的证据摘要。 |
+| `diagnostics.unknown_tokens` | 提取阶段未注释的字节位置和值；未知值保留在 `tokens` 中，不会被丢弃。 |
+| `decoded_text` | 解码器追加的可读文本；不会覆盖原始字节或 token。 |
+| `decode_diagnostics` | 解码器追加的未知 token 和含义未定 token 列表。 |
 
 ## 已验证样本
 
@@ -65,9 +69,9 @@
     {"offset": "0x013546", "raw_hex": "7D", "kind": "control", "meaning": "line_advance"},
     {"offset": "0x013547", "raw_hex": "3B", "kind": "glyph_code", "display": "「"},
     {"offset": "0x013548", "raw_hex": "1D", "kind": "glyph_code", "display": "な"},
-    {"offset": "0x013549", "raw_hex": "4D", "kind": "special_glyph", "display": " ", "meaning": "blank_tile; textual role not confirmed"},
+    {"offset": "0x013549", "raw_hex": "4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
     {"offset": "0x01354A", "raw_hex": "B7", "kind": "macro_ref", "display": "なんだ"},
-    {"offset": "0x01354B", "raw_hex": "4D", "kind": "special_glyph", "display": " ", "meaning": "blank_tile; textual role not confirmed"},
+    {"offset": "0x01354B", "raw_hex": "4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
     {"offset": "0x01354C", "raw_hex": "12", "kind": "glyph_code", "display": "こ"},
     {"offset": "0x01354D", "raw_hex": "21", "kind": "glyph_code", "display": "の"},
     {"offset": "0x01354E", "raw_hex": "0E", "kind": "glyph_code", "display": "か"},
@@ -98,7 +102,10 @@
     "事件分派表将 $57 映射到 $6E88，处理器调用文本解析器 $16F0。",
     "运行时解析游标从 $353F 开始；$7F 在 $13552 结束当前内嵌文本段并返回事件脚本。",
     "下一个事件命令 $57 位于 $13556，其正文从 $13557 开始。"
-  ]
+  ],
+  "diagnostics": {
+    "unknown_tokens": []
+  }
 }
 ```
 

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "glyph_codes": {
+    "0x07": {"text": "ょ", "status": "confirmed"},
+    "0x0A": {"text": "い", "status": "confirmed"},
+    "0x0B": {"text": "う", "status": "confirmed"},
+    "0x0D": {"text": "お", "status": "confirmed"},
+    "0x0E": {"text": "か", "status": "confirmed", "note": "普通文本样本「このかんじ」"},
+    "0x0F": {"text": "き", "status": "confirmed"},
+    "0x11": {"text": "け", "status": "confirmed"},
+    "0x12": {"text": "こ", "status": "confirmed", "note": "普通文本上下文；宏展开上下文存在不同观察"},
+    "0x14": {"text": "し", "status": "confirmed"},
+    "0x15": {"text": "す", "status": "confirmed"},
+    "0x18": {"text": "た", "status": "confirmed"},
+    "0x1C": {"text": "と", "status": "confirmed"},
+    "0x1D": {"text": "な", "status": "confirmed"},
+    "0x1E": {"text": "に", "status": "confirmed"},
+    "0x21": {"text": "の", "status": "confirmed"},
+    "0x22": {"text": "は", "status": "confirmed"},
+    "0x27": {"text": "ま", "status": "confirmed"},
+    "0x31": {"text": "る", "status": "confirmed"},
+    "0x32": {"text": "れ", "status": "confirmed"},
+    "0x34": {"text": "わ", "status": "confirmed"},
+    "0x36": {"text": "ん", "status": "confirmed"},
+    "0x3B": {"text": "「", "status": "confirmed"},
+    "0x3C": {"text": "」", "status": "confirmed"},
+    "0x66": {"text": "じ", "status": "confirmed", "note": "画面字形由「し」与前一格濁点组件组合"},
+    "0x6D": {"text": "で", "status": "confirmed", "note": "首段普通文本「これで」；濁点组合的写入细节未确认"}
+  },
+  "special_glyphs": {
+    "0x4D": {
+      "text": "[空白图块$4D]",
+      "status": "unresolved",
+      "note": "图块视觉为空白；它在文本中的作用尚未确认"
+    }
+  },
+  "macro_refs": {
+    "0x80": {"text": "こがねまる", "status": "confirmed", "note": "用户根据对应画面辨认；展开码与普通路径映射存在差异"},
+    "0x95": {"text": "ときわまる", "status": "confirmed"},
+    "0xB7": {"text": "なんだ", "status": "confirmed"},
+    "0xCC": {"text": "！？」", "status": "confirmed"}
+  },
+  "controls": {
+    "0x7B": {"text": "[REGION]", "status": "confirmed", "note": "与$7C共享区域处理路径"},
+    "0x7C": {"text": "[REGION]", "status": "confirmed"},
+    "0x7D": {"text": "\n", "status": "confirmed"},
+    "0x7E": {"text": "[PAGE]", "status": "confirmed"},
+    "0x7F": {"text": "[END]", "status": "confirmed"}
+  }
+}
