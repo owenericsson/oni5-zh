@@ -23,8 +23,9 @@
 - 已在 MBC1 bank `$24` 中定位到解析器消费的文本数据流；确认两条 `$57` 事件命令后的内嵌文本边界，并用两段人工核对的画面文字验证提取与解码输出。当前只确认了 `$7B–$7F` 中几个已观察码的主要行为，尚无穷尽的控制码清单；其他文本块边界及控制码副作用仍待分析。
 - 已定义 JSONL 文本记录格式，并用一个经 SameBoy 核对的事件文本样本说明 bank、正文边界、原始字节、控制码和译文的对应方式（见[格式说明](notes/text-record-format.md)）。
 - 已实现按人工确认边界工作的只读提取器和保守解码器；未知码与尚未定性的空白图块会显式保留并报告。
+- T10–T14 已完成：验证 8×8 中文字形原型，确定固定格排版（对话每行 18 格、菜单约 5 格），将两段已核对的可见对话片段定为首轮翻译试点，并建立独立 ROM 输出构建器。T15 已通过原 ROM 和临时输出的尺寸及 checksum 基线验证；真实汉化 ROM 的 SameBoy 加载检查待实际字节补丁清单就绪后进行。详见 [Day 4 记录](notes/day-04.md)。
 - T09a–T09f 已完成：已记录室内、村外、道具屋和战斗画面的代表性 map/OAM/VRAM 样本，并对大地图读取固定 VRAM 窗口（未读取完整 map/OAM）。当前没有任何 VRAM 区域被证实可安全复用。结论不涵盖完整资源加载来源或生命周期；若后续需要，应单独开展专项追踪。详见 [任务清单](tasks.md) 与 [Day 3 记录](notes/day-03.md)。
-- 每日进展记录见 [Day 1：SameBoy 字符与 ROM 数据流追踪](notes/day-01.md)、[Day 2：控制码展开与页面处理追踪](notes/day-02.md) 和 [Day 3：只读提取与样本文本解码](notes/day-03.md)。
+- 每日进展记录见 [Day 1：SameBoy 字符与 ROM 数据流追踪](notes/day-01.md)、[Day 2：控制码展开与页面处理追踪](notes/day-02.md)、[Day 3：只读提取与样本文本解码](notes/day-03.md) 和 [Day 4：字形、布局与翻译范围](notes/day-04.md)。
 
 ## 目录结构
 
@@ -56,7 +57,7 @@
 从项目根目录运行以下命令：
 
 ```bash
-# 输出 ROM 大小、哈希和 Game Boy 卡带头信息
+# 输出 ROM 大小、哈希，并验证头部声明的容量及两种 checksum
 python scripts/analys_rom.py roms/oni5_original.gb
 
 # 查看指定 ROM 区域，偏移和长度支持十进制或 0x 开头的十六进制
@@ -78,9 +79,15 @@ python scripts/render_tiles.py roms/oni5_original.gb
 python scripts/decode_gb_resource.py roms/oni5_original.gb \
   --bank 5 --descriptor 0x55D3 --length 0x800 \
   --output /tmp/oni5-resource05.bin
+
+# 字节补丁清单准备好后，生成独立 ROM；默认不覆盖已存在的输出文件
+python scripts/build_rom.py roms/oni5_original.gb \
+  data/rom_patch_manifest.json roms/oni5_zh.gb
 ```
 
 资源解码器依据 SameBoy 反汇编还原当前已验证的 bitstream/回溯格式；命令要求明确指定 ROMX bank、描述头地址、解码长度和输出路径。输出文件已存在时默认报错；只有明确需要替换时才传入 `--overwrite`。当前只用 bank `$05` 的一类资源及运行时样本验证，不应假设其他描述头或资源都已支持。
+
+ROM 构建器使用 schema version 1 的 JSON 清单：顶层字段为 `source_rom_sha256` 和非空 `patches`；每条补丁提供唯一 `id`、十六进制 `offset`、`expected_hex` 和等长 `replacement_hex`。它会拒绝源哈希不匹配、原字节不符、越界、重叠或变长写入；成功时重算 Header/Global checksum，并只写入独立的同尺寸 ROM。需要显式传入 `--overwrite` 才会替换已有输出。该工具目前不生成 IPS/BPS 分发补丁，也尚无实际汉化字节清单；要等字形编码和 ROM 写入方案确定后才能生成汉化 ROM。
 
 目前的 ASCII 扫描只会找到字节值落在可打印 ASCII 范围内的片段，不能据此判断游戏文本的位置或编码。图块预览也只是原始字节的初步可视化，需通过模拟器进一步确认。
 文本提取器只读取清单中人工确认的 bank 和边界，不扫描或修改 ROM；未注释的字节会保留并报告为未知 token。解码器使用 `data/text_decode_map.json` 中已确认的字符、宏和控制码映射；未收录的码不会静默丢弃。

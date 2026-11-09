@@ -10,6 +10,7 @@
 - `kind` 使用 `control`、`macro_ref`、`glyph_code`、`special_glyph`、`terminator` 或 `unknown`。无法确认的字节必须保留为 `unknown`，不得静默转成字符或丢弃。
 - `display` 和 `meaning` 只记录有证据支持的解释。宏展开信息可选，只有确认后才填写；未确认的译文用 `null` 表示。
 - `observations` 记录模拟器中实际观察到的屏幕文本及其正文子范围；`translation.segments` 与这些范围对应。译文与原始字节分开保存，不覆盖 ROM 数据或控制码。
+- `translation.status` 为 `untranslated` 时表示尚无译文；为 `draft` 时表示已有译稿但尚未审核定稿。每个译稿仍须按 `source_start` 和 `source_end_exclusive` 对应原文范围。
 - 提取器使用 `data/text_manifest.json` 保存人工确认的范围和 token 注释；没有注释的正文 byte 会输出为 `unknown`，同时加入 `diagnostics.unknown_tokens` 并向标准错误报告。
 
 ## 字段
@@ -89,12 +90,12 @@
     }
   ],
   "translation": {
-    "status": "untranslated",
+    "status": "draft",
     "segments": [
       {
         "source_start": "0x013545",
         "source_end_exclusive": "0x013552",
-        "text": null
+        "text": "常盘丸\n「什、什么情况 这气息！？」"
       }
     ]
   },

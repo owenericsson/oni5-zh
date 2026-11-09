@@ -51,12 +51,12 @@
         }
       ],
       "translation": {
-        "status": "untranslated",
+        "status": "draft",
         "segments": [
           {
             "source_start": "0x013545",
             "source_end_exclusive": "0x013552",
-            "text": null
+            "text": "常盘丸\n「什、什么情况 这气息！？」"
           }
         ]
       },
@@ -127,12 +127,12 @@
         }
       ],
       "translation": {
-        "status": "untranslated",
+        "status": "draft",
         "segments": [
           {
             "source_start": "0x01348F",
             "source_end_exclusive": "0x0134AA",
-            "text": null
+            "text": "「今日之修行\n就此作罢」"
           }
         ]
       },
