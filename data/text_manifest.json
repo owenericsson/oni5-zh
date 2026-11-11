@@ -51,7 +51,7 @@
         }
       ],
       "translation": {
-        "status": "draft",
+        "status": "confirmed",
         "segments": [
           {
             "source_start": "0x013545",
@@ -140,6 +140,174 @@
         "ROM $01348B 为事件命令 $57；同一分派表项进入 $6E88 并调用文本解析器 $16F0。",
         "正文从命令后的 $01348C 开始；SameBoy 曾在逻辑地址 $748F/$7490 观察到正文内的 $3B/$0F。",
         "从 $01348C 起的下一个 $7F 位于 $013516；解析器在 $7F 分支返回，因此排他终点为 $013517。"
+      ]
+    },
+    {
+      "id": "oni5-bank0c-pointer-030e8e",
+      "source": {
+        "bank": {
+          "logical": "0x0C",
+          "physical": "0x0C",
+          "size": "0x4000"
+        },
+        "pointer": {
+          "window": "lower",
+          "cpu_address": "0x0E8E"
+        },
+        "payload": {
+          "start": "0x030E8E",
+          "end_exclusive": "0x030ED2",
+          "terminator": "0x7F"
+        }
+      },
+      "token_annotations": [
+        {"offset": "0x030E8E", "code": "0xB9", "kind": "macro_ref", "display": "おんな"},
+        {"offset": "0x030E8F", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x030E90", "code": "0x3B", "kind": "glyph_code", "display": "「"},
+        {"offset": "0x030E91", "code": "0x2B", "kind": "glyph_code"},
+        {"offset": "0x030E92", "code": "0x0B", "kind": "glyph_code"},
+        {"offset": "0x030E93", "code": "0x15", "kind": "glyph_code"},
+        {"offset": "0x030E94", "code": "0x12", "kind": "glyph_code"},
+        {"offset": "0x030E95", "code": "0x14", "kind": "glyph_code"},
+        {"offset": "0x030E96", "code": "0x6D", "kind": "glyph_code"},
+        {"offset": "0x030E97", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x030E98", "code": "0x15", "kind": "glyph_code"},
+        {"offset": "0x030E99", "code": "0x10", "kind": "glyph_code"},
+        {"offset": "0x030E9A", "code": "0x2B", "kind": "glyph_code"},
+        {"offset": "0x030E9B", "code": "0x6E", "kind": "glyph_code"},
+        {"offset": "0x030E9C", "code": "0x0B", "kind": "glyph_code"},
+        {"offset": "0x030E9D", "code": "0x1E", "kind": "glyph_code"},
+        {"offset": "0x030E9E", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x030E9F", "code": "0x1A", "kind": "glyph_code"},
+        {"offset": "0x030EA0", "code": "0x32", "kind": "glyph_code"},
+        {"offset": "0x030EA1", "code": "0x1B", "kind": "glyph_code"},
+        {"offset": "0x030EA2", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x030EA3", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x030EA4", "code": "0x0A", "kind": "glyph_code"},
+        {"offset": "0x030EA5", "code": "0x0E", "kind": "glyph_code"},
+        {"offset": "0x030EA6", "code": "0x32", "kind": "glyph_code"},
+        {"offset": "0x030EA7", "code": "0x31", "kind": "glyph_code"},
+        {"offset": "0x030EA8", "code": "0x1C", "kind": "glyph_code"},
+        {"offset": "0x030EA9", "code": "0x12", "kind": "glyph_code"},
+        {"offset": "0x030EAA", "code": "0x33", "kind": "glyph_code"},
+        {"offset": "0x030EAB", "code": "0x6A", "kind": "glyph_code"},
+        {"offset": "0x030EAC", "code": "0x08", "kind": "glyph_code"},
+        {"offset": "0x030EAD", "code": "0x18", "kind": "glyph_code"},
+        {"offset": "0x030EAE", "code": "0x21", "kind": "glyph_code"},
+        {"offset": "0x030EAF", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x030EB0", "code": "0x15", "kind": "glyph_code"},
+        {"offset": "0x030EB1", "code": "0x10", "kind": "glyph_code"},
+        {"offset": "0x030EB2", "code": "0x2B", "kind": "glyph_code"},
+        {"offset": "0x030EB3", "code": "0x6E", "kind": "glyph_code"},
+        {"offset": "0x030EB4", "code": "0x0B", "kind": "glyph_code"},
+        {"offset": "0x030EB5", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x030EB6", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x030EB7", "code": "0x60", "kind": "glyph_code"},
+        {"offset": "0x030EB8", "code": "0x6E", "kind": "glyph_code"},
+        {"offset": "0x030EB9", "code": "0x12", "kind": "glyph_code"},
+        {"offset": "0x030EBA", "code": "0x0E", "kind": "glyph_code"},
+        {"offset": "0x030EBB", "code": "0x08", "kind": "glyph_code"},
+        {"offset": "0x030EBC", "code": "0x1B", "kind": "glyph_code"},
+        {"offset": "0x030EBD", "code": "0xCF", "kind": "macro_ref"},
+        {"offset": "0x030EBE", "code": "0x13", "kind": "glyph_code"},
+        {"offset": "0x030EBF", "code": "0x09", "kind": "glyph_code"},
+        {"offset": "0x030EC0", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x030EC1", "code": "0x14", "kind": "glyph_code"},
+        {"offset": "0x030EC2", "code": "0x2F", "kind": "glyph_code"},
+        {"offset": "0x030EC3", "code": "0x1D", "kind": "glyph_code"},
+        {"offset": "0x030EC4", "code": "0x0A", "kind": "glyph_code"},
+        {"offset": "0x030EC5", "code": "0x11", "kind": "glyph_code"},
+        {"offset": "0x030EC6", "code": "0x6E", "kind": "glyph_code"},
+        {"offset": "0x030EC7", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x030EC8", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x030EC9", "code": "0xA0", "kind": "macro_ref"},
+        {"offset": "0x030ECA", "code": "0x60", "kind": "glyph_code"},
+        {"offset": "0x030ECB", "code": "0x0A", "kind": "glyph_code"},
+        {"offset": "0x030ECC", "code": "0x08", "kind": "glyph_code"},
+        {"offset": "0x030ECD", "code": "0x1B", "kind": "glyph_code"},
+        {"offset": "0x030ECE", "code": "0x18", "kind": "glyph_code"},
+        {"offset": "0x030ECF", "code": "0x21", "kind": "glyph_code"},
+        {"offset": "0x030ED0", "code": "0x3C", "kind": "glyph_code", "display": "」"},
+        {"offset": "0x030ED1", "code": "0x7F", "kind": "terminator"}
+      ],
+      "observations": [
+        {
+          "start": "0x030E8E",
+          "end_exclusive": "0x030ED1",
+          "text": "おんな\nもうすこしで□すくもどうに□つれて\nいかれるところだったの□すくもどう\nがどこかって？□さあ□しらないけど\nようかいがいってたの」",
+          "evidence": "用户提供的 SameBoy 五行转写；ROM 中两处地名编码均为 15 10 2B 6E 0B，对应完整的「すくもどう」"
+        }
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x030E8E",
+            "source_end_exclusive": "0x030ED1",
+            "text": "女子\n「差点便被带去\n宿木堂了。宿木堂\n在何处？不知，听妖怪\n言确有此地」"
+          }
+        ]
+      },
+      "verification": [
+        "SameBoy 在 $174E 字符分派处捕获游标 $0E8E，活动 bank 为 $0C；回溯调用链为 $20:$174E ← $20:$16F9 ← $21:$6E88。",
+        "bank $0C:$0E8E 映射到文件偏移 $030E8E；正文截至 $030ED1 的 $7F 终止码，排他终点为 $030ED2。",
+        "$B9 宏展开为「おんな」；地名编码在 $030E98 和 $030EB0 重复，两处均含表示「ど」的 $6E。",
+        "此记录使用 banked pointer，不记录尚未定位的事件命令地址。"
+      ]
+    },
+    {
+      "id": "oni5-bank0c-pointer-030e33",
+      "source": {
+        "bank": {
+          "logical": "0x0C",
+          "physical": "0x0C",
+          "size": "0x4000"
+        },
+        "pointer": {
+          "window": "lower",
+          "cpu_address": "0x0E33"
+        },
+        "payload": {
+          "start": "0x030E33",
+          "end_exclusive": "0x030E3D",
+          "terminator": "0x7F"
+        }
+      },
+      "token_annotations": [
+        {"offset": "0x030E33", "code": "0x12", "kind": "glyph_code", "display": "こ"},
+        {"offset": "0x030E34", "code": "0x1D", "kind": "glyph_code", "display": "な"},
+        {"offset": "0x030E35", "code": "0x0E", "kind": "glyph_code", "display": "か"},
+        {"offset": "0x030E36", "code": "0xC6", "kind": "macro_ref", "display": "むら"},
+        {"offset": "0x030E37", "code": "0x1E", "kind": "glyph_code", "display": "に"},
+        {"offset": "0x030E38", "code": "0x2E", "kind": "glyph_code"},
+        {"offset": "0x030E39", "code": "0x0B", "kind": "glyph_code", "display": "う"},
+        {"offset": "0x030E3A", "code": "0x12", "kind": "glyph_code", "display": "こ"},
+        {"offset": "0x030E3B", "code": "0x17", "kind": "glyph_code"},
+        {"offset": "0x030E3C", "code": "0x7F", "kind": "terminator"}
+      ],
+      "observations": [
+        {
+          "start": "0x030E33",
+          "end_exclusive": "0x030E3C",
+          "text": "こなかむらにようこそ",
+          "evidence": "用户在 SameBoy 通知板画面确认完整原文；$C6 宏数据包含两个展开码"
+        }
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x030E33",
+            "source_end_exclusive": "0x030E3C",
+            "text": "欢迎来到小中村"
+          }
+        ]
+      },
+      "verification": [
+        "SameBoy 在 $174E 捕获活动 bank $0C、游标 $0E33；在 $17C2 命中 A=$7F 时，HRAM 游标为 $0E3D，位于此正文终止符之后。",
+        "原 ROM 文件偏移 $030E33 的正文为 12 1D 0E C6 1E 2E 0B 12 17 7F。",
+        "$C6 宏表项位于 $03028C，指针为 $049D；bank $0C:$049D 的数据以 02 29 2F 开始，结合屏幕原文确认宏展开为「むら」。",
+        "由完整屏幕原文和原始字节对应确认 $2E 为「よ」、$17 为「そ」。用户提供的攻略将「こなかむら」标为「小中の村／小中村莊」(https://forum.gamer.com.tw/Co.php?bsn=60009&sn=33735)；中文译文定为「欢迎来到小中村」。"
       ]
     }
   ]

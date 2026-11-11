@@ -11,6 +11,7 @@
     "0x12": {"text": "こ", "status": "confirmed", "note": "普通文本上下文；宏展开上下文存在不同观察"},
     "0x14": {"text": "し", "status": "confirmed"},
     "0x15": {"text": "す", "status": "confirmed"},
+    "0x17": {"text": "そ", "status": "confirmed", "note": "通知板「こなかむらにようこそ」末尾字节；依据用户对完整屏幕原文的确认"},
     "0x18": {"text": "た", "status": "confirmed"},
     "0x1C": {"text": "と", "status": "confirmed"},
     "0x1D": {"text": "な", "status": "confirmed"},
@@ -18,6 +19,7 @@
     "0x21": {"text": "の", "status": "confirmed"},
     "0x22": {"text": "は", "status": "confirmed"},
     "0x27": {"text": "ま", "status": "confirmed"},
+    "0x2E": {"text": "よ", "status": "confirmed", "note": "通知板「こなかむらにようこそ」中的对应字节；依据用户对完整屏幕原文的确认"},
     "0x31": {"text": "る", "status": "confirmed"},
     "0x32": {"text": "れ", "status": "confirmed"},
     "0x34": {"text": "わ", "status": "confirmed"},
@@ -38,6 +40,7 @@
     "0x80": {"text": "こがねまる", "status": "confirmed", "note": "用户根据对应画面辨认；展开码与普通路径映射存在差异"},
     "0x95": {"text": "ときわまる", "status": "confirmed"},
     "0xB7": {"text": "なんだ", "status": "confirmed"},
+    "0xC6": {"text": "むら", "status": "confirmed", "note": "bank $0C:$0E33 通知板；宏表指向 $049D，展开数据 02 29 2F；用户确认完整屏幕原文「こなかむらにようこそ」"},
     "0xCC": {"text": "！？」", "status": "confirmed"}
   },
   "controls": {

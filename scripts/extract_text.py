@@ -49,43 +49,63 @@ def extract_record(rom: bytes, template: dict[str, Any], rom_sha256: str) -> dic
 
     parse_hex(bank.get("logical"), f"{record_id}.source.bank.logical")
     physical_bank = parse_hex(bank.get("physical"), f"{record_id}.source.bank.physical")
-    event = require_object(
-        source_template.get("event_command"),
-        f"{record_id}.source.event_command",
-    )
-    event_offset = parse_hex(event.get("rom_offset"), f"{record_id}.event_command.rom_offset")
-    event_opcode = parse_hex(event.get("opcode"), f"{record_id}.event_command.opcode")
-    cpu_address = parse_hex(event.get("cpu_address"), f"{record_id}.event_command.cpu_address")
+    event_value = source_template.get("event_command")
+    pointer_value = source_template.get("pointer")
+    if (event_value is None) == (pointer_value is None):
+        raise ValueError(f"{record_id}: source must contain exactly one of event_command or pointer")
 
     payload = require_object(source_template.get("payload"), f"{record_id}.source.payload")
     payload_start = parse_hex(payload.get("start"), f"{record_id}.payload.start")
     payload_end = parse_hex(payload.get("end_exclusive"), f"{record_id}.payload.end_exclusive")
     terminator = parse_hex(payload.get("terminator"), f"{record_id}.payload.terminator")
 
-    for field, value in (
-        ("event opcode", event_opcode),
-        ("terminator", terminator),
-    ):
-        if value > 0xFF:
-            raise ValueError(f"{record_id}: {field} must fit in one byte")
-
-    if payload_start != event_offset + 1:
-        raise ValueError(f"{record_id}: inline payload must immediately follow its event command")
     if payload_end <= payload_start:
         raise ValueError(f"{record_id}: payload range must be non-empty")
-    if payload_end > len(rom) or event_offset >= len(rom):
-        raise ValueError(f"{record_id}: event or payload range exceeds ROM size")
-    if event_offset // bank_size != physical_bank:
-        raise ValueError(f"{record_id}: event offset does not match the declared physical bank")
+    if payload_end > len(rom):
+        raise ValueError(f"{record_id}: payload range exceeds ROM size")
     if payload_start // bank_size != physical_bank or (payload_end - 1) // bank_size != physical_bank:
         raise ValueError(f"{record_id}: payload crosses or disagrees with the declared physical bank")
-    if cpu_address != 0x4000 + event_offset % bank_size:
-        raise ValueError(f"{record_id}: CPU address does not match the event ROM offset")
-    if rom[event_offset] != event_opcode:
-        raise ValueError(
-            f"{record_id}: event opcode mismatch at 0x{event_offset:06X}; "
-            f"expected 0x{event_opcode:02X}, found 0x{rom[event_offset]:02X}"
-        )
+    if terminator > 0xFF:
+        raise ValueError(f"{record_id}: terminator must fit in one byte")
+
+    if event_value is not None:
+        event = require_object(event_value, f"{record_id}.source.event_command")
+        event_offset = parse_hex(event.get("rom_offset"), f"{record_id}.event_command.rom_offset")
+        event_opcode = parse_hex(event.get("opcode"), f"{record_id}.event_command.opcode")
+        cpu_address = parse_hex(event.get("cpu_address"), f"{record_id}.event_command.cpu_address")
+        if event_opcode > 0xFF:
+            raise ValueError(f"{record_id}: event opcode must fit in one byte")
+        if payload_start != event_offset + 1:
+            raise ValueError(f"{record_id}: inline payload must immediately follow its event command")
+        if event_offset >= len(rom):
+            raise ValueError(f"{record_id}: event or payload range exceeds ROM size")
+        if event_offset // bank_size != physical_bank:
+            raise ValueError(f"{record_id}: event offset does not match the declared physical bank")
+        if cpu_address != 0x4000 + event_offset % bank_size:
+            raise ValueError(f"{record_id}: CPU address does not match the event ROM offset")
+        if rom[event_offset] != event_opcode:
+            raise ValueError(
+                f"{record_id}: event opcode mismatch at 0x{event_offset:06X}; "
+                f"expected 0x{event_opcode:02X}, found 0x{rom[event_offset]:02X}"
+            )
+    else:
+        pointer = require_object(pointer_value, f"{record_id}.source.pointer")
+        pointer_address = parse_hex(pointer.get("cpu_address"), f"{record_id}.pointer.cpu_address")
+        window = pointer.get("window")
+        if window == "lower" and pointer_address < bank_size:
+            mapped_offset = physical_bank * bank_size + pointer_address
+        elif window == "upper" and bank_size <= pointer_address < 2 * bank_size:
+            mapped_offset = physical_bank * bank_size + pointer_address - bank_size
+        else:
+            raise ValueError(
+                f"{record_id}: pointer must use the lower (0x0000-0x3FFF) "
+                "or upper (0x4000-0x7FFF) ROM window"
+            )
+        if payload_start != mapped_offset:
+            raise ValueError(
+                f"{record_id}: pointer maps to ROM offset 0x{mapped_offset:06X}, "
+                f"not payload start 0x{payload_start:06X}"
+            )
 
     raw_payload = rom[payload_start:payload_end]
     if raw_payload[-1] != terminator:

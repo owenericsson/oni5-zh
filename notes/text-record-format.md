@@ -4,8 +4,10 @@
 
 - 每行是一个独立 JSON 对象，文件采用 UTF-8；下例为便于阅读而格式化展示。
 - 所有 ROM 偏移都是从文件起点算起的绝对偏移；地址用带 `0x` 前缀的十六进制字符串表示。
-- `end_exclusive` 采用左闭右开范围。`raw_hex` 只包含文本正文，包含终止码，但不包含触发正文的事件命令。
+- `end_exclusive` 采用左闭右开范围。`raw_hex` 只包含文本正文并包含终止码；内嵌正文不包含前置事件命令，banked-pointer 正文从指针目标开始。
 - `source.bank` 同时记录游戏逻辑 bank 和 ROM 实际物理 bank，避免 MBC1 映射下地址含义混淆。
+- `source` 必须且只能包含 `event_command` 或 `pointer` 之一。前者用于正文紧随事件命令的布局；后者用于正文由 banked pointer 单独指向的布局。
+- `source.pointer.window` 为 `lower` 或 `upper`。`lower` 的 CPU 地址范围是 `$0000–$3FFF`，物理 ROM 偏移为 `physical_bank * bank_size + cpu_address`；`upper` 的 CPU 地址范围是 `$4000–$7FFF`，物理偏移为 `physical_bank * bank_size + cpu_address - bank_size`。
 - `tokens` 按原始顺序覆盖正文的每个字节，不得遗漏、重叠或重排；拼接 token 的 `raw_hex` 必须等于记录的 `raw_hex`。
 - `kind` 使用 `control`、`macro_ref`、`glyph_code`、`special_glyph`、`terminator` 或 `unknown`。无法确认的字节必须保留为 `unknown`，不得静默转成字符或丢弃。
 - `display` 和 `meaning` 只记录有证据支持的解释。宏展开信息可选，只有确认后才填写；未确认的译文用 `null` 表示。
@@ -21,7 +23,8 @@
 | `id` | 稳定且唯一的记录 ID。 |
 | `source.rom_sha256` | 被分析 ROM 的 SHA-256，用于确认来源。 |
 | `source.bank` | 逻辑 bank、物理 bank 和 bank 大小。 |
-| `source.event_command` | 触发该正文的事件命令及其 ROM/CPU 地址。 |
+| `source.event_command` | 可选；正文紧跟该事件命令时记录其 opcode 和 ROM/CPU 地址。 |
+| `source.pointer` | 可选；记录 banked pointer 的 CPU 地址及 ROM 窗口。与 `event_command` 二选一。 |
 | `source.payload` | 正文起点、排他终点和终止码。 |
 | `raw_hex` | 正文原始字节，以空格分隔的十六进制串保存。 |
 | `tokens` | 与原始字节逐项对齐的解释；解释不确定时保留 `unknown`。 |
@@ -111,3 +114,5 @@
 ```
 
 完整正文中 `$1353F–$13544` 的屏幕语义尚未全部确认；因此样本只把已核实的画面文字放入 `observations`，不将其误当成整条正文的完整转写。译文应在确认对应屏幕片段后填写。
+
+村中女子对话是 banked-pointer 样本：活动 bank `$0C` 的 lower-window 指针 `$0E8E` 映射到 ROM `$030E8E`，正文以 `$7F` 结束，排他终点为 `$030ED2`。其 `source` 不包含 `event_command`，避免把运行时调用点误记成事件命令。

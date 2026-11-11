@@ -58,6 +58,71 @@ class ExtractRecordTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "terminator mismatch"):
             extract_record(bytes(self.rom), self.template, "test-hash")
 
+    def test_extracts_text_from_a_banked_lower_window_pointer(self):
+        rom = bytearray(0x40000)
+        payload_start = 0x0C * 0x4000 + 0x0E8E
+        rom[payload_start:payload_start + 4] = bytes((0xB9, 0x7D, 0x3B, 0x7F))
+        template = {
+            "id": "test-bank0c-pointer-00e8e",
+            "source": {
+                "bank": {
+                    "logical": "0x0C",
+                    "physical": "0x0C",
+                    "size": "0x4000",
+                },
+                "pointer": {
+                    "window": "lower",
+                    "cpu_address": "0x0E8E",
+                },
+                "payload": {
+                    "start": "0x030E8E",
+                    "end_exclusive": "0x030E92",
+                    "terminator": "0x7F",
+                },
+            },
+            "token_annotations": [
+                {"offset": "0x030E8E", "code": "0xB9", "kind": "macro_ref"},
+                {"offset": "0x030E8F", "code": "0x7D", "kind": "control"},
+                {"offset": "0x030E90", "code": "0x3B", "kind": "glyph_code"},
+            ],
+        }
+
+        record = extract_record(bytes(rom), template, "test-hash")
+
+        self.assertEqual(record["raw_hex"], "B9 7D 3B 7F")
+        self.assertEqual(record["source"]["pointer"]["cpu_address"], "0x0E8E")
+        self.assertEqual(
+            [token["offset"] for token in record["tokens"]],
+            ["0x030E8E", "0x030E8F", "0x030E90", "0x030E91"],
+        )
+
+    def test_rejects_pointer_that_does_not_map_to_payload_start(self):
+        rom = bytearray(0x40000)
+        payload_start = 0x0C * 0x4000 + 0x0E8E
+        rom[payload_start:payload_start + 2] = bytes((0x12, 0x7F))
+        template = {
+            "id": "test-pointer-mismatch",
+            "source": {
+                "bank": {
+                    "logical": "0x0C",
+                    "physical": "0x0C",
+                    "size": "0x4000",
+                },
+                "pointer": {
+                    "window": "lower",
+                    "cpu_address": "0x0E8E",
+                },
+                "payload": {
+                    "start": "0x030E8F",
+                    "end_exclusive": "0x030E91",
+                    "terminator": "0x7F",
+                },
+            },
+        }
+
+        with self.assertRaisesRegex(ValueError, "pointer maps to ROM offset"):
+            extract_record(bytes(rom), template, "test-hash")
+
 
 if __name__ == "__main__":
     unittest.main()
