@@ -1,0 +1,416 @@
+{
+  "schema_version": 1,
+  "status": "blocked_pending_runtime_loader_and_restore_validation",
+  "mode": "fixed_tile_mapping",
+  "source_rom_sha256": "870f83f781c103925f206f35b71cdda6a0493e5b4c70d70b49cade145c35f127",
+  "font_resource": {
+    "bank": "0x03",
+    "descriptor": "0x5CA4",
+    "decoded_length": 2048,
+    "decoded_sha256": "692b3740bbe2487d018fd20656e0e2f682805ae93dda61670e43894a3eba9458"
+  },
+  "tile_pool": {
+    "start": "0x80",
+    "end_exclusive": "0xC0",
+    "count": 34,
+    "eligible_count": 44,
+    "reserved_native_tile_ids": [
+      "0xBB",
+      "0xBC"
+    ],
+    "excluded_non_text_map_ids": [
+      "0x88",
+      "0x8A",
+      "0x8B",
+      "0x8D",
+      "0x8E",
+      "0x90",
+      "0x92",
+      "0x95",
+      "0x98",
+      "0x9C",
+      "0x9D",
+      "0xA1",
+      "0xAB",
+      "0xB1",
+      "0xB2",
+      "0xB3",
+      "0xB6",
+      "0xB8"
+    ],
+    "status": "pending_target_context_reference_and_restore_audit"
+  },
+  "custom_glyph_count": 34,
+  "entries": [
+    {
+      "character": "。",
+      "codepoint": "U+3002",
+      "input_code": "0x00",
+      "tile": "0x80",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "00 00 00 00 00 00 00 00 20 20 50 50 20 20 00 00",
+      "restore_pattern_2bpp_hex": "00 00 00 00 20 20 70 70 28 28 7C 7C B4 B4 68 68",
+      "font_output_offset": "0x000"
+    },
+    {
+      "character": "「",
+      "codepoint": "U+300C",
+      "input_code": "0x3B",
+      "tile": "0xBB",
+      "tile_source": "native",
+      "glyph_pattern_2bpp_hex": null,
+      "restore_pattern_2bpp_hex": null,
+      "font_output_offset": null
+    },
+    {
+      "character": "」",
+      "codepoint": "U+300D",
+      "input_code": "0x3C",
+      "tile": "0xBC",
+      "tile_source": "native",
+      "glyph_pattern_2bpp_hex": null,
+      "restore_pattern_2bpp_hex": null,
+      "font_output_offset": null
+    },
+    {
+      "character": "不",
+      "codepoint": "U+4E0D",
+      "input_code": "0x01",
+      "tile": "0x81",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "FE FE 08 08 10 10 34 34 D2 D2 10 10 10 10 00 00",
+      "restore_pattern_2bpp_hex": "00 00 00 00 00 00 88 88 84 84 84 84 C0 C0 40 40",
+      "font_output_offset": "0x010"
+    },
+    {
+      "character": "中",
+      "codepoint": "U+4E2D",
+      "input_code": "0x02",
+      "tile": "0x82",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "10 10 FE FE 92 92 92 92 FE FE 10 10 10 10 00 00",
+      "restore_pattern_2bpp_hex": "00 00 00 00 30 30 00 00 38 38 44 44 04 04 38 38",
+      "font_output_offset": "0x020"
+    },
+    {
+      "character": "了",
+      "codepoint": "U+4E86",
+      "input_code": "0x03",
+      "tile": "0x83",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "FE FE 04 04 18 18 10 10 10 10 10 10 30 30 00 00",
+      "restore_pattern_2bpp_hex": "00 00 00 00 30 30 00 00 78 78 10 10 20 20 5C 5C",
+      "font_output_offset": "0x030"
+    },
+    {
+      "character": "何",
+      "codepoint": "U+4F55",
+      "input_code": "0x04",
+      "tile": "0x84",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "2E 2E 42 42 DE DE 56 56 5E 5E 42 42 46 46 00 00",
+      "restore_pattern_2bpp_hex": "00 00 00 00 20 20 74 74 24 24 78 78 A4 A4 68 68",
+      "font_output_offset": "0x040"
+    },
+    {
+      "character": "便",
+      "codepoint": "U+4FBF",
+      "input_code": "0x05",
+      "tile": "0x85",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "5E 5E 84 84 BE BE AA AA BE BE 90 90 AE AE 00 00",
+      "restore_pattern_2bpp_hex": "00 00 00 00 50 50 58 58 E4 E4 48 48 20 20 20 20",
+      "font_output_offset": "0x050"
+    },
+    {
+      "character": "到",
+      "codepoint": "U+5230",
+      "input_code": "0x06",
+      "tile": "0x86",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "F2 F2 2A 2A 5A 5A FA FA 62 62 32 32 C6 C6 00 00",
+      "restore_pattern_2bpp_hex": "00 00 00 00 10 10 B8 B8 D4 D4 94 94 98 98 20 20",
+      "font_output_offset": "0x060"
+    },
+    {
+      "character": "去",
+      "codepoint": "U+53BB",
+      "input_code": "0x07",
+      "tile": "0x87",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "10 10 7C 7C 10 10 FE FE 20 20 44 44 7A 7A 00 00",
+      "restore_pattern_2bpp_hex": "00 00 00 00 10 10 18 18 10 10 70 70 98 98 64 64",
+      "font_output_offset": "0x070"
+    },
+    {
+      "character": "听",
+      "codepoint": "U+542C",
+      "input_code": "0x09",
+      "tile": "0x89",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "0E 0E D0 D0 BE BE B4 B4 F4 F4 14 14 24 24 00 00",
+      "restore_pattern_2bpp_hex": "20 20 78 78 24 24 3C 3C 6A 6A AA AA 92 92 64 64",
+      "font_output_offset": "0x090"
+    },
+    {
+      "character": "在",
+      "codepoint": "U+5728",
+      "input_code": "0x0C",
+      "tile": "0x8C",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "20 20 FE FE 28 28 5C 5C C8 C8 48 48 7E 7E 00 00",
+      "restore_pattern_2bpp_hex": "38 38 00 00 7C 7C 08 08 10 10 30 30 4A 4A 8C 8C",
+      "font_output_offset": "0x0C0"
+    },
+    {
+      "character": "地",
+      "codepoint": "U+5730",
+      "input_code": "0x0F",
+      "tile": "0x8F",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "44 44 54 54 FE FE 56 56 74 74 D2 D2 0E 0E 00 00",
+      "restore_pattern_2bpp_hex": "10 10 7C 7C 10 10 FE FE 08 08 84 84 C0 C0 38 38",
+      "font_output_offset": "0x0F0"
+    },
+    {
+      "character": "堂",
+      "codepoint": "U+5802",
+      "input_code": "0x11",
+      "tile": "0x91",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "54 54 FE FE AA AA 38 38 7C 7C 10 10 FE FE 00 00",
+      "restore_pattern_2bpp_hex": "04 04 9E 9E 84 84 84 84 84 84 C4 C4 84 84 08 08",
+      "font_output_offset": "0x110"
+    },
+    {
+      "character": "处",
+      "codepoint": "U+5904",
+      "input_code": "0x13",
+      "tile": "0x93",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "44 44 74 74 96 96 54 54 24 24 50 50 8E 8E 00 00",
+      "restore_pattern_2bpp_hex": "10 10 08 08 FE FE 04 04 0C 0C 84 84 80 80 7C 7C",
+      "font_output_offset": "0x130"
+    },
+    {
+      "character": "女",
+      "codepoint": "U+5973",
+      "input_code": "0x14",
+      "tile": "0x94",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "10 10 10 10 FE FE 24 24 44 44 38 38 C6 C6 00 00",
+      "restore_pattern_2bpp_hex": "80 80 40 40 40 40 40 40 40 40 42 42 44 44 38 38",
+      "font_output_offset": "0x140"
+    },
+    {
+      "character": "妖",
+      "codepoint": "U+5996",
+      "input_code": "0x16",
+      "tile": "0x96",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "22 22 2C 2C F4 F4 5E 5E 64 64 34 34 CA CA 00 00",
+      "restore_pattern_2bpp_hex": "04 04 44 44 FE FE 44 44 4C 4C 44 44 40 40 3C 3C",
+      "font_output_offset": "0x160"
+    },
+    {
+      "character": "子",
+      "codepoint": "U+5B50",
+      "input_code": "0x17",
+      "tile": "0x97",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "7C 7C 08 08 10 10 FE FE 10 10 10 10 30 30 00 00",
+      "restore_pattern_2bpp_hex": "24 24 18 18 30 30 FE FE 18 18 20 20 20 20 1C 1C",
+      "font_output_offset": "0x170"
+    },
+    {
+      "character": "宿",
+      "codepoint": "U+5BBF",
+      "input_code": "0x19",
+      "tile": "0x99",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "10 10 FE FE AA AA 54 54 DC DC 54 54 5C 5C 00 00",
+      "restore_pattern_2bpp_hex": "10 10 FE FE 10 10 20 20 7C 7C 02 02 02 02 3C 3C",
+      "font_output_offset": "0x190"
+    },
+    {
+      "character": "小",
+      "codepoint": "U+5C0F",
+      "input_code": "0x1A",
+      "tile": "0x9A",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "10 10 10 10 54 54 52 52 92 92 10 10 30 30 00 00",
+      "restore_pattern_2bpp_hex": "00 00 1C 1C E2 E2 02 02 02 02 02 02 04 04 38 38",
+      "font_output_offset": "0x1A0"
+    },
+    {
+      "character": "差",
+      "codepoint": "U+5DEE",
+      "input_code": "0x1B",
+      "tile": "0x9B",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "44 44 FE FE 10 10 FE FE 5C 5C 48 48 BE BE 00 00",
+      "restore_pattern_2bpp_hex": "00 00 8E 8E 74 74 08 08 10 10 20 20 20 20 1E 1E",
+      "font_output_offset": "0x1B0"
+    },
+    {
+      "character": "带",
+      "codepoint": "U+5E26",
+      "input_code": "0x1E",
+      "tile": "0x9E",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "54 54 FE FE 54 54 FE FE 92 92 7C 7C 54 54 00 00",
+      "restore_pattern_2bpp_hex": "00 00 9E 9E A4 A4 80 80 80 80 A0 A0 90 90 4E 4E",
+      "font_output_offset": "0x1E0"
+    },
+    {
+      "character": "怪",
+      "codepoint": "U+602A",
+      "input_code": "0x1F",
+      "tile": "0x9F",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "7C 7C D4 D4 C8 C8 76 76 5C 5C 48 48 7E 7E 00 00",
+      "restore_pattern_2bpp_hex": "10 10 90 90 BC BC 52 52 D2 D2 AE AE B2 B2 4C 4C",
+      "font_output_offset": "0x1F0"
+    },
+    {
+      "character": "有",
+      "codepoint": "U+6709",
+      "input_code": "0x20",
+      "tile": "0xA0",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "20 20 FE FE 24 24 7C 7C A4 A4 3C 3C 24 24 00 00",
+      "restore_pattern_2bpp_hex": "40 40 4C 4C D2 D2 62 62 42 42 CE CE 52 52 4C 4C",
+      "font_output_offset": "0x200"
+    },
+    {
+      "character": "木",
+      "codepoint": "U+6728",
+      "input_code": "0x22",
+      "tile": "0xA2",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "10 10 10 10 FE FE 38 38 54 54 92 92 10 10 00 00",
+      "restore_pattern_2bpp_hex": "04 04 84 84 BE BE 84 84 84 84 9C 9C A6 A6 18 18",
+      "font_output_offset": "0x220"
+    },
+    {
+      "character": "村",
+      "codepoint": "U+6751",
+      "input_code": "0x23",
+      "tile": "0xA3",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "24 24 FE FE 24 24 74 74 6C 6C A4 A4 2C 2C 00 00",
+      "restore_pattern_2bpp_hex": "00 00 F0 F0 20 20 44 44 84 84 86 86 88 88 70 70",
+      "font_output_offset": "0x230"
+    },
+    {
+      "character": "来",
+      "codepoint": "U+6765",
+      "input_code": "0x24",
+      "tile": "0xA4",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "10 10 FE FE 54 54 FE FE 38 38 54 54 92 92 00 00",
+      "restore_pattern_2bpp_hex": "78 78 10 10 00 00 34 34 8A 8A 8A 8A 8A 8A 70 70",
+      "font_output_offset": "0x240"
+    },
+    {
+      "character": "欢",
+      "codepoint": "U+6B22",
+      "input_code": "0x25",
+      "tile": "0xA5",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "08 08 EE EE 32 32 A4 A4 44 44 6A 6A 92 92 00 00",
+      "restore_pattern_2bpp_hex": "20 20 50 50 48 48 88 88 84 84 04 04 02 02 02 02",
+      "font_output_offset": "0x250"
+    },
+    {
+      "character": "此",
+      "codepoint": "U+6B64",
+      "input_code": "0x26",
+      "tile": "0xA6",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "28 28 28 28 BA BA AC AC A8 A8 BA BA CE CE 00 00",
+      "restore_pattern_2bpp_hex": "3E 3E 84 84 BE BE 84 84 84 84 DC DC A4 A4 1A 1A",
+      "font_output_offset": "0x260"
+    },
+    {
+      "character": "点",
+      "codepoint": "U+70B9",
+      "input_code": "0x27",
+      "tile": "0xA7",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "1C 1C 10 10 7C 7C 44 44 7C 7C 00 00 AA AA 00 00",
+      "restore_pattern_2bpp_hex": "08 08 FE FE 08 08 FC FC 08 08 78 78 8C 8C 72 72",
+      "font_output_offset": "0x270"
+    },
+    {
+      "character": "知",
+      "codepoint": "U+77E5",
+      "input_code": "0x28",
+      "tile": "0xA8",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "40 40 7E 7E AA AA 7A 7A 2A 2A 5A 5A 8E 8E 00 00",
+      "restore_pattern_2bpp_hex": "38 38 08 08 10 10 14 14 7C 7C A6 A6 A4 A4 48 48",
+      "font_output_offset": "0x280"
+    },
+    {
+      "character": "确",
+      "codepoint": "U+786E",
+      "input_code": "0x29",
+      "tile": "0xA9",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "EC EC 54 54 4E 4E 8A 8A 6E 6E 6E 6E 12 12 00 00",
+      "restore_pattern_2bpp_hex": "20 20 F4 F4 22 22 62 62 A0 A0 A0 A0 62 62 1C 1C",
+      "font_output_offset": "0x290"
+    },
+    {
+      "character": "被",
+      "codepoint": "U+88AB",
+      "input_code": "0x2A",
+      "tile": "0xAA",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "44 44 1E 1E F4 F4 5E 5E 7A 7A D4 D4 6A 6A 00 00",
+      "restore_pattern_2bpp_hex": "10 10 90 90 BC BC 52 52 D2 D2 A2 A2 B2 B2 44 44",
+      "font_output_offset": "0x2A0"
+    },
+    {
+      "character": "言",
+      "codepoint": "U+8A00",
+      "input_code": "0x2C",
+      "tile": "0xAC",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "10 10 FE FE 00 00 38 38 7C 7C 44 44 7C 7C 00 00",
+      "restore_pattern_2bpp_hex": "48 48 4C 4C 72 72 C2 C2 24 24 20 20 10 10 10 10",
+      "font_output_offset": "0x2C0"
+    },
+    {
+      "character": "迎",
+      "codepoint": "U+8FCE",
+      "input_code": "0x2D",
+      "tile": "0xAD",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "50 50 2E 2E EA EA 6A 6A 7E 7E 48 48 BE BE 00 00",
+      "restore_pattern_2bpp_hex": "10 10 10 10 BC BC D2 D2 92 92 B2 B2 1C 1C 60 60",
+      "font_output_offset": "0x2D0"
+    },
+    {
+      "character": "，",
+      "codepoint": "U+FF0C",
+      "input_code": "0x2E",
+      "tile": "0xAE",
+      "tile_source": "custom",
+      "glyph_pattern_2bpp_hex": "00 00 00 00 00 00 00 00 60 60 20 20 40 40 00 00",
+      "restore_pattern_2bpp_hex": "10 10 10 10 1E 1E 10 10 08 08 78 78 8C 8C 72 72",
+      "font_output_offset": "0x2E0"
+    },
+    {
+      "character": "？",
+      "codepoint": "U+FF1F",
+      "input_code": "0x4A",
+      "tile": "0xCA",
+      "tile_source": "native",
+      "glyph_pattern_2bpp_hex": null,
+      "restore_pattern_2bpp_hex": null,
+      "font_output_offset": null
+    }
+  ]
+}

@@ -6,14 +6,47 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTICEBOARD_RECORD_ID = "oni5-bank0c-pointer-030e33"
+WOMAN_RECORD_ID = "oni5-bank0c-pointer-030e8e"
 PILOT_RECORD_IDS = (
     NOTICEBOARD_RECORD_ID,
-    "oni5-bank0c-pointer-030e8e",
+    WOMAN_RECORD_ID,
 )
-CUSTOM_TOKEN_CODES = [
-    code for code in range(0x2A, 0x55) if code != 0x4D
+NON_TEXT_MAP_TILE_IDS = {
+    0x88,
+    0x8A,
+    0x8B,
+    0x8D,
+    0x8E,
+    0x90,
+    0x92,
+    0x95,
+    0x98,
+    0x9C,
+    0x9D,
+    0xA1,
+    0xAB,
+    0xB1,
+    0xB2,
+    0xB3,
+    0xB6,
+    0xB8,
+}
+NATIVE_TILE_BY_CHARACTER = {
+    "？": 0xCA,
+    "「": 0xBB,
+    "」": 0xBC,
+}
+NATIVE_CUSTOM_TILE_IDS = {
+    tile_id
+    for tile_id in NATIVE_TILE_BY_CHARACTER.values()
+    if 0x80 <= tile_id < 0xC0
+}
+ELIGIBLE_CUSTOM_TILE_IDS = [
+    tile_id
+    for tile_id in range(0x80, 0xC0)
+    if tile_id not in NON_TEXT_MAP_TILE_IDS | NATIVE_CUSTOM_TILE_IDS
 ]
-TILE_IDS = [*range(0xC0, 0xCA), 0xCB, *range(0xE0, 0xFF)]
+PROVISIONAL_CUSTOM_TILE_IDS = ELIGIBLE_CUSTOM_TILE_IDS[:34]
 SPACE_CODE = 0x4D
 LINE_ADVANCE_CODE = 0x7D
 PAGE_TRANSITION_CODE = 0x7E
@@ -35,7 +68,14 @@ def create_glyph_map(glyph_asset: Any) -> tuple[list[dict[str, str]], dict[str, 
     glyphs = root.get("glyphs")
     if not isinstance(glyphs, list) or not glyphs:
         raise ValueError("glyph asset.glyphs must be a non-empty list")
-    capacity = min(len(CUSTOM_TOKEN_CODES), len(TILE_IDS))
+    native_characters = {
+        glyph.get("character")
+        for glyph in glyphs
+        if isinstance(glyph, dict)
+        and isinstance(glyph.get("character"), str)
+        and glyph["character"] in NATIVE_TILE_BY_CHARACTER
+    }
+    capacity = len(PROVISIONAL_CUSTOM_TILE_IDS) + len(native_characters)
     if len(glyphs) > capacity:
         raise ValueError(
             f"glyph asset has {len(glyphs)} glyphs, exceeding candidate capacity {capacity}"
@@ -44,6 +84,8 @@ def create_glyph_map(glyph_asset: Any) -> tuple[list[dict[str, str]], dict[str, 
     token_map = []
     code_by_character = {}
     seen_characters = set()
+    seen_codes = set()
+    custom_tiles = iter(PROVISIONAL_CUSTOM_TILE_IDS)
     for index, value in enumerate(glyphs):
         glyph = require_object(value, f"glyph asset.glyphs[{index}]")
         character = glyph.get("character")
@@ -65,8 +107,14 @@ def create_glyph_map(glyph_asset: Any) -> tuple[list[dict[str, str]], dict[str, 
             raise ValueError(f"tile data for {character!r} must be 16 bytes")
 
         seen_characters.add(character)
-        code = CUSTOM_TOKEN_CODES[index]
-        tile = TILE_IDS[index]
+        native_tile = NATIVE_TILE_BY_CHARACTER.get(character)
+        tile = native_tile if native_tile is not None else next(custom_tiles)
+        code = tile - 0x80
+        if not 0 <= code < 0x60:
+            raise ValueError(f"tile 0x{tile:02X} cannot use direct text code 0x{code:02X}")
+        if code == SPACE_CODE or code in seen_codes:
+            raise ValueError(f"duplicate or reserved direct input code: 0x{code:02X}")
+        seen_codes.add(code)
         code_by_character[character] = code
         token_map.append(
             {
@@ -74,6 +122,7 @@ def create_glyph_map(glyph_asset: Any) -> tuple[list[dict[str, str]], dict[str, 
                 "codepoint": codepoint,
                 "input_code": f"0x{code:02X}",
                 "tile": f"0x{tile:02X}",
+                "tile_source": "native" if native_tile is not None else "custom",
             }
         )
 
@@ -142,25 +191,32 @@ def compile_encoding(manifest: Any, glyph_asset: Any) -> dict[str, Any]:
 
         body = encode_text(text, code_by_character)
         source_length = end - start
-        padding_count = source_length - len(body)
-        if padding_count < 0:
+        if len(body) > source_length:
             raise ValueError(
                 f"{record_id}: encoded text needs {len(body)} bytes, "
                 f"but source span has {source_length}"
             )
         padding_code = SPACE_CODE
+        padding_count = 0 if record_id == WOMAN_RECORD_ID else source_length - len(body)
         body.extend([padding_code] * padding_count)
         body.append(terminator)
+        patch_end = start + len(body)
+        padding_status = (
+            "omitted: trailing 0x4D cells caused an extra scroll; terminator follows translated text"
+            if record_id == WOMAN_RECORD_ID
+            else "0x4D visual blank verified in SameBoy"
+        )
         encoded_records.append(
             {
                 "id": record_id,
                 "source_start": f"0x{start:06X}",
                 "source_end_exclusive": f"0x{payload_end:06X}",
+                "patch_end_exclusive": f"0x{patch_end:06X}",
                 "source_bytes": payload_end - start,
                 "encoded_bytes": len(body),
                 "padding_count": padding_count,
                 "padding_code": f"0x{padding_code:02X}",
-                "padding_status": "0x4D visual blank verified in SameBoy",
+                "padding_status": padding_status,
                 "encoded_hex": bytes(body).hex(" ").upper(),
                 "decoded_text": text,
             }
@@ -169,7 +225,23 @@ def compile_encoding(manifest: Any, glyph_asset: Any) -> dict[str, Any]:
     font = require_object(glyph_asset, "glyph asset").get("font")
     return {
         "schema_version": 1,
-        "status": "pending_context_runtime_probe",
+        "status": "blocked_by_tile_pool_audit",
+        "tile_allocation_status": (
+            "provisional_80_bf_excluding_map_refs_and_native_tiles_blocked_pending_lifecycle_audit"
+        ),
+        "provisional_custom_tile_pool": {
+            "start": "0x80",
+            "end_exclusive": "0xC0",
+            "count": len(PROVISIONAL_CUSTOM_TILE_IDS),
+            "eligible_count": len(ELIGIBLE_CUSTOM_TILE_IDS),
+            "reserved_native_tile_ids": [
+                f"0x{tile_id:02X}" for tile_id in sorted(NATIVE_CUSTOM_TILE_IDS)
+            ],
+            "excluded_non_text_map_ids": [
+                f"0x{tile_id:02X}" for tile_id in sorted(NON_TEXT_MAP_TILE_IDS)
+            ],
+            "status": "pending_target_context_reference_and_restore_audit",
+        },
         "mode": "context_scoped",
         "font_source_sha256": font["source_sha256"],
         "custom_glyphs": token_map,
@@ -177,7 +249,10 @@ def compile_encoding(manifest: Any, glyph_asset: Any) -> dict[str, Any]:
             "space": {
                 "input_code": f"0x{SPACE_CODE:02X}",
                 "tile": "0xCD",
-                "status": "0x4D padding verified for noticeboard (2 cells) and woman (30 cells)",
+                "status": (
+                    "0x4D padding verified for noticeboard (2 cells); omitted from the woman "
+                    "stream because trailing spaces caused an extra scroll"
+                ),
             },
             "line_advance": f"0x{LINE_ADVANCE_CODE:02X}",
             "page_transition": f"0x{PAGE_TRANSITION_CODE:02X}",
@@ -195,10 +270,16 @@ def compile_encoding(manifest: Any, glyph_asset: Any) -> dict[str, Any]:
         "runtime_requirements": [
             "Activate the custom mapping only for the two listed source ranges.",
             "Restore the original mapping when the source terminator is processed.",
+            "For custom glyphs, encode input_code as tile_id - 0x80; the original renderer adds 0x80 for codes below 0x60.",
             "Do not use 0xD6 as padding; a zero expansion length loops 256 times.",
-            "0x4D padding preserves source length and terminator in both tested records.",
+            "0x4D padding preserves the noticeboard source length; the woman stream terminates immediately after translated text to avoid trailing-space scrolling.",
             "Validate custom mapping activation only for the two exact text ranges.",
             "Verify the original Japanese mapping is restored after each 0x7F terminator.",
+            "Reserve 0xE0-0xFF globally for dynamic portraits; do not allocate custom glyphs there.",
+            "Treat 0x80-0xBF excluding observed non-text BG map IDs and native punctuation tile IDs as a provisional fixed pool only; verify transition references, per-tile backups, and restoration before generating a ROM.",
+            "Prefer native tile reuse for 0xFF1F (0xCA), 0x300C (0xBB), and 0x300D (0xBC); these are the glyph tiles used by the original dialogue text.",
+            "Do not allocate custom glyph patterns to native punctuation tiles marked tile_source=native.",
+            "Do not custom-allocate 0xCB (native exclamation mark) or the blank 0xCC-0xCD tiles.",
         ],
     }
 

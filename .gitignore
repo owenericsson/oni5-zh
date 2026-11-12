@@ -8,6 +8,7 @@ __pycache__/
 *.gbc
 *.sav
 roms/*.s[0-9]
+roms/*_patches.json
 
 # Generated ROM-analysis output
 reports/tiles/

@@ -1,237 +1,306 @@
 {
   "schema_version": 1,
-  "status": "pending_context_runtime_probe",
+  "status": "blocked_by_tile_pool_audit",
+  "tile_allocation_status": "provisional_80_bf_excluding_map_refs_and_native_tiles_blocked_pending_lifecycle_audit",
+  "provisional_custom_tile_pool": {
+    "start": "0x80",
+    "end_exclusive": "0xC0",
+    "count": 34,
+    "eligible_count": 44,
+    "reserved_native_tile_ids": [
+      "0xBB",
+      "0xBC"
+    ],
+    "excluded_non_text_map_ids": [
+      "0x88",
+      "0x8A",
+      "0x8B",
+      "0x8D",
+      "0x8E",
+      "0x90",
+      "0x92",
+      "0x95",
+      "0x98",
+      "0x9C",
+      "0x9D",
+      "0xA1",
+      "0xAB",
+      "0xB1",
+      "0xB2",
+      "0xB3",
+      "0xB6",
+      "0xB8"
+    ],
+    "status": "pending_target_context_reference_and_restore_audit"
+  },
   "mode": "context_scoped",
   "font_source_sha256": "37b51f4f2a094a952a3cb481090c2185922a65b90c228e5bdad7b4c445ca7939",
   "custom_glyphs": [
     {
       "character": "。",
       "codepoint": "U+3002",
-      "input_code": "0x2A",
-      "tile": "0xC0"
+      "input_code": "0x00",
+      "tile": "0x80",
+      "tile_source": "custom"
     },
     {
       "character": "「",
       "codepoint": "U+300C",
-      "input_code": "0x2B",
-      "tile": "0xC1"
+      "input_code": "0x3B",
+      "tile": "0xBB",
+      "tile_source": "native"
     },
     {
       "character": "」",
       "codepoint": "U+300D",
-      "input_code": "0x2C",
-      "tile": "0xC2"
+      "input_code": "0x3C",
+      "tile": "0xBC",
+      "tile_source": "native"
     },
     {
       "character": "不",
       "codepoint": "U+4E0D",
-      "input_code": "0x2D",
-      "tile": "0xC3"
+      "input_code": "0x01",
+      "tile": "0x81",
+      "tile_source": "custom"
     },
     {
       "character": "中",
       "codepoint": "U+4E2D",
-      "input_code": "0x2E",
-      "tile": "0xC4"
+      "input_code": "0x02",
+      "tile": "0x82",
+      "tile_source": "custom"
     },
     {
       "character": "了",
       "codepoint": "U+4E86",
-      "input_code": "0x2F",
-      "tile": "0xC5"
+      "input_code": "0x03",
+      "tile": "0x83",
+      "tile_source": "custom"
     },
     {
       "character": "何",
       "codepoint": "U+4F55",
-      "input_code": "0x30",
-      "tile": "0xC6"
+      "input_code": "0x04",
+      "tile": "0x84",
+      "tile_source": "custom"
     },
     {
       "character": "便",
       "codepoint": "U+4FBF",
-      "input_code": "0x31",
-      "tile": "0xC7"
+      "input_code": "0x05",
+      "tile": "0x85",
+      "tile_source": "custom"
     },
     {
       "character": "到",
       "codepoint": "U+5230",
-      "input_code": "0x32",
-      "tile": "0xC8"
+      "input_code": "0x06",
+      "tile": "0x86",
+      "tile_source": "custom"
     },
     {
       "character": "去",
       "codepoint": "U+53BB",
-      "input_code": "0x33",
-      "tile": "0xC9"
+      "input_code": "0x07",
+      "tile": "0x87",
+      "tile_source": "custom"
     },
     {
       "character": "听",
       "codepoint": "U+542C",
-      "input_code": "0x34",
-      "tile": "0xCB"
+      "input_code": "0x09",
+      "tile": "0x89",
+      "tile_source": "custom"
     },
     {
       "character": "在",
       "codepoint": "U+5728",
-      "input_code": "0x35",
-      "tile": "0xE0"
+      "input_code": "0x0C",
+      "tile": "0x8C",
+      "tile_source": "custom"
     },
     {
       "character": "地",
       "codepoint": "U+5730",
-      "input_code": "0x36",
-      "tile": "0xE1"
+      "input_code": "0x0F",
+      "tile": "0x8F",
+      "tile_source": "custom"
     },
     {
       "character": "堂",
       "codepoint": "U+5802",
-      "input_code": "0x37",
-      "tile": "0xE2"
+      "input_code": "0x11",
+      "tile": "0x91",
+      "tile_source": "custom"
     },
     {
       "character": "处",
       "codepoint": "U+5904",
-      "input_code": "0x38",
-      "tile": "0xE3"
+      "input_code": "0x13",
+      "tile": "0x93",
+      "tile_source": "custom"
     },
     {
       "character": "女",
       "codepoint": "U+5973",
-      "input_code": "0x39",
-      "tile": "0xE4"
+      "input_code": "0x14",
+      "tile": "0x94",
+      "tile_source": "custom"
     },
     {
       "character": "妖",
       "codepoint": "U+5996",
-      "input_code": "0x3A",
-      "tile": "0xE5"
+      "input_code": "0x16",
+      "tile": "0x96",
+      "tile_source": "custom"
     },
     {
       "character": "子",
       "codepoint": "U+5B50",
-      "input_code": "0x3B",
-      "tile": "0xE6"
+      "input_code": "0x17",
+      "tile": "0x97",
+      "tile_source": "custom"
     },
     {
       "character": "宿",
       "codepoint": "U+5BBF",
-      "input_code": "0x3C",
-      "tile": "0xE7"
+      "input_code": "0x19",
+      "tile": "0x99",
+      "tile_source": "custom"
     },
     {
       "character": "小",
       "codepoint": "U+5C0F",
-      "input_code": "0x3D",
-      "tile": "0xE8"
+      "input_code": "0x1A",
+      "tile": "0x9A",
+      "tile_source": "custom"
     },
     {
       "character": "差",
       "codepoint": "U+5DEE",
-      "input_code": "0x3E",
-      "tile": "0xE9"
+      "input_code": "0x1B",
+      "tile": "0x9B",
+      "tile_source": "custom"
     },
     {
       "character": "带",
       "codepoint": "U+5E26",
-      "input_code": "0x3F",
-      "tile": "0xEA"
+      "input_code": "0x1E",
+      "tile": "0x9E",
+      "tile_source": "custom"
     },
     {
       "character": "怪",
       "codepoint": "U+602A",
-      "input_code": "0x40",
-      "tile": "0xEB"
+      "input_code": "0x1F",
+      "tile": "0x9F",
+      "tile_source": "custom"
     },
     {
       "character": "有",
       "codepoint": "U+6709",
-      "input_code": "0x41",
-      "tile": "0xEC"
+      "input_code": "0x20",
+      "tile": "0xA0",
+      "tile_source": "custom"
     },
     {
       "character": "木",
       "codepoint": "U+6728",
-      "input_code": "0x42",
-      "tile": "0xED"
+      "input_code": "0x22",
+      "tile": "0xA2",
+      "tile_source": "custom"
     },
     {
       "character": "村",
       "codepoint": "U+6751",
-      "input_code": "0x43",
-      "tile": "0xEE"
+      "input_code": "0x23",
+      "tile": "0xA3",
+      "tile_source": "custom"
     },
     {
       "character": "来",
       "codepoint": "U+6765",
-      "input_code": "0x44",
-      "tile": "0xEF"
+      "input_code": "0x24",
+      "tile": "0xA4",
+      "tile_source": "custom"
     },
     {
       "character": "欢",
       "codepoint": "U+6B22",
-      "input_code": "0x45",
-      "tile": "0xF0"
+      "input_code": "0x25",
+      "tile": "0xA5",
+      "tile_source": "custom"
     },
     {
       "character": "此",
       "codepoint": "U+6B64",
-      "input_code": "0x46",
-      "tile": "0xF1"
+      "input_code": "0x26",
+      "tile": "0xA6",
+      "tile_source": "custom"
     },
     {
       "character": "点",
       "codepoint": "U+70B9",
-      "input_code": "0x47",
-      "tile": "0xF2"
+      "input_code": "0x27",
+      "tile": "0xA7",
+      "tile_source": "custom"
     },
     {
       "character": "知",
       "codepoint": "U+77E5",
-      "input_code": "0x48",
-      "tile": "0xF3"
+      "input_code": "0x28",
+      "tile": "0xA8",
+      "tile_source": "custom"
     },
     {
       "character": "确",
       "codepoint": "U+786E",
-      "input_code": "0x49",
-      "tile": "0xF4"
+      "input_code": "0x29",
+      "tile": "0xA9",
+      "tile_source": "custom"
     },
     {
       "character": "被",
       "codepoint": "U+88AB",
-      "input_code": "0x4A",
-      "tile": "0xF5"
+      "input_code": "0x2A",
+      "tile": "0xAA",
+      "tile_source": "custom"
     },
     {
       "character": "言",
       "codepoint": "U+8A00",
-      "input_code": "0x4B",
-      "tile": "0xF6"
+      "input_code": "0x2C",
+      "tile": "0xAC",
+      "tile_source": "custom"
     },
     {
       "character": "迎",
       "codepoint": "U+8FCE",
-      "input_code": "0x4C",
-      "tile": "0xF7"
+      "input_code": "0x2D",
+      "tile": "0xAD",
+      "tile_source": "custom"
     },
     {
       "character": "，",
       "codepoint": "U+FF0C",
-      "input_code": "0x4E",
-      "tile": "0xF8"
+      "input_code": "0x2E",
+      "tile": "0xAE",
+      "tile_source": "custom"
     },
     {
       "character": "？",
       "codepoint": "U+FF1F",
-      "input_code": "0x4F",
-      "tile": "0xF9"
+      "input_code": "0x4A",
+      "tile": "0xCA",
+      "tile_source": "native"
     }
   ],
   "special_codes": {
     "space": {
       "input_code": "0x4D",
       "tile": "0xCD",
-      "status": "0x4D padding verified for noticeboard (2 cells) and woman (30 cells)"
+      "status": "0x4D padding verified for noticeboard (2 cells); omitted from the woman stream because trailing spaces caused an extra scroll"
     },
     "line_advance": "0x7D",
     "page_transition": "0x7E",
@@ -247,33 +316,41 @@
       "id": "oni5-bank0c-pointer-030e33",
       "source_start": "0x030E33",
       "source_end_exclusive": "0x030E3D",
+      "patch_end_exclusive": "0x030E3D",
       "source_bytes": 10,
       "encoded_bytes": 10,
       "padding_count": 2,
       "padding_code": "0x4D",
       "padding_status": "0x4D visual blank verified in SameBoy",
-      "encoded_hex": "45 4C 44 32 3D 2E 43 4D 4D 7F",
+      "encoded_hex": "25 2D 24 06 1A 02 23 4D 4D 7F",
       "decoded_text": "欢迎来到小中村"
     },
     {
       "id": "oni5-bank0c-pointer-030e8e",
       "source_start": "0x030E8E",
       "source_end_exclusive": "0x030ED2",
+      "patch_end_exclusive": "0x030EB4",
       "source_bytes": 68,
-      "encoded_bytes": 68,
-      "padding_count": 30,
+      "encoded_bytes": 38,
+      "padding_count": 0,
       "padding_code": "0x4D",
-      "padding_status": "0x4D visual blank verified in SameBoy",
-      "encoded_hex": "39 3B 7D 2B 3E 47 31 4A 3F 33 7D 3C 42 37 2F 2A 3C 42 37 7D 35 30 38 4F 2D 48 4E 34 3A 40 7D 4B 49 41 46 36 2C 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 4D 7F",
+      "padding_status": "omitted: trailing 0x4D cells caused an extra scroll; terminator follows translated text",
+      "encoded_hex": "14 17 7D 3B 1B 27 05 2A 1E 07 7D 19 22 11 03 00 19 22 11 7D 0C 04 13 4A 01 28 2E 09 16 1F 7D 2C 29 20 26 0F 3C 7F",
       "decoded_text": "女子\n「差点便被带去\n宿木堂了。宿木堂\n在何处？不知，听妖怪\n言确有此地」"
     }
   ],
   "runtime_requirements": [
     "Activate the custom mapping only for the two listed source ranges.",
     "Restore the original mapping when the source terminator is processed.",
+    "For custom glyphs, encode input_code as tile_id - 0x80; the original renderer adds 0x80 for codes below 0x60.",
     "Do not use 0xD6 as padding; a zero expansion length loops 256 times.",
-    "0x4D padding preserves source length and terminator in both tested records.",
+    "0x4D padding preserves the noticeboard source length; the woman stream terminates immediately after translated text to avoid trailing-space scrolling.",
     "Validate custom mapping activation only for the two exact text ranges.",
-    "Verify the original Japanese mapping is restored after each 0x7F terminator."
+    "Verify the original Japanese mapping is restored after each 0x7F terminator.",
+    "Reserve 0xE0-0xFF globally for dynamic portraits; do not allocate custom glyphs there.",
+    "Treat 0x80-0xBF excluding observed non-text BG map IDs and native punctuation tile IDs as a provisional fixed pool only; verify transition references, per-tile backups, and restoration before generating a ROM.",
+    "Prefer native tile reuse for 0xFF1F (0xCA), 0x300C (0xBB), and 0x300D (0xBC); these are the glyph tiles used by the original dialogue text.",
+    "Do not allocate custom glyph patterns to native punctuation tiles marked tile_source=native.",
+    "Do not custom-allocate 0xCB (native exclamation mark) or the blank 0xCC-0xCD tiles."
   ]
 }

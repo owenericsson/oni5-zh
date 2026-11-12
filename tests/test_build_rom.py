@@ -69,6 +69,36 @@ class ApplyPatchManifestTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "non-empty list"):
             apply_patch_manifest(self.rom, self.manifest)
 
+    def test_expands_with_declared_fill_byte_before_applying_patches(self):
+        self.manifest["target_size"] = "0x8"
+        self.manifest["extension_fill_byte"] = "0xFF"
+        self.manifest["patches"] = [
+            {
+                "id": "extension-edit",
+                "offset": "0x6",
+                "expected_hex": "FF FF",
+                "replacement_hex": "AA BB",
+            }
+        ]
+
+        patched = apply_patch_manifest(self.rom, self.manifest)
+
+        self.assertEqual(patched, self.rom + bytes.fromhex("AA BB"))
+        self.assertEqual(len(patched), 8)
+
+    def test_rejects_target_size_smaller_than_source(self):
+        self.manifest["target_size"] = "0x4"
+
+        with self.assertRaisesRegex(ValueError, "smaller than the source ROM"):
+            apply_patch_manifest(self.rom, self.manifest)
+
+    def test_rejects_non_byte_extension_fill(self):
+        self.manifest["target_size"] = "0x8"
+        self.manifest["extension_fill_byte"] = "0x100"
+
+        with self.assertRaisesRegex(ValueError, "must be a byte value"):
+            apply_patch_manifest(self.rom, self.manifest)
+
 
 class BuildRomTests(unittest.TestCase):
     def setUp(self):

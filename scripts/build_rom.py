@@ -66,6 +66,23 @@ def apply_patch_manifest(rom: bytes, manifest: Any) -> bytes:
             f"expected {expected_hash}, found {actual_hash}"
         )
 
+    target_size = parse_offset(
+        root.get("target_size", f"0x{len(rom):X}"),
+        "target_size",
+    )
+    if target_size < len(rom):
+        raise ValueError("target_size must not be smaller than the source ROM")
+    extension_fill_byte = parse_offset(
+        root.get("extension_fill_byte", "0xFF"),
+        "extension_fill_byte",
+    )
+    if extension_fill_byte > 0xFF:
+        raise ValueError("extension_fill_byte must be a byte value")
+    expanded_source = bytearray(rom)
+    expanded_source.extend(
+        bytes([extension_fill_byte]) * (target_size - len(expanded_source))
+    )
+
     patch_entries = root.get("patches")
     if not isinstance(patch_entries, list) or not patch_entries:
         raise ValueError("patches must be a non-empty list")
@@ -92,9 +109,9 @@ def apply_patch_manifest(rom: bytes, manifest: Any) -> bytes:
             raise ValueError(
                 f"{patch_id}: expected_hex and replacement_hex must have equal lengths"
             )
-        if offset + len(expected) > len(rom):
-            raise ValueError(f"{patch_id}: patch range exceeds source ROM size")
-        if rom[offset:offset + len(expected)] != expected:
+        if offset + len(expected) > target_size:
+            raise ValueError(f"{patch_id}: patch range exceeds target ROM size")
+        if expanded_source[offset:offset + len(expected)] != expected:
             raise ValueError(f"{patch_id}: source bytes do not match expected_hex")
         patches.append((offset, expected, replacement, patch_id))
 
@@ -104,7 +121,7 @@ def apply_patch_manifest(rom: bytes, manifest: Any) -> bytes:
         if current[0] < previous_end:
             raise ValueError(f"patches overlap: {previous[3]!r} and {current[3]!r}")
 
-    output = bytearray(rom)
+    output = expanded_source
     for offset, expected, replacement, _ in patches:
         output[offset:offset + len(expected)] = replacement
     return bytes(output)
