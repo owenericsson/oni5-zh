@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 from scripts.compile_tile_cache_plan import compile_tile_cache_plan
+from scripts.compile_translation_encoding import compile_encoding
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -58,14 +59,40 @@ class CompileTileCachePlanTests(unittest.TestCase):
             )
         )
 
-    def test_plan_preserves_blocked_status_and_resource_provenance(self):
+    def test_plan_preserves_context_scope_and_resource_provenance(self):
         self.assertEqual(
             self.plan["status"],
-            "blocked_pending_runtime_loader_and_restore_validation",
+            "candidate_restricted_to_confirmed_dialogue_contexts",
         )
         self.assertEqual(self.plan["mode"], "fixed_tile_mapping")
         self.assertEqual(self.plan["font_resource"]["decoded_length"], 0x800)
         self.assertEqual(self.plan["tile_pool"], self.candidate["provisional_custom_tile_pool"])
+
+    def test_context_specific_plan_can_reuse_tiles_with_exact_backups(self):
+        glyph_asset = json.loads(
+            (ROOT / "data" / "chinese_glyphs_oni5_bank0c_030ee8.json").read_text()
+        )
+        candidate = compile_encoding(
+            json.loads((ROOT / "data" / "text_manifest.json").read_text()),
+            glyph_asset,
+            record_ids=("oni5-bank0c-pointer-030ee8",),
+        )
+        plan = compile_tile_cache_plan(self.rom, candidate, glyph_asset)
+        custom_entries = [
+            entry for entry in plan["entries"] if entry["tile_source"] == "custom"
+        ]
+
+        self.assertEqual(plan["mode"], "per_context_reusable_mapping")
+        self.assertEqual(plan["custom_glyph_count"], 20)
+        self.assertEqual(len(custom_entries), 20)
+        self.assertEqual(
+            len({entry["tile"] for entry in custom_entries}),
+            20,
+        )
+        for entry in custom_entries:
+            self.assertEqual(len(bytes.fromhex(entry["glyph_pattern_2bpp_hex"])), 16)
+            self.assertEqual(len(bytes.fromhex(entry["restore_pattern_2bpp_hex"])), 16)
+            self.assertIsNotNone(entry["font_output_offset"])
 
 
 if __name__ == "__main__":

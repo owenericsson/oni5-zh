@@ -105,11 +105,14 @@ class CompileTranslationEncodingTests(unittest.TestCase):
         self.assertFalse(any(0xE0 <= tile <= 0xFF for tile in custom_tiles))
         self.assertNotIn(0x4D, codes)
 
-    def test_candidate_blocks_tile_mapping_until_pool_audit(self):
-        self.assertEqual(self.plan["status"], "blocked_by_tile_pool_audit")
+    def test_candidate_restricts_tile_mapping_to_confirmed_dialogue_contexts(self):
+        self.assertEqual(
+            self.plan["status"],
+            "candidate_restricted_to_confirmed_dialogue_contexts",
+        )
         self.assertEqual(
             self.plan["tile_allocation_status"],
-            "provisional_80_bf_excluding_map_refs_and_native_tiles_blocked_pending_lifecycle_audit",
+            "fixed_34_tile_mapping_for_confirmed_contexts_only",
         )
         self.assertEqual(
             self.plan["provisional_custom_tile_pool"],
@@ -122,7 +125,7 @@ class CompileTranslationEncodingTests(unittest.TestCase):
                 "excluded_non_text_map_ids": [
                     f"0x{tile_id:02X}" for tile_id in sorted(NON_TEXT_MAP_TILE_IDS)
                 ],
-                "status": "pending_target_context_reference_and_restore_audit",
+                "status": "restricted_to_confirmed_contexts_not_global",
             },
         )
         self.assertIn("rejected", self.plan["special_codes"]["padding"]["status"])
@@ -166,6 +169,34 @@ class CompileTranslationEncodingTests(unittest.TestCase):
         self.assertIn("extra scroll", record["padding_status"])
         self.assertNotIn(SPACE_CODE, encoded)
         self.assertEqual(encoded[-1], 0x7F)
+
+    def test_new_dialogue_uses_a_reusable_context_specific_tile_map(self):
+        glyph_asset = json.loads(
+            (ROOT / "data" / "chinese_glyphs_oni5_bank0c_030ee8.json").read_text()
+        )
+        plan = compile_encoding(
+            self.manifest,
+            glyph_asset,
+            record_ids=("oni5-bank0c-pointer-030ee8",),
+        )
+
+        self.assertEqual(plan["mode"], "context_scoped")
+        self.assertEqual(
+            plan["tile_allocation_status"],
+            "per_context_mapping_reuses_audited_pool",
+        )
+        self.assertEqual(plan["provisional_custom_tile_pool"]["count"], 20)
+        self.assertEqual(len(plan["custom_glyphs"]), 23)
+        record = plan["records"][0]
+        self.assertEqual(record["id"], "oni5-bank0c-pointer-030ee8")
+        self.assertEqual(record["source_bytes"], 32)
+        self.assertEqual(record["encoded_bytes"], 32)
+        self.assertEqual(record["padding_count"], 6)
+        self.assertEqual(record["patch_end_exclusive"], "0x030F08")
+        encoded = bytes.fromhex(record["encoded_hex"])
+        self.assertEqual(encoded[-1], 0x7F)
+        self.assertEqual(encoded[-7:-1], bytes([SPACE_CODE]) * 6)
+        self.assertEqual(encoded[-10:-7], bytes.fromhex("09 4A 3C"))
 
     def test_candidate_streams_decode_back_to_confirmed_text(self):
         code_to_character = {

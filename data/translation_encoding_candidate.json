@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "status": "blocked_by_tile_pool_audit",
-  "tile_allocation_status": "provisional_80_bf_excluding_map_refs_and_native_tiles_blocked_pending_lifecycle_audit",
+  "status": "candidate_restricted_to_confirmed_dialogue_contexts",
+  "tile_allocation_status": "fixed_34_tile_mapping_for_confirmed_contexts_only",
   "provisional_custom_tile_pool": {
     "start": "0x80",
     "end_exclusive": "0xC0",
@@ -31,7 +31,7 @@
       "0xB6",
       "0xB8"
     ],
-    "status": "pending_target_context_reference_and_restore_audit"
+    "status": "restricted_to_confirmed_contexts_not_global"
   },
   "mode": "context_scoped",
   "font_source_sha256": "37b51f4f2a094a952a3cb481090c2185922a65b90c228e5bdad7b4c445ca7939",
@@ -348,7 +348,7 @@
     "Validate custom mapping activation only for the two exact text ranges.",
     "Verify the original Japanese mapping is restored after each 0x7F terminator.",
     "Reserve 0xE0-0xFF globally for dynamic portraits; do not allocate custom glyphs there.",
-    "Treat 0x80-0xBF excluding observed non-text BG map IDs and native punctuation tile IDs as a provisional fixed pool only; verify transition references, per-tile backups, and restoration before generating a ROM.",
+    "Use the 34 custom tiles only for the two tested dialogue contexts; before adding another text context, audit its visible BG/OAM references and verify tile backups and restoration there.",
     "Prefer native tile reuse for 0xFF1F (0xCA), 0x300C (0xBB), and 0x300D (0xBC); these are the glyph tiles used by the original dialogue text.",
     "Do not allocate custom glyph patterns to native punctuation tiles marked tile_source=native.",
     "Do not custom-allocate 0xCB (native exclamation mark) or the blank 0xCC-0xCD tiles."

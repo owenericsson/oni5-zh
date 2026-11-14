@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "blocked_pending_runtime_loader_and_restore_validation",
+  "status": "candidate_restricted_to_confirmed_dialogue_contexts",
   "mode": "fixed_tile_mapping",
   "source_rom_sha256": "870f83f781c103925f206f35b71cdda6a0493e5b4c70d70b49cade145c35f127",
   "font_resource": {
@@ -38,7 +38,7 @@
       "0xB6",
       "0xB8"
     ],
-    "status": "pending_target_context_reference_and_restore_audit"
+    "status": "restricted_to_confirmed_contexts_not_global"
   },
   "custom_glyph_count": 34,
   "entries": [

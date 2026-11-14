@@ -207,6 +207,7 @@ def build_copy_code(source_address: int, destination_address: int) -> bytes:
 def build_loader_helper(
     glyphs: list[CachedGlyph],
     pattern_cpu_address: int = 0x4100,
+    return_a_value: int | None = None,
 ) -> bytes:
     code = bytearray.fromhex("C5 D5 E5")
     for index, glyph in enumerate(glyphs):
@@ -223,10 +224,12 @@ def build_loader_helper(
                 tile_vram_address(glyph.tile),
             )
         )
-    code.extend(
-        bytes((0x3E, glyphs[0].tile))
-        + bytes.fromhex("EA F2 C4 E1 D1 C1 C9")
-    )
+    code.extend(bytes((0x3E, glyphs[0].tile)) + bytes.fromhex("EA F2 C4"))
+    if return_a_value is not None:
+        if not 0 <= return_a_value <= 0xFF:
+            raise ValueError("loader return A value must fit in one byte")
+        code.extend((0x3E, return_a_value))
+    code.extend(bytes.fromhex("E1 D1 C1 C9"))
     return bytes(code)
 
 

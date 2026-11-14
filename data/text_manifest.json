@@ -309,6 +309,84 @@
         "$C6 宏表项位于 $03028C，指针为 $049D；bank $0C:$049D 的数据以 02 29 2F 开始，结合屏幕原文确认宏展开为「むら」。",
         "由完整屏幕原文和原始字节对应确认 $2E 为「よ」、$17 为「そ」。用户提供的攻略将「こなかむら」标为「小中の村／小中村莊」(https://forum.gamer.com.tw/Co.php?bsn=60009&sn=33735)；中文译文定为「欢迎来到小中村」。"
       ]
+    },
+    {
+      "id": "oni5-bank0c-pointer-030ee8",
+      "source": {
+        "bank": {
+          "logical": "0x0C",
+          "physical": "0x0C",
+          "size": "0x4000"
+        },
+        "pointer": {
+          "window": "lower",
+          "cpu_address": "0x0EE8"
+        },
+        "payload": {
+          "start": "0x030EE8",
+          "end_exclusive": "0x030F08",
+          "terminator": "0x7F"
+        }
+      },
+      "token_annotations": [
+        {"offset": "0x030EE8", "code": "0xA9", "kind": "macro_ref"},
+        {"offset": "0x030EE9", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x030EEA", "code": "0x3B", "kind": "glyph_code", "display": "「"},
+        {"offset": "0x030EEB", "code": "0xC5", "kind": "macro_ref"},
+        {"offset": "0x030EEC", "code": "0xC4", "kind": "macro_ref"},
+        {"offset": "0x030EED", "code": "0x21", "kind": "glyph_code"},
+        {"offset": "0x030EEE", "code": "0x0A", "kind": "glyph_code"},
+        {"offset": "0x030EEF", "code": "0x08", "kind": "glyph_code"},
+        {"offset": "0x030EF0", "code": "0x1B", "kind": "glyph_code"},
+        {"offset": "0x030EF1", "code": "0x18", "kind": "glyph_code"},
+        {"offset": "0x030EF2", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x030EF3", "code": "0x28", "kind": "glyph_code"},
+        {"offset": "0x030EF4", "code": "0x0E", "kind": "glyph_code"},
+        {"offset": "0x030EF5", "code": "0x6C", "kind": "glyph_code"},
+        {"offset": "0x030EF6", "code": "0x0F", "kind": "glyph_code"},
+        {"offset": "0x030EF7", "code": "0xC3", "kind": "macro_ref"},
+        {"offset": "0x030EF8", "code": "0x1E", "kind": "glyph_code"},
+        {"offset": "0x030EF9", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x030EFA", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x030EFB", "code": "0x22", "kind": "glyph_code"},
+        {"offset": "0x030EFC", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x030EFD", "code": "0x1D", "kind": "glyph_code"},
+        {"offset": "0x030EFE", "code": "0x1E", "kind": "glyph_code"},
+        {"offset": "0x030EFF", "code": "0x60", "kind": "glyph_code"},
+        {"offset": "0x030F00", "code": "0x09", "kind": "glyph_code"},
+        {"offset": "0x030F01", "code": "0x31", "kind": "glyph_code"},
+        {"offset": "0x030F02", "code": "0x21", "kind": "glyph_code"},
+        {"offset": "0x030F03", "code": "0x0E", "kind": "glyph_code"},
+        {"offset": "0x030F04", "code": "0x14", "kind": "glyph_code"},
+        {"offset": "0x030F05", "code": "0x2F", "kind": "glyph_code"},
+        {"offset": "0x030F06", "code": "0x3C", "kind": "glyph_code", "display": "」"},
+        {"offset": "0x030F07", "code": "0x7F", "kind": "terminator"}
+      ],
+      "verification": [
+        "用户在 SameBoy 的 $20:$174E 命中该对话首码，活动 bank 为 $0C、游标为 $0EE8；回溯为 $20:$174E ← $20:$16F9 ← $21:$6E88。",
+        "bank $0C:$0EE8 映射到文件偏移 $030EE8；ROM 字节序列在 $030F07 首次遇到 $7F。",
+        "处理 $7F 时在 $20:$17C2 捕获 A=$7F、bank $0C、游标 $0F08，确认排他终点 $030F08。",
+        "原 ROM 与双文本试点在 $030EE8–$030F07 字节相同。用户提供的两行屏幕转写与引号正文及 $C5/$C4/$C3 宏展开相符；用户确认 $A9 宏前置三字符读作「きゃら」，但是否为人物姓名尚未确认。",
+        "SameBoy 稳定页采样为 PC $20:$1DD6、bank $0C、$FF40=$C7、SCY=$30、SCX=$F8、BGP=$E4；当前可见视口为 BG map $9800 的行 6–23、列 31 后接 0–18。",
+        "稳定页可见的 $80–$BF 图块引用仅出现在三行文字的基字行（map 行 18、20、22）；上方行 17、19、21 主要为 $CD，$B8 出现在 $9A62/$9AA5。OAM 全部 40 项均无 $80–$BF 图块引用。此结论只覆盖该稳定页可见视口，不覆盖转场与缓存恢复。",
+        "用户在 SameBoy 的独立探针中确认目标对话显示及关闭正常；关闭后 $C4F2=$00，且所有被覆盖图块均恢复原图。用户明确表示无需为原生问号这一单字改动重复测试；该旧版探针结果不覆盖后来为对齐事件流追加的 6 个 $4D。",
+        "用户报告旧版三文本整合 ROM 关闭该对话后画面跳到类似出房屋的场景。旧版译文终止符位于 $030F01，原流终止符在 $030F07，原事件流从 $030F08 继续；新版补 6 个 $4D，使 $7F 回到 $030F07、恢复游标为 $0F08。修正版仍待 SameBoy 实测确认关闭行为。"
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x030EE8",
+            "source_end_exclusive": "0x030F07",
+            "text": "伽罗\n「听大娘说那三日月山之上\n到底藏着什么呢？」"
+          }
+        ],
+        "review_notes": [
+          "用户确认的译文；第二个「那」已确认是误输入。用户建议在末句「到底藏着什么呢」后添加全角问号。",
+          "首行「伽罗」对应独立的 $A9 宏展开；修改前需检查该宏是否被其他文本共用。",
+          "译文有 20 个不同汉字；该上下文配置 20 个 custom glyph，句尾全角问号使用原生 tile $CA，引号使用原生 tile $BB/$BC。"
+        ]
+      }
     }
   ]
 }

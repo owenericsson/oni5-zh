@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "status": "candidate_restricted_to_confirmed_dialogue_contexts",
+  "tile_allocation_status": "per_context_mapping_reuses_audited_pool",
+  "provisional_custom_tile_pool": {
+    "start": "0x80",
+    "end_exclusive": "0xC0",
+    "count": 20,
+    "eligible_count": 44,
+    "reserved_native_tile_ids": [
+      "0xBB",
+      "0xBC"
+    ],
+    "excluded_non_text_map_ids": [
+      "0x88",
+      "0x8A",
+      "0x8B",
+      "0x8D",
+      "0x8E",
+      "0x90",
+      "0x92",
+      "0x95",
+      "0x98",
+      "0x9C",
+      "0x9D",
+      "0xA1",
+      "0xAB",
+      "0xB1",
+      "0xB2",
+      "0xB3",
+      "0xB6",
+      "0xB8"
+    ],
+    "status": "restricted_to_confirmed_contexts_not_global"
+  },
+  "mode": "context_scoped",
+  "font_source_sha256": "37b51f4f2a094a952a3cb481090c2185922a65b90c228e5bdad7b4c445ca7939",
+  "custom_glyphs": [
+    {
+      "character": "「",
+      "codepoint": "U+300C",
+      "input_code": "0x3B",
+      "tile": "0xBB",
+      "tile_source": "native"
+    },
+    {
+      "character": "」",
+      "codepoint": "U+300D",
+      "input_code": "0x3C",
+      "tile": "0xBC",
+      "tile_source": "native"
+    },
+    {
+      "character": "三",
+      "codepoint": "U+4E09",
+      "input_code": "0x00",
+      "tile": "0x80",
+      "tile_source": "custom"
+    },
+    {
+      "character": "上",
+      "codepoint": "U+4E0A",
+      "input_code": "0x01",
+      "tile": "0x81",
+      "tile_source": "custom"
+    },
+    {
+      "character": "么",
+      "codepoint": "U+4E48",
+      "input_code": "0x02",
+      "tile": "0x82",
+      "tile_source": "custom"
+    },
+    {
+      "character": "之",
+      "codepoint": "U+4E4B",
+      "input_code": "0x03",
+      "tile": "0x83",
+      "tile_source": "custom"
+    },
+    {
+      "character": "什",
+      "codepoint": "U+4EC0",
+      "input_code": "0x04",
+      "tile": "0x84",
+      "tile_source": "custom"
+    },
+    {
+      "character": "伽",
+      "codepoint": "U+4F3D",
+      "input_code": "0x05",
+      "tile": "0x85",
+      "tile_source": "custom"
+    },
+    {
+      "character": "到",
+      "codepoint": "U+5230",
+      "input_code": "0x06",
+      "tile": "0x86",
+      "tile_source": "custom"
+    },
+    {
+      "character": "听",
+      "codepoint": "U+542C",
+      "input_code": "0x07",
+      "tile": "0x87",
+      "tile_source": "custom"
+    },
+    {
+      "character": "呢",
+      "codepoint": "U+5462",
+      "input_code": "0x09",
+      "tile": "0x89",
+      "tile_source": "custom"
+    },
+    {
+      "character": "大",
+      "codepoint": "U+5927",
+      "input_code": "0x0C",
+      "tile": "0x8C",
+      "tile_source": "custom"
+    },
+    {
+      "character": "娘",
+      "codepoint": "U+5A18",
+      "input_code": "0x0F",
+      "tile": "0x8F",
+      "tile_source": "custom"
+    },
+    {
+      "character": "山",
+      "codepoint": "U+5C71",
+      "input_code": "0x11",
+      "tile": "0x91",
+      "tile_source": "custom"
+    },
+    {
+      "character": "底",
+      "codepoint": "U+5E95",
+      "input_code": "0x13",
+      "tile": "0x93",
+      "tile_source": "custom"
+    },
+    {
+      "character": "日",
+      "codepoint": "U+65E5",
+      "input_code": "0x14",
+      "tile": "0x94",
+      "tile_source": "custom"
+    },
+    {
+      "character": "月",
+      "codepoint": "U+6708",
+      "input_code": "0x16",
+      "tile": "0x96",
+      "tile_source": "custom"
+    },
+    {
+      "character": "着",
+      "codepoint": "U+7740",
+      "input_code": "0x17",
+      "tile": "0x97",
+      "tile_source": "custom"
+    },
+    {
+      "character": "罗",
+      "codepoint": "U+7F57",
+      "input_code": "0x19",
+      "tile": "0x99",
+      "tile_source": "custom"
+    },
+    {
+      "character": "藏",
+      "codepoint": "U+85CF",
+      "input_code": "0x1A",
+      "tile": "0x9A",
+      "tile_source": "custom"
+    },
+    {
+      "character": "说",
+      "codepoint": "U+8BF4",
+      "input_code": "0x1B",
+      "tile": "0x9B",
+      "tile_source": "custom"
+    },
+    {
+      "character": "那",
+      "codepoint": "U+90A3",
+      "input_code": "0x1E",
+      "tile": "0x9E",
+      "tile_source": "custom"
+    },
+    {
+      "character": "？",
+      "codepoint": "U+FF1F",
+      "input_code": "0x4A",
+      "tile": "0xCA",
+      "tile_source": "native"
+    }
+  ],
+  "special_codes": {
+    "space": {
+      "input_code": "0x4D",
+      "tile": "0xCD",
+      "status": "0x4D padding preserves source length for the noticeboard and context dialogues; omitted from the woman stream because trailing spaces caused an extra scroll"
+    },
+    "line_advance": "0x7D",
+    "page_transition": "0x7E",
+    "terminator": "0x7F",
+    "phrase_aliases": [],
+    "padding": {
+      "input_code": "0xD6",
+      "status": "rejected: zero length underflows the parser counter to 256; SameBoy displayed gibberish and corrupted the text cursor"
+    }
+  },
+  "records": [
+    {
+      "id": "oni5-bank0c-pointer-030ee8",
+      "source_start": "0x030EE8",
+      "source_end_exclusive": "0x030F08",
+      "patch_end_exclusive": "0x030F08",
+      "source_bytes": 32,
+      "encoded_bytes": 32,
+      "padding_count": 6,
+      "padding_code": "0x4D",
+      "padding_status": "0x4D blank cells preserve the original event/script cursor; verify this line width does not trigger scrolling",
+      "encoded_hex": "05 19 7D 3B 07 0C 0F 1B 1E 00 14 16 11 03 01 7D 06 13 1A 17 04 02 09 4A 3C 4D 4D 4D 4D 4D 4D 7F",
+      "decoded_text": "伽罗\n「听大娘说那三日月山之上\n到底藏着什么呢？」"
+    }
+  ],
+  "runtime_requirements": [
+    "Select the custom mapping only for the exact text source context.",
+    "Restore the original mapping when the source terminator is processed.",
+    "For custom glyphs, encode input_code as tile_id - 0x80; the original renderer adds 0x80 for codes below 0x60.",
+    "Do not use 0xD6 as padding; a zero expansion length loops 256 times.",
+    "For this context, pad with 0x4D blank cells through the original 0x7F terminator position to preserve the following event/script cursor.",
+    "Before reusing tile IDs in another context, verify context activation and original-pattern backup/restoration.",
+    "Verify the original Japanese mapping is restored after each 0x7F terminator.",
+    "Reserve 0xE0-0xFF globally for dynamic portraits; do not allocate custom glyphs there.",
+    "Reuse tile IDs across text contexts only when the contexts cannot overlap and each context has verified pattern backup/restoration.",
+    "Prefer native tile reuse for 0xFF1F (0xCA), 0x300C (0xBB), and 0x300D (0xBC); these are the glyph tiles used by the original dialogue text.",
+    "Do not allocate custom glyph patterns to native punctuation tiles marked tile_source=native.",
+    "Do not custom-allocate 0xCB (native exclamation mark) or the blank 0xCC-0xCD tiles."
+  ]
+}

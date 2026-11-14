@@ -11,6 +11,10 @@ PILOT_RECORD_IDS = (
     NOTICEBOARD_RECORD_ID,
     WOMAN_RECORD_ID,
 )
+REUSABLE_CONTEXT_RECORD_ID = "oni5-bank0c-pointer-030ee8"
+NO_PADDING_RECORD_IDS = {
+    WOMAN_RECORD_ID,
+}
 NON_TEXT_MAP_TILE_IDS = {
     0x88,
     0x8A,
@@ -149,11 +153,23 @@ def encode_text(text: str, code_by_character: dict[str, int]) -> list[int]:
     return result
 
 
-def compile_encoding(manifest: Any, glyph_asset: Any) -> dict[str, Any]:
+def compile_encoding(
+    manifest: Any,
+    glyph_asset: Any,
+    record_ids: tuple[str, ...] | None = None,
+) -> dict[str, Any]:
     root = require_object(manifest, "text manifest")
     records = root.get("records")
     if not isinstance(records, list):
         raise ValueError("text manifest.records must be a list")
+    selected_record_ids = PILOT_RECORD_IDS if record_ids is None else record_ids
+    if (
+        not isinstance(selected_record_ids, tuple)
+        or not selected_record_ids
+        or any(not isinstance(record_id, str) or not record_id for record_id in selected_record_ids)
+        or len(set(selected_record_ids)) != len(selected_record_ids)
+    ):
+        raise ValueError("record_ids must be a non-empty tuple of unique record IDs")
     by_id = {}
     for index, value in enumerate(records):
         record = require_object(value, f"text manifest.records[{index}]")
@@ -163,7 +179,7 @@ def compile_encoding(manifest: Any, glyph_asset: Any) -> dict[str, Any]:
 
     token_map, code_by_character = create_glyph_map(glyph_asset)
     encoded_records = []
-    for record_id in PILOT_RECORD_IDS:
+    for record_id in selected_record_ids:
         record = by_id.get(record_id)
         if record is None:
             raise ValueError(f"missing pilot record {record_id!r}")
@@ -197,15 +213,24 @@ def compile_encoding(manifest: Any, glyph_asset: Any) -> dict[str, Any]:
                 f"but source span has {source_length}"
             )
         padding_code = SPACE_CODE
-        padding_count = 0 if record_id == WOMAN_RECORD_ID else source_length - len(body)
+        padding_count = (
+            0 if record_id in NO_PADDING_RECORD_IDS else source_length - len(body)
+        )
         body.extend([padding_code] * padding_count)
         body.append(terminator)
         patch_end = start + len(body)
-        padding_status = (
-            "omitted: trailing 0x4D cells caused an extra scroll; terminator follows translated text"
-            if record_id == WOMAN_RECORD_ID
-            else "0x4D visual blank verified in SameBoy"
-        )
+        if record_id == WOMAN_RECORD_ID:
+            padding_status = (
+                "omitted: trailing 0x4D cells caused an extra scroll; "
+                "terminator follows translated text"
+            )
+        elif record_id == REUSABLE_CONTEXT_RECORD_ID:
+            padding_status = (
+                "0x4D blank cells preserve the original event/script cursor; verify this "
+                "line width does not trigger scrolling"
+            )
+        else:
+            padding_status = "0x4D visual blank verified in SameBoy"
         encoded_records.append(
             {
                 "id": record_id,
@@ -223,16 +248,50 @@ def compile_encoding(manifest: Any, glyph_asset: Any) -> dict[str, Any]:
         )
 
     font = require_object(glyph_asset, "glyph asset").get("font")
+    custom_glyph_count = sum(
+        glyph["tile_source"] == "custom" for glyph in token_map
+    )
+    context_specific_mapping = record_ids is not None
+    tile_allocation_status = "fixed_34_tile_mapping_for_confirmed_contexts_only"
+    runtime_requirements = [
+        "Activate the custom mapping only for the two listed source ranges.",
+        "Restore the original mapping when the source terminator is processed.",
+        "For custom glyphs, encode input_code as tile_id - 0x80; the original renderer adds 0x80 for codes below 0x60.",
+        "Do not use 0xD6 as padding; a zero expansion length loops 256 times.",
+        "0x4D padding preserves the noticeboard source length; the woman stream terminates immediately after translated text to avoid trailing-space scrolling.",
+        "Validate custom mapping activation only for the two exact text ranges.",
+        "Verify the original Japanese mapping is restored after each 0x7F terminator.",
+        "Reserve 0xE0-0xFF globally for dynamic portraits; do not allocate custom glyphs there.",
+        "Use the 34 custom tiles only for the two tested dialogue contexts; before adding another text context, audit its visible BG/OAM references and verify tile backups and restoration there.",
+        "Prefer native tile reuse for 0xFF1F (0xCA), 0x300C (0xBB), and 0x300D (0xBC); these are the glyph tiles used by the original dialogue text.",
+        "Do not allocate custom glyph patterns to native punctuation tiles marked tile_source=native.",
+        "Do not custom-allocate 0xCB (native exclamation mark) or the blank 0xCC-0xCD tiles.",
+    ]
+    if context_specific_mapping:
+        tile_allocation_status = "per_context_mapping_reuses_audited_pool"
+        runtime_requirements[0] = (
+            "Select the custom mapping only for the exact text source context."
+        )
+        runtime_requirements[4] = (
+            "For this context, pad with 0x4D blank cells through the original 0x7F "
+            "terminator position to preserve the following event/script cursor."
+        )
+        runtime_requirements[5] = (
+            "Before reusing tile IDs in another context, verify context activation and "
+            "original-pattern backup/restoration."
+        )
+        runtime_requirements[8] = (
+            "Reuse tile IDs across text contexts only when the contexts cannot overlap "
+            "and each context has verified pattern backup/restoration."
+        )
     return {
         "schema_version": 1,
-        "status": "blocked_by_tile_pool_audit",
-        "tile_allocation_status": (
-            "provisional_80_bf_excluding_map_refs_and_native_tiles_blocked_pending_lifecycle_audit"
-        ),
+        "status": "candidate_restricted_to_confirmed_dialogue_contexts",
+        "tile_allocation_status": tile_allocation_status,
         "provisional_custom_tile_pool": {
             "start": "0x80",
             "end_exclusive": "0xC0",
-            "count": len(PROVISIONAL_CUSTOM_TILE_IDS),
+            "count": custom_glyph_count,
             "eligible_count": len(ELIGIBLE_CUSTOM_TILE_IDS),
             "reserved_native_tile_ids": [
                 f"0x{tile_id:02X}" for tile_id in sorted(NATIVE_CUSTOM_TILE_IDS)
@@ -240,7 +299,7 @@ def compile_encoding(manifest: Any, glyph_asset: Any) -> dict[str, Any]:
             "excluded_non_text_map_ids": [
                 f"0x{tile_id:02X}" for tile_id in sorted(NON_TEXT_MAP_TILE_IDS)
             ],
-            "status": "pending_target_context_reference_and_restore_audit",
+            "status": "restricted_to_confirmed_contexts_not_global",
         },
         "mode": "context_scoped",
         "font_source_sha256": font["source_sha256"],
@@ -250,8 +309,9 @@ def compile_encoding(manifest: Any, glyph_asset: Any) -> dict[str, Any]:
                 "input_code": f"0x{SPACE_CODE:02X}",
                 "tile": "0xCD",
                 "status": (
-                    "0x4D padding verified for noticeboard (2 cells); omitted from the woman "
-                    "stream because trailing spaces caused an extra scroll"
+                    "0x4D padding preserves source length for the noticeboard and context "
+                    "dialogues; omitted from the woman stream because trailing spaces caused "
+                    "an extra scroll"
                 ),
             },
             "line_advance": f"0x{LINE_ADVANCE_CODE:02X}",
@@ -267,20 +327,7 @@ def compile_encoding(manifest: Any, glyph_asset: Any) -> dict[str, Any]:
             },
         },
         "records": encoded_records,
-        "runtime_requirements": [
-            "Activate the custom mapping only for the two listed source ranges.",
-            "Restore the original mapping when the source terminator is processed.",
-            "For custom glyphs, encode input_code as tile_id - 0x80; the original renderer adds 0x80 for codes below 0x60.",
-            "Do not use 0xD6 as padding; a zero expansion length loops 256 times.",
-            "0x4D padding preserves the noticeboard source length; the woman stream terminates immediately after translated text to avoid trailing-space scrolling.",
-            "Validate custom mapping activation only for the two exact text ranges.",
-            "Verify the original Japanese mapping is restored after each 0x7F terminator.",
-            "Reserve 0xE0-0xFF globally for dynamic portraits; do not allocate custom glyphs there.",
-            "Treat 0x80-0xBF excluding observed non-text BG map IDs and native punctuation tile IDs as a provisional fixed pool only; verify transition references, per-tile backups, and restoration before generating a ROM.",
-            "Prefer native tile reuse for 0xFF1F (0xCA), 0x300C (0xBB), and 0x300D (0xBC); these are the glyph tiles used by the original dialogue text.",
-            "Do not allocate custom glyph patterns to native punctuation tiles marked tile_source=native.",
-            "Do not custom-allocate 0xCB (native exclamation mark) or the blank 0xCC-0xCD tiles.",
-        ],
+        "runtime_requirements": runtime_requirements,
     }
 
 
@@ -306,6 +353,12 @@ def main() -> None:
         default=ROOT / "data" / "translation_encoding_candidate.json",
         help="candidate encoding output",
     )
+    parser.add_argument(
+        "--record-id",
+        action="append",
+        dest="record_ids",
+        help="compile only this confirmed text context; may be repeated",
+    )
     parser.add_argument("--overwrite", action="store_true", help="replace existing output")
     args = parser.parse_args()
 
@@ -322,6 +375,7 @@ def main() -> None:
         plan = compile_encoding(
             json.loads(manifest_path.read_text(encoding="utf-8")),
             json.loads(glyph_path.read_text(encoding="utf-8")),
+            tuple(args.record_ids) if args.record_ids else None,
         )
         output_path.write_text(
             json.dumps(plan, ensure_ascii=False, indent=2) + "\n",

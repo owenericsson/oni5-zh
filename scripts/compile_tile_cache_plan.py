@@ -17,7 +17,6 @@ FONT_BANK = 0x03
 FONT_DESCRIPTOR = 0x5CA4
 FONT_LENGTH = 0x800
 CUSTOM_TILE_RANGE = range(0x80, 0xC0)
-EXPECTED_CUSTOM_GLYPH_COUNT = 34
 
 
 def require_object(value: Any, field: str) -> dict[str, Any]:
@@ -89,6 +88,13 @@ def compile_tile_cache_plan(
     mappings = candidate_root.get("custom_glyphs")
     if not isinstance(mappings, list):
         raise ValueError("encoding candidate.custom_glyphs must be a list")
+    tile_pool = require_object(
+        candidate_root.get("provisional_custom_tile_pool"),
+        "encoding candidate.provisional_custom_tile_pool",
+    )
+    expected_custom_count = tile_pool.get("count")
+    if not isinstance(expected_custom_count, int) or expected_custom_count < 0:
+        raise ValueError("encoding candidate tile pool count must be a non-negative integer")
 
     entries = []
     custom_tiles = set()
@@ -145,15 +151,23 @@ def compile_tile_cache_plan(
         )
         entries.append(entry)
 
-    if custom_count != EXPECTED_CUSTOM_GLYPH_COUNT:
+    if custom_count != expected_custom_count:
         raise ValueError(
-            f"expected {EXPECTED_CUSTOM_GLYPH_COUNT} custom glyphs, found {custom_count}"
+            f"expected {expected_custom_count} custom glyphs, found {custom_count}"
         )
+    per_context_mapping = (
+        candidate_root.get("tile_allocation_status")
+        == "per_context_mapping_reuses_audited_pool"
+    )
 
     return {
         "schema_version": 1,
-        "status": "blocked_pending_runtime_loader_and_restore_validation",
-        "mode": "fixed_tile_mapping",
+        "status": "candidate_restricted_to_confirmed_dialogue_contexts",
+        "mode": (
+            "per_context_reusable_mapping"
+            if per_context_mapping
+            else "fixed_tile_mapping"
+        ),
         "source_rom_sha256": hashlib.sha256(rom).hexdigest(),
         "font_resource": {
             "bank": f"0x{FONT_BANK:02X}",
@@ -161,7 +175,7 @@ def compile_tile_cache_plan(
             "decoded_length": len(decoded_font),
             "decoded_sha256": hashlib.sha256(decoded_font).hexdigest(),
         },
-        "tile_pool": candidate_root.get("provisional_custom_tile_pool"),
+        "tile_pool": tile_pool,
         "custom_glyph_count": custom_count,
         "entries": entries,
     }
@@ -181,7 +195,7 @@ def main() -> None:
         "--candidate",
         type=Path,
         default=ROOT / "data" / "translation_encoding_candidate.json",
-        help="blocked translation encoding candidate",
+        help="context-restricted translation encoding candidate",
     )
     parser.add_argument(
         "--glyphs",
@@ -222,7 +236,7 @@ def main() -> None:
         parser.error(str(exc))
 
     print(
-        f"Wrote blocked tile cache plan for {plan['custom_glyph_count']} custom glyphs "
+        f"Wrote context-restricted tile cache plan for {plan['custom_glyph_count']} custom glyphs "
         f"to {output_path}"
     )
 

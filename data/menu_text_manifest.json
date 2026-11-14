@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "scope": "oni5-main-command-menu",
+  "source_rom_sha256": "870f83f781c103925f206f35b71cdda6a0493e5b4c70d70b49cade145c35f127",
+  "records": [
+    {
+      "id": "oni5-menu-status",
+      "source": {
+        "kind": "rom_string_table",
+        "rom_offset": "0x00669B",
+        "payload": {
+          "start": "0x00669B",
+          "end_exclusive": "0x0066A1",
+          "terminator": "0x7F",
+          "raw_hex": "66 07 0B 18 0A 7F"
+        }
+      },
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x00669B",
+            "source_end_exclusive": "0x0066A0",
+            "text": "状态"
+          }
+        ]
+      }
+    },
+    {
+      "id": "oni5-menu-spells",
+      "source": {
+        "kind": "rom_string_table",
+        "rom_offset": "0x0066A1",
+        "payload": {
+          "start": "0x0066A1",
+          "end_exclusive": "0x0066A7",
+          "terminator": "0x7F",
+          "raw_hex": "66 06 1A 4D 4D 7F"
+        }
+      },
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x0066A1",
+            "source_end_exclusive": "0x0066A6",
+            "text": "法术"
+          }
+        ]
+      }
+    },
+    {
+      "id": "oni5-menu-items",
+      "source": {
+        "kind": "rom_string_table",
+        "rom_offset": "0x0066A7",
+        "payload": {
+          "start": "0x0066A7",
+          "end_exclusive": "0x0066AD",
+          "terminator": "0x7F",
+          "raw_hex": "6E 0B 62 4D 4D 7F"
+        }
+      },
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x0066A7",
+            "source_end_exclusive": "0x0066AC",
+            "text": "道具"
+          }
+        ]
+      }
+    },
+    {
+      "id": "oni5-menu-important-items",
+      "source": {
+        "kind": "rom_string_table",
+        "rom_offset": "0x0066AD",
+        "payload": {
+          "start": "0x0066AD",
+          "end_exclusive": "0x0066B3",
+          "terminator": "0x7F",
+          "raw_hex": "66 06 0B 2E 0B 7F"
+        }
+      },
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x0066AD",
+            "source_end_exclusive": "0x0066B2",
+            "text": "重要物品"
+          }
+        ]
+      }
+    },
+    {
+      "id": "oni5-menu-equipment",
+      "source": {
+        "kind": "rom_string_table",
+        "rom_offset": "0x0066B3",
+        "payload": {
+          "start": "0x0066B3",
+          "end_exclusive": "0x0066B9",
+          "terminator": "0x7F",
+          "raw_hex": "17 0B 75 4D 4D 7F"
+        }
+      },
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x0066B3",
+            "source_end_exclusive": "0x0066B8",
+            "text": "装备"
+          }
+        ]
+      }
+    },
+    {
+      "id": "oni5-menu-currency",
+      "source": {
+        "kind": "rom_string_table",
+        "rom_offset": "0x0066B9",
+        "payload": {
+          "start": "0x0066B9",
+          "end_exclusive": "0x0066BF",
+          "terminator": "0x7F",
+          "raw_hex": "14 07 66 0F 36 7F"
+        }
+      },
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x0066B9",
+            "source_end_exclusive": "0x0066BE",
+            "text": "盘缠"
+          }
+        ]
+      }
+    }
+  ]
+}

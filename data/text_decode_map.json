@@ -26,8 +26,8 @@
     "0x36": {"text": "ん", "status": "confirmed"},
     "0x3B": {"text": "「", "status": "confirmed"},
     "0x3C": {"text": "」", "status": "confirmed"},
-    "0x66": {"text": "じ", "status": "confirmed", "note": "画面字形由「し」与前一格濁点组件组合"},
-    "0x6D": {"text": "で", "status": "confirmed", "note": "首段普通文本「これで」；濁点组合的写入细节未确认"}
+    "0x66": {"text": "じ", "status": "confirmed", "note": "画面字形由基字「し」与位于其上方的濁点组件$B8组成；运行时写入路径尚未追踪"},
+    "0x6D": {"text": "で", "status": "confirmed", "note": "首段普通文本「これで」；画面由基字「て」与位于其上方的濁点组件$B8组成，运行时写入路径尚未追踪"}
   },
   "special_glyphs": {
     "0x4D": {
@@ -39,15 +39,39 @@
   "macro_refs": {
     "0x80": {"text": "こがねまる", "status": "confirmed", "note": "用户根据对应画面辨认；展开码与普通路径映射存在差异"},
     "0x95": {"text": "ときわまる", "status": "confirmed"},
+    "0xA9": {"text": "きゃら", "status": "confirmed", "note": "bank $0C:$0EE8 的前置宏；用户确认可见读法为三个字符「きゃら」，是否为人物姓名尚未确认"},
     "0xB7": {"text": "なんだ", "status": "confirmed"},
+    "0xC3": {"text": "やま", "status": "confirmed", "note": "bank $0C:$0EE8；宏表指向 $0494，展开数据 02 2C 27，与用户的山名转写相符"},
+    "0xC4": {"text": "さん", "status": "confirmed", "note": "bank $0C:$0EE8；宏表指向 $0497，展开数据 02 13 36，与用户的转写相符"},
+    "0xC5": {"text": "おば", "status": "confirmed", "note": "bank $0C:$0EE8；宏表指向 $049A，展开数据 02 0D 74，与用户的转写相符"},
     "0xC6": {"text": "むら", "status": "confirmed", "note": "bank $0C:$0E33 通知板；宏表指向 $049D，展开数据 02 29 2F；用户确认完整屏幕原文「こなかむらにようこそ」"},
     "0xCC": {"text": "！？」", "status": "confirmed"}
   },
   "controls": {
-    "0x7B": {"text": "[REGION]", "status": "confirmed", "note": "与$7C共享区域处理路径"},
-    "0x7C": {"text": "[REGION]", "status": "confirmed"},
-    "0x7D": {"text": "\n", "status": "confirmed"},
-    "0x7E": {"text": "[PAGE]", "status": "confirmed"},
-    "0x7F": {"text": "[END]", "status": "confirmed"}
+    "0x7B": {
+      "text": "[REGION]",
+      "status": "confirmed",
+      "note": "与$7C共享$17ED区域处理路径；本次四段试点正文中未出现$7B"
+    },
+    "0x7C": {
+      "text": "[REGION]",
+      "status": "confirmed",
+      "note": "进入$17ED共享区域渲染路径；具体区域由运行时参数决定。见Day 2记录"
+    },
+    "0x7D": {
+      "text": "\n",
+      "status": "confirmed",
+      "note": "行推进：$174E分派至$1779，重置横向位置并推进文本行；边界处可清理或滚动tilemap"
+    },
+    "0x7E": {
+      "text": "[PAGE]",
+      "status": "confirmed",
+      "note": "页面处理：$174E分派至$17EA，执行等待/区域重绘路径；具体结果依区域参数而定"
+    },
+    "0x7F": {
+      "text": "[END]",
+      "status": "confirmed",
+      "note": "终止当前内嵌文本段并返回事件脚本；$17C2后续包含JOYP输出等副作用，其具体用途尚未确认"
+    }
   }
 }
