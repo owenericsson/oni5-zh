@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "version_id": "V1-opening-dialog",
+  "rom": {
+    "path": "../roms/oni5_v1_opening_dialog.gb",
+    "size_bytes": 1048576,
+    "sha256": "5682522e20fade44c457725a66430bae13e3d6695dcc18e04d058e4ce2e910ab"
+  },
+  "patch": {
+    "path": "../roms/oni5_v1_opening_dialog.bps",
+    "size_bytes": 508191,
+    "sha256": "c3e735ab2b273e81446d1a49933186e164cd784d358b7c8e708dd43c59e2abd1"
+  },
+  "runtime_validation": {
+    "status": "sameboy-confirmed-by-byte-identity",
+    "evidence_rom_path": "../roms/oni5_opening_preview.gb",
+    "evidence_rom_sha256": "5682522e20fade44c457725a66430bae13e3d6695dcc18e04d058e4ce2e910ab"
+  },
+  "features": [
+    "opening-scroll-dialog-chinese"
+  ],
+  "excluded_features": [
+    "practice-dialogue",
+    "noticeboard-dialogue",
+    "woman-dialogue",
+    "garou-dialogue",
+    "main-menu"
+  ],
+  "source_rom": {
+    "path": "../roms/oni5_original.gb",
+    "sha256": "870f83f781c103925f206f35b71cdda6a0493e5b4c70d70b49cade145c35f127"
+  },
+  "inputs": [
+    {
+      "path": "../data/text_manifest.json",
+      "sha256": "b13f95dc8438260f9055a55031d2f9a8e94a6a6ddab078c3b9644408845a2f9e"
+    },
+    {
+      "path": "../data/chinese_glyphs_oni5_bank04_01330d.json",
+      "sha256": "1c3220f4c18dd48188a97e58df9480bb9e2b99ad20019aae427fd48bf35bcb30"
+    },
+    {
+      "path": "../data/chinese_glyphs.json",
+      "sha256": "f1c37f02f7a7de2d347c9dd657a9a4070fc0ba134440ef69139a22008781a012"
+    },
+    {
+      "path": "../data/tile_cache_plan_candidate.json",
+      "sha256": "2941bbe87a930b1b97fd16d8b21e27c5c886e08c638584f1995c5c1f3d3564a4"
+    }
+  ],
+  "builder": {
+    "script": "../scripts/build_opening_text_preview_patch.py",
+    "sha256": "89a549bf35e9091e380429a873d88643d711b47ab8f823afee6e81f1a69a41a8",
+    "apply_script": "../scripts/apply_bps_patch.py",
+    "apply_script_sha256": "60c021ae803bf3eada3ebf4c2c1e042ae5e110d95e671953680d342679131390",
+    "supporting_scripts": [
+      {
+        "path": "../scripts/build_mbc1_expansion_probe.py",
+        "sha256": "b7125b16a4e8fbbbd5c35c18a560380bd59957ec79fb9240a95346b0330ddb6f"
+      },
+      {
+        "path": "../scripts/build_menu_pilot.py",
+        "sha256": "d9ca0b87345464e677440ee7257c89ce4d909e6dbbbafce3a9a3f2151f3ce78a"
+      },
+      {
+        "path": "../scripts/build_noticeboard_glyph_probe.py",
+        "sha256": "f13be5e3d332bd2029fe5c4e256b281294d3aa96ab0ad76555080fe00b1bfe2e"
+      },
+      {
+        "path": "../scripts/build_rom.py",
+        "sha256": "930d2872e070b4d4df5f17b597f893c4992a72dcffbc76a0d8ff60f2076d35ab"
+      },
+      {
+        "path": "../scripts/decode_gb_resource.py",
+        "sha256": "f6f10ba7e22703bce692d24a25f7b01b57b0518feefa4e4576395cc815aee880"
+      },
+      {
+        "path": "../scripts/rom_checksums.py",
+        "sha256": "94bdf9b7f8d237161f88ee00f0cb4344605067f31e0b7b468851ea897787cf0d"
+      }
+    ]
+  },
+  "rebuild_commands": [
+    "./.venv/bin/python scripts/build_opening_text_preview_patch.py --output /tmp/oni5_v1_opening_dialog.rebuild.bps --overwrite",
+    "./.venv/bin/python scripts/apply_bps_patch.py --patch /tmp/oni5_v1_opening_dialog.rebuild.bps --output /tmp/oni5_v1_opening_dialog.rebuild.gb --overwrite",
+    "cmp /tmp/oni5_v1_opening_dialog.rebuild.gb roms/oni5_v1_opening_dialog.gb"
+  ]
+}

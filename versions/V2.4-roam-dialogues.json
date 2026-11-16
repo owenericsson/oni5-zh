@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.4-roam-dialogues",
+  "parent_version": {
+    "version_id": "V1-opening-dialog",
+    "path": "../roms/oni5_v1_opening_dialog.gb",
+    "sha256": "5682522e20fade44c457725a66430bae13e3d6695dcc18e04d058e4ce2e910ab"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_4_roam_dialogues.bps",
+    "size_bytes": 8430,
+    "sha256": "15bf9e54ed4b6f8b0918f018908daaa0de677d087d8163dcf3e3c3358f1d4448"
+  },
+  "target_rom": {
+    "size_bytes": 1048576,
+    "sha256": "f2f61a05971bcea719c14420ac88e0bdf1f9628ca36ca2d58bd1372f8f6f0895",
+    "persisted_by_builder": false
+  },
+  "runtime_validation": {
+    "status": "partial-sameboy",
+    "tested_rom_sha256": "f2f61a05971bcea719c14420ac88e0bdf1f9628ca36ca2d58bd1372f8f6f0895",
+    "hash_confirmation": "The user confirmed that the ROM loaded in SameBoy matches the V2.4 target SHA-256.",
+    "user_report": {
+      "mandatory_battle_menu_before_free_roam": "garbled/unreadable",
+      "battle_menu_interactive": true,
+      "user_observation": "The menu remains operable with controls, but the full screen is garbled and very difficult to use.",
+      "free_roam_reached": false,
+      "noticeboard_dialogue": "not tested",
+      "woman_dialogue": "not tested"
+    },
+    "automated_validation": {
+      "focused_unit_tests": "5 passed",
+      "full_unit_suite": "136 passed",
+      "checksum": "Target ROM passes the repository's ROM checksum verification.",
+      "deterministic_rebuild": "Rebuilt BPS patch and target hash are byte-identical."
+    },
+    "required_sameboy_checks": [
+      "Apply the V2.4 patch to the immutable V1 ROM and confirm target SHA-256 f2f61a05971bcea719c14420ac88e0bdf1f9628ca36ca2d58bd1372f8f6f0895.",
+      "Capture the first garbled battle-menu scene's HRAM text state and call stack to determine whether the V2.4 shared entry gateway is involved.",
+      "Complete the opening and confirm its Chinese text remains correct.",
+      "Reach free roaming, verify the noticeboard and woman dialogue display Chinese, and confirm closing either dialogue returns to normal gameplay.",
+      "Confirm there is no freeze or illegal opcode while entering, displaying, or closing either target dialogue."
+    ]
+  },
+  "features": [
+    "opening-scroll-dialog-chinese",
+    "noticeboard-dialogue",
+    "woman-dialogue"
+  ],
+  "excluded_features": [
+    "practice-dialogue",
+    "garou-dialogue",
+    "main-menu",
+    "house-story-sequence"
+  ],
+  "scope": {
+    "dialogue_context_ids": [
+      "noticeboard",
+      "woman"
+    ],
+    "gateway_layout": "v2.2",
+    "build_parent": "V1 only; V2.2 is used solely as the known bank-safe gateway layout, not as the parent ROM.",
+    "preserved_contexts": [
+      "opening",
+      "practice",
+      "garou"
+    ]
+  },
+  "source_rom": {
+    "path": "../roms/oni5_original.gb",
+    "sha256": "870f83f781c103925f206f35b71cdda6a0493e5b4c70d70b49cade145c35f127"
+  },
+  "inputs": [
+    {
+      "path": "../data/text_manifest.json",
+      "sha256": "b13f95dc8438260f9055a55031d2f9a8e94a6a6ddab078c3b9644408845a2f9e"
+    },
+    {
+      "path": "../data/chinese_glyphs_oni5_bank04_01330d.json",
+      "sha256": "1c3220f4c18dd48188a97e58df9480bb9e2b99ad20019aae427fd48bf35bcb30"
+    },
+    {
+      "path": "../data/chinese_glyphs.json",
+      "sha256": "f1c37f02f7a7de2d347c9dd657a9a4070fc0ba134440ef69139a22008781a012"
+    },
+    {
+      "path": "../data/chinese_glyphs_oni5_bank24_01348f.json",
+      "sha256": "9faacc0a76e7c3da2d16cbb52819fbdfcb8d08f9471fcee479e799745393c558"
+    },
+    {
+      "path": "../data/tile_cache_plan_candidate.json",
+      "sha256": "2941bbe87a930b1b97fd16d8b21e27c5c886e08c638584f1995c5c1f3d3564a4"
+    },
+    {
+      "path": "../data/translation_encoding_candidate.json",
+      "sha256": "e19de39100f80c6ab5cc37acac04fb22e21335c72f9a77d867c0e4bb2884be66"
+    },
+    {
+      "path": "../data/tile_cache_plan_oni5_bank0c_030ee8.json",
+      "sha256": "2f9162eb0b76f9c4aa685dca529716f1780229e9fa3de565580e257b8a94f543"
+    },
+    {
+      "path": "../data/translation_encoding_oni5_bank0c_030ee8.json",
+      "sha256": "8d81820daf4f9f875647260791423331be7492dbe6a5fb9283eb61dfba23b49d"
+    }
+  ],
+  "builder": {
+    "script": "../scripts/build_v2_4_roam_dialogue_patch.py",
+    "sha256": "f6d6b629bf3ff2cf4042c3fb24294c74ae031cec9e1164d74656cf66a30f6e06",
+    "arguments": [
+      "--parent roms/oni5_v1_opening_dialog.gb",
+      "--output roms/oni5_v2_4_roam_dialogues.bps",
+      "--overwrite"
+    ],
+    "parent_builder_script": "../scripts/build_opening_dialogue_pilot.py",
+    "parent_builder_sha256": "d4587856b7078c22bb95406133d8f8bd7be71f587bedf2a8f3b13b215ee817e4",
+    "context_builder_script": "../scripts/build_text_comparison_pilot.py",
+    "context_builder_sha256": "cc80e8e59d8b23dbe212bab16cc1f1a3b5b3393cd0ad2b130c62efb52c8746ca",
+    "apply_script": "../scripts/apply_bps_patch.py",
+    "apply_script_sha256": "60c021ae803bf3eada3ebf4c2c1e042ae5e110d95e671953680d342679131390",
+    "supporting_scripts": [
+      {
+        "path": "../scripts/build_mbc1_expansion_probe.py",
+        "sha256": "b7125b16a4e8fbbbd5c35c18a560380bd59957ec79fb9240a95346b0330ddb6f"
+      },
+      {
+        "path": "../scripts/build_menu_pilot.py",
+        "sha256": "d9ca0b87345464e677440ee7257c89ce4d909e6dbbbafce3a9a3f2151f3ce78a"
+      },
+      {
+        "path": "../scripts/build_noticeboard_glyph_probe.py",
+        "sha256": "f13be5e3d332bd2029fe5c4e256b281294d3aa96ab0ad76555080fe00b1bfe2e"
+      },
+      {
+        "path": "../scripts/build_opening_text_preview_patch.py",
+        "sha256": "89a549bf35e9091e380429a873d88643d711b47ab8f823afee6e81f1a69a41a8"
+      },
+      {
+        "path": "../scripts/build_rom.py",
+        "sha256": "930d2872e070b4d4df5f17b597f893c4992a72dcffbc76a0d8ff60f2076d35ab"
+      },
+      {
+        "path": "../scripts/rom_checksums.py",
+        "sha256": "94bdf9b7f8d237161f88ee00f0cb4344605067f31e0b7b468851ea897787cf0d"
+      }
+    ]
+  },
+  "tests": [
+    {
+      "path": "../tests/test_build_v2_4_roam_dialogue_patch.py",
+      "sha256": "80d1d3c9ee3ac4ccfa9bd61204cc2c22dcb0409896311d1af74c55c89e4a1429",
+      "result": "5 passed"
+    }
+  ],
+  "rebuild_command": "./.venv/bin/python scripts/build_v2_4_roam_dialogue_patch.py --parent roms/oni5_v1_opening_dialog.gb --output roms/oni5_v2_4_roam_dialogues.bps --overwrite",
+  "apply_locally_command": "./.venv/bin/python scripts/apply_bps_patch.py --source roms/oni5_v1_opening_dialog.gb --patch roms/oni5_v2_4_roam_dialogues.bps --output roms/oni5_v2_4_roam_dialogues.gb"
+}

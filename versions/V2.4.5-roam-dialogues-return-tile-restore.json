@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.4.5-roam-dialogues-return-tile-restore",
+  "parent_version": {
+    "version_id": "V1-opening-dialog",
+    "path": "../roms/oni5_v1_opening_dialog.gb",
+    "sha256": "5682522e20fade44c457725a66430bae13e3d6695dcc18e04d058e4ce2e910ab"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_4_5_roam_dialogues.bps",
+    "size_bytes": 11316,
+    "sha256": "2138f663bbba846defb0450a84be94ca693ef686e1650e96dd86fc6e472eba50"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_4_5_roam_dialogues.gb",
+    "size_bytes": 1048576,
+    "sha256": "2543df09fb1dc3f83b7b197701b1f84f9ff7c7906fc39d522c2bbdb0bf239b99",
+    "persisted_by_builder": false
+  },
+  "runtime_validation": {
+    "status": "sameboy-confirmed-by-user",
+    "tested_rom_sha256": "2543df09fb1dc3f83b7b197701b1f84f9ff7c7906fc39d522c2bbdb0bf239b99",
+    "diagnosis": {
+      "runtime_observation": "Before any translated dialogue the user observed $C4F0=$BB; after the woman dialogue it was $94, while $C4F1=$00 and $C4F2=$00. The village menu becomes garbled after translated dialogue.",
+      "code_path": "The shared gateway return handler loads $C4F0 when a selected-pointer check misses. Dialogue loaders replace $C4F0 with their first-glyph return tile, but prior versions did not restore it after the text cache was closed.",
+      "candidate_change": "V2.4.5 saves the previous $C4F0 value to $C4F1 on dialogue-cache load, restores $C4F0 on cache cleanup, then clears $C4F1. It also retains V2.4.4's ROM-backed pattern restoration so dialogue loads avoid the game's $C000-$CFFF font staging area.",
+      "sameboy_result": "The user reports that all discovered issues are resolved and everything tested is working normally; V2.4.5 is the new runtime baseline."
+    },
+    "sameboy_observations": {
+      "tested_rom_sha256": "2543df09fb1dc3f83b7b197701b1f84f9ff7c7906fc39d522c2bbdb0bf239b99",
+      "result": "User confirmed all discovered issues are resolved and all tested features work normally."
+    },
+    "required_sameboy_checks": [
+      "Confirm the loaded ROM SHA-256 is 2543df09fb1dc3f83b7b197701b1f84f9ff7c7906fc39d522c2bbdb0bf239b99 before attributing runtime results.",
+      "Confirm the opening Chinese text and mandatory battle remain correct.",
+      "Check noticeboard, woman, and Garou translations; after closing each one, confirm $C4F0 returns to its pre-dialogue value and $C4F1/$C4F2 are cleared.",
+      "After each translated dialogue, open the village menu and confirm all Japanese menu text is legible.",
+      "Confirm each dialogue closes into the expected event flow with no stray tile, freeze, or illegal opcode."
+    ]
+  },
+  "features": [
+    "opening-scroll-dialog-chinese",
+    "noticeboard-dialogue",
+    "woman-dialogue",
+    "garou-dialogue"
+  ],
+  "excluded_features": [
+    "practice-dialogue",
+    "main-menu",
+    "house-story-sequence",
+    "battle-menu-translation"
+  ],
+  "scope": {
+    "dialogue_context_ids": [
+      "noticeboard",
+      "woman",
+      "garou"
+    ],
+    "gateway_layout": "v2.2",
+    "entry_pointer_high_prefilter": [
+      "0x33",
+      "0x0E"
+    ],
+    "dialogue_loader_return_b": "0xCD",
+    "dialogue_pattern_restore": "original ROM font patterns; no WRAM backup at 0xC000",
+    "dialogue_return_code_lifecycle": "save previous 0xC4F0 to 0xC4F1 while active, restore 0xC4F0 on cleanup, clear 0xC4F1",
+    "garou_source_offset": "0x030EE8",
+    "garou_source_size": 32,
+    "build_parent": "Immutable V1 only; V2.4.2 remains the runtime regression baseline, not the binary parent."
+  },
+  "source_rom": {
+    "path": "../roms/oni5_original.gb",
+    "sha256": "870f83f781c103925f206f35b71cdda6a0493e5b4c70d70b49cade145c35f127"
+  },
+  "inputs": [
+    {
+      "path": "../data/text_manifest.json",
+      "sha256": "b13f95dc8438260f9055a55031d2f9a8e94a6a6ddab078c3b9644408845a2f9e"
+    },
+    {
+      "path": "../data/chinese_glyphs_oni5_bank04_01330d.json",
+      "sha256": "1c3220f4c18dd48188a97e58df9480bb9e2b99ad20019aae427fd48bf35bcb30"
+    },
+    {
+      "path": "../data/chinese_glyphs.json",
+      "sha256": "f1c37f02f7a7de2d347c9dd657a9a4070fc0ba134440ef69139a22008781a012"
+    },
+    {
+      "path": "../data/chinese_glyphs_oni5_bank24_01348f.json",
+      "sha256": "9faacc0a76e7c3da2d16cbb52819fbdfcb8d08f9471fcee479e799745393c558"
+    },
+    {
+      "path": "../data/tile_cache_plan_candidate.json",
+      "sha256": "2941bbe87a930b1b97fd16d8b21e27c5c886e08c638584f1995c5c1f3d3564a4"
+    },
+    {
+      "path": "../data/translation_encoding_candidate.json",
+      "sha256": "e19de39100f80c6ab5cc37acac04fb22e21335c72f9a77d867c0e4bb2884be66"
+    },
+    {
+      "path": "../data/tile_cache_plan_oni5_bank0c_030ee8.json",
+      "sha256": "2f9162eb0b76f9c4aa685dca529716f1780229e9fa3de565580e257b8a94f543"
+    },
+    {
+      "path": "../data/translation_encoding_oni5_bank0c_030ee8.json",
+      "sha256": "8d81820daf4f9f875647260791423331be7492dbe6a5fb9283eb61dfba23b49d"
+    }
+  ],
+  "builder": {
+    "script": "../scripts/build_v2_4_roam_dialogue_patch.py",
+    "sha256": "2685076b1460d1527ea520e57cc28bdd53e9d88b23511481d493489fcb45c68c",
+    "arguments": [
+      "--parent roms/oni5_v1_opening_dialog.gb",
+      "--prefilter-pointer-highs",
+      "--clear-dialogue-upper-tile",
+      "--include-garou",
+      "--restore-dialogue-patterns-from-rom",
+      "--preserve-dialogue-return-code",
+      "--output roms/oni5_v2_4_5_roam_dialogues.bps",
+      "--overwrite"
+    ],
+    "parent_builder_script": "../scripts/build_opening_dialogue_pilot.py",
+    "parent_builder_sha256": "14d81e0709a700aa38746b60826cbb234aaa5744ae9fda2bf1bf884566e1a6c9",
+    "context_builder_script": "../scripts/build_text_comparison_pilot.py",
+    "context_builder_sha256": "c941515f9965202b1a4ed5f8513d97fade3b0e8cb61518545e8f4dd2f0a35964",
+    "apply_script": "../scripts/apply_bps_patch.py",
+    "apply_script_sha256": "60c021ae803bf3eada3ebf4c2c1e042ae5e110d95e671953680d342679131390",
+    "supporting_scripts": [
+      {
+        "path": "../scripts/build_mbc1_expansion_probe.py",
+        "sha256": "b7125b16a4e8fbbbd5c35c18a560380bd59957ec79fb9240a95346b0330ddb6f"
+      },
+      {
+        "path": "../scripts/build_menu_pilot.py",
+        "sha256": "d9ca0b87345464e677440ee7257c89ce4d909e6dbbbafce3a9a3f2151f3ce78a"
+      },
+      {
+        "path": "../scripts/build_noticeboard_glyph_probe.py",
+        "sha256": "f13be5e3d332bd2029fe5c4e256b281294d3aa96ab0ad76555080fe00b1bfe2e"
+      },
+      {
+        "path": "../scripts/build_opening_text_preview_patch.py",
+        "sha256": "89a549bf35e9091e380429a873d88643d711b47ab8f823afee6e81f1a69a41a8"
+      },
+      {
+        "path": "../scripts/build_rom.py",
+        "sha256": "930d2872e070b4d4df5f17b597f893c4992a72dcffbc76a0d8ff60f2076d35ab"
+      },
+      {
+        "path": "../scripts/rom_checksums.py",
+        "sha256": "94bdf9b7f8d237161f88ee00f0cb4344605067f31e0b7b468851ea897787cf0d"
+      }
+    ]
+  },
+  "automated_validation": {
+    "focused_unit_tests": "10 passed",
+    "full_unit_suite": "141 passed",
+    "checksum": "Target ROM passes the repository's ROM checksum verification.",
+    "deterministic_rebuild": "The V2.4.5 BPS patch and target hash match across two builds."
+  },
+  "tests": [
+    {
+      "path": "../tests/test_build_v2_4_roam_dialogue_patch.py",
+      "sha256": "ca4573cedf04365bbe8b0907680c9494134f970277b1158bfcb501b0b9fff839",
+      "result": "10 passed"
+    }
+  ],
+  "rebuild_command": "./.venv/bin/python scripts/build_v2_4_roam_dialogue_patch.py --parent roms/oni5_v1_opening_dialog.gb --prefilter-pointer-highs --clear-dialogue-upper-tile --include-garou --restore-dialogue-patterns-from-rom --preserve-dialogue-return-code --output roms/oni5_v2_4_5_roam_dialogues.bps --overwrite",
+  "apply_locally_command": "./.venv/bin/python scripts/apply_bps_patch.py --source roms/oni5_v1_opening_dialog.gb --patch roms/oni5_v2_4_5_roam_dialogues.bps --output roms/oni5_v2_4_5_roam_dialogues.gb"
+}

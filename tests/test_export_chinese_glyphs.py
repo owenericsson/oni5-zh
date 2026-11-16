@@ -109,6 +109,44 @@ class ExportChineseGlyphTests(unittest.TestCase):
             ["中"],
         )
 
+    def test_excludes_characters_preserved_from_the_original_rom(self):
+        manifest = {
+            "records": [
+                {
+                    "id": "target",
+                    "translation": {
+                        "status": "confirmed",
+                        "segments": [{"text": "「中…」"}],
+                    },
+                }
+            ]
+        }
+
+        self.assertEqual(
+            collect_required_characters(
+                manifest,
+                ["target"],
+                ["「", "」", "…"],
+            ),
+            ["中"],
+        )
+
+    def test_rejects_excluded_characters_missing_from_selected_text(self):
+        manifest = {
+            "records": [
+                {
+                    "id": "target",
+                    "translation": {
+                        "status": "confirmed",
+                        "segments": [{"text": "中"}],
+                    },
+                }
+            ]
+        }
+
+        with self.assertRaisesRegex(ValueError, "excluded character.*not found"):
+            collect_required_characters(manifest, ["target"], ["…"])
+
     def test_rejects_missing_selected_record(self):
         with self.assertRaisesRegex(ValueError, "missing selected record"):
             collect_required_characters({"records": []}, ["missing"])

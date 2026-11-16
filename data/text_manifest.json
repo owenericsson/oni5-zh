@@ -127,19 +127,20 @@
         }
       ],
       "translation": {
-        "status": "draft",
+        "status": "confirmed",
         "segments": [
           {
             "source_start": "0x01348F",
             "source_end_exclusive": "0x0134AA",
-            "text": "「今日之修行\n就此作罢」"
+            "text": "「今日的修行\n就到此为止」"
           }
         ]
       },
       "verification": [
         "ROM $01348B 为事件命令 $57；同一分派表项进入 $6E88 并调用文本解析器 $16F0。",
         "正文从命令后的 $01348C 开始；SameBoy 曾在逻辑地址 $748F/$7490 观察到正文内的 $3B/$0F。",
-        "从 $01348C 起的下一个 $7F 位于 $013516；解析器在 $7F 分支返回，因此排他终点为 $013517。"
+        "从 $01348C 起的下一个 $7F 位于 $013516；解析器在 $7F 分支返回，因此排他终点为 $013517。",
+        "用户于 2026-11-14 确认译文「今日的修行／就到此为止」。"
       ]
     },
     {
@@ -387,6 +388,69 @@
           "译文有 20 个不同汉字；该上下文配置 20 个 custom glyph，句尾全角问号使用原生 tile $CA，引号使用原生 tile $BB/$BC。"
         ]
       }
+    },
+    {
+      "id": "oni5-bank04-pointer-01330d",
+      "source": {
+        "bank": {
+          "logical": "0x04",
+          "physical": "0x04",
+          "size": "0x4000"
+        },
+        "pointer": {
+          "window": "lower",
+          "cpu_address": "0x330D"
+        },
+        "payload": {
+          "start": "0x01330D",
+          "end_exclusive": "0x013368",
+          "terminator": "0x7F"
+        }
+      },
+      "token_annotations": [
+        {"offset": "0x01330D", "code": "0x3B", "kind": "glyph_code", "display": "「"},
+        {"offset": "0x013318", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x01331C", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x01331D", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x013327", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x01332F", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x013330", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x013336", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x013341", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x013342", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x013346", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x013353", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x013354", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]", "meaning": "blank_tile; textual role not confirmed"},
+        {"offset": "0x013363", "code": "0x3C", "kind": "glyph_code", "display": "」"},
+        {"offset": "0x013364", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x013365", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x013366", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x013367", "code": "0x7F", "kind": "terminator"}
+      ],
+      "observations": [
+        {
+          "start": "0x01330D",
+          "end_exclusive": "0x013364",
+          "text": "「……とおきひがしのだいちに□ふうじ\n□られしわがたましい□いまこそながい\n□ねむりより□めざめん……わがかしん\n□たちよ□われにいけにえをささげよ\n□ふっかつのぎしきのために……」",
+          "evidence": "用户提供的开场滚动文字完整转写；用户的运行时快照为 PC $20:$0D40、回溯 $21:$76E3、$FFAA=$04、$FFAD/$FFAE=$42/$33。按 bank $04 映射时游标 $3342 对应 ROM $013342，字节为 $4D，符合转写中第四行前的空白图块。开头引号 $3B 位于 $01330D，闭引号 $3C 位于 $013363；用户前一停点游标 $3368 越过 $013367 的 $7F。"
+        }
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x01330D",
+            "source_end_exclusive": "0x013364",
+            "text": "「……远在东方的大地上，封印着\n我的灵魂。如今终于从漫长的\n沉睡中苏醒……我的家臣\n们啊，向我献上祭品吧\n为了复活仪式……」"
+          }
+        ]
+      },
+      "verification": [
+        "在原 ROM 中，bank $04 的低窗口指针 $330D 映射到文件偏移 $01330D；$3B 为开引号，$013363 的 $3C 为闭引号。",
+        "候选 payload 为 91 字节，唯一 $7F 位于 $013367；正文内行推进码位于 $01331C/$01332F/$013341/$013353，闭引号后的三个 $7D 位于 $013364–$013366，暂保留为滚动尾部控制。",
+        "用户提供的转写含 38 种不同平假名，其中标准 46 个基础平假名覆盖 31 个；不包含片假名或汉字，不能据此声称覆盖完整日文字集。",
+        "用户于 2026-11-14 确认该五行中文译文。"
+      ]
     }
   ]
 }

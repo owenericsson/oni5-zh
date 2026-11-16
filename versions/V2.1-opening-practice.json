@@ -1,0 +1,392 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.1-opening-practice",
+  "parent_version": {
+    "version_id": "V1-opening-dialog",
+    "path": "../roms/oni5_v1_opening_dialog.gb",
+    "sha256": "5682522e20fade44c457725a66430bae13e3d6695dcc18e04d058e4ce2e910ab"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_1_opening_practice.bps",
+    "size_bytes": 5736,
+    "sha256": "5252a190258c7119bf7c259f89c817b8641c3347ac2fb81f75733a4a5d708223"
+  },
+  "target_rom": {
+    "size_bytes": 1048576,
+    "sha256": "d7f557e9a9f918d507b3952882be88213644dcb8129fa81a8ac9df9c4723adf9",
+    "persisted_by_builder": false
+  },
+  "runtime_validation": {
+    "status": "failed-sameboy",
+    "failure_report": "User reports SameBoy displays \"Illegal Opcode. Halting.\" before the opening text appears.",
+    "candidate_version_confirmed_by_user": "V2.1-opening-practice",
+    "tested_rom_sha256": "d7f557e9a9f918d507b3952882be88213644dcb8129fa81a8ac9df9c4723adf9",
+    "hash_confirmation": "User confirms the tested ROM hash matches the expected V2.1 target hash.",
+    "debug_snapshot": {
+      "pc": "0x4083",
+      "backtrace": [
+        "0x24:0x4083",
+        "0x20:0x194B",
+        "0x20:0x1935",
+        "0x21:0x76D2"
+      ],
+      "registers": {
+        "AF": "0x3D70",
+        "BC": "0x0FCA",
+        "DE": "0x01CA",
+        "HL": "0xFF66",
+        "SP": "0xDFEB",
+        "IME": "disabled"
+      },
+      "memory": {
+        "0xFFAA": "0x04",
+        "0xFFAD": "0x1D",
+        "0xFFAE": "0x33",
+        "0xC4F0": "0xBB",
+        "0xC4F1": "0x00",
+        "0xC4F2": "0x80"
+      },
+      "current_rom_bank": "0x24"
+    },
+    "binary_comparison": {
+      "parent_sha256": "5682522e20fade44c457725a66430bae13e3d6695dcc18e04d058e4ce2e910ab",
+      "target_sha256": "d7f557e9a9f918d507b3952882be88213644dcb8129fa81a8ac9df9c4723adf9",
+      "changed_bytes": 5590,
+      "contiguous_ranges": 41,
+      "scope": [
+        "opening-entry dispatcher in banks 0x00 and 0x20",
+        "gateway/completion code in banks 0x00 and 0x20",
+        "practice payload in banks 0x04 and 0x24",
+        "new dispatcher/loaders/glyph data in banks 0x10 and 0x30",
+        "ROM header size/checksum fields"
+      ],
+      "verified_unchanged": [
+        "opening dialogue payload",
+        "fallback bytes at 0x00F7-0x00FF and mirrored bank 0x20",
+        "bank 0x24 bytes at 0x4082-0x4083 (DD 08)"
+      ]
+    },
+    "diagnostic_trace": [
+      {
+        "stop": "entry hook",
+        "pc": "0x1803",
+        "backtrace": [
+          "0x20:0x1803",
+          "0x20:0x194B",
+          "0x20:0x1935",
+          "0x21:0x76D2"
+        ],
+        "registers": {
+          "AF": "0x3B70",
+          "BC": "0x0000",
+          "DE": "0x0100",
+          "HL": "0xD366",
+          "SP": "0xDFF3",
+          "IME": "enabled"
+        },
+        "memory": {
+          "0xFFAA": "0x04",
+          "0xFFAD": "0x1D",
+          "0xFFAE": "0x33",
+          "0xC4F0": "0x00",
+          "0xC4F1": "0x00",
+          "0xC4F2": "0x00"
+        },
+        "expected_next_path": "Entry hook jumps to 0x00A0; opening signature matches and empty cache marker should dispatch through 0x00E0 to the bank-0x30 alias of the bank-0x10 helper."
+      },
+      {
+        "stop": "fixed-bank gateway",
+        "pc": "0x00E0",
+        "backtrace": [
+          "0x20:0x00E0",
+          "0x20:0x194B",
+          "0x20:0x1935",
+          "0x21:0x76D2"
+        ],
+        "registers": {
+          "AF": "0x0080",
+          "BC": "0x0000",
+          "DE": "0x0100",
+          "HL": "0xD366",
+          "SP": "0xDFF1",
+          "IME": "enabled"
+        },
+        "memory": {
+          "0xFFAA": "0x04",
+          "0xFFAD": "0x1D",
+          "0xFFAE": "0x33",
+          "0xC4F0": "0x00",
+          "0xC4F1": "0x00",
+          "0xC4F2": "0x00"
+        },
+        "expected_next_path": "Execute the fixed stub at 0x00E0, switch the low ROM bank register to 0x10, and jump to the bank-0x30 alias at CPU address 0x4000."
+      },
+      {
+        "stop": "bank-0x10 helper mirror",
+        "pc": "0x4000",
+        "backtrace": [
+          "0x30:0x4000",
+          "0x20:0x194B",
+          "0x20:0x1935",
+          "0x21:0x76D2"
+        ],
+        "registers": {
+          "AF": "0x1080",
+          "BC": "0x0000",
+          "DE": "0x0100",
+          "HL": "0xD366",
+          "SP": "0xDFF1",
+          "IME": "disabled"
+        },
+        "memory": {
+          "0xFFAA": "0x04",
+          "0xFFAD": "0x1D",
+          "0xFFAE": "0x33",
+          "0xC4F0": "0x00",
+          "0xC4F1": "0x00",
+          "0xC4F2": "0x00"
+        },
+        "expected_next_path": "The helper begins with CALL 0x400F to invoke the bank-10 dispatcher; the opening signature should match and the loader should set C4F0=BB and C4F2=80."
+      },
+      {
+        "stop": "bank-0x10 dispatcher",
+        "pc": "0x400F",
+        "backtrace": [
+          "0x30:0x400F",
+          "0x30:0x4000",
+          "0x20:0x194B",
+          "0x20:0x1935",
+          "0x21:0x76D2"
+        ],
+        "registers": {
+          "AF": "0x1080",
+          "BC": "0x0000",
+          "DE": "0x0100",
+          "HL": "0xD366",
+          "SP": "0xDFEF",
+          "IME": "disabled"
+        },
+        "memory": {
+          "0xFFAA": "0x04",
+          "0xFFAD": "0x1D",
+          "0xFFAE": "0x33",
+          "0xC4F0": "0x00",
+          "0xC4F1": "0x00",
+          "0xC4F2": "0x00"
+        },
+        "expected_next_path": "Dispatcher sees an empty cache marker and matching opening bank/pointer/cursor signature, then CALLs the opening loader at 0x4B00."
+      },
+      {
+        "stop": "opening glyph loader",
+        "pc": "0x4B00",
+        "backtrace": [
+          "0x30:0x4B00",
+          "0x30:0x402A",
+          "0x30:0x4000",
+          "0x20:0x194B",
+          "0x20:0x1935",
+          "0x21:0x76D2"
+        ],
+        "registers": {
+          "AF": "0x1DC0",
+          "BC": "0x0000",
+          "DE": "0x0100",
+          "HL": "0xD366",
+          "SP": "0xDFED",
+          "IME": "disabled"
+        },
+        "memory": {
+          "0xFFAA": "0x04",
+          "0xFFAD": "0x1D",
+          "0xFFAE": "0x33",
+          "0xC4F0": "0x00",
+          "0xC4F1": "0x00",
+          "0xC4F2": "0x00"
+        },
+        "expected_next_path": "The loader should copy opening glyphs, set C4F2 to 0x80, return to dispatcher at 0x402D, and then complete the gateway return."
+      },
+      {
+        "stop": "dispatcher after loader return",
+        "pc": "0x402D",
+        "backtrace": [
+          "0x30:0x402D",
+          "0x30:0x4000",
+          "0x20:0x194B",
+          "0x20:0x1935",
+          "0x21:0x76D2"
+        ],
+        "registers": {
+          "AF": "0x8080",
+          "BC": "0xCD00",
+          "DE": "0x0100",
+          "HL": "0xD366",
+          "SP": "0xDFEF",
+          "IME": "disabled"
+        },
+        "memory": {
+          "0xFFAA": "0x04",
+          "0xFFAD": "0x1D",
+          "0xFFAE": "0x33",
+          "0xC4F0": "0x00",
+          "0xC4F1": "0x00",
+          "0xC4F2": "0x80"
+        },
+        "expected_next_path": "Dispatcher writes C4F0=BB, returns success A=01 to helper at 0x4003, which restores bank 0x04 and jumps to fixed completion at 0x00E8."
+      },
+      {
+        "stop": "helper after dispatcher return",
+        "pc": "0x4003",
+        "backtrace": [
+          "0x30:0x4003",
+          "0x20:0x194B",
+          "0x20:0x1935",
+          "0x21:0x76D2"
+        ],
+        "registers": {
+          "AF": "0x0180",
+          "BC": "0xCD00",
+          "DE": "0x0100",
+          "HL": "0xD366",
+          "SP": "0xDFF1",
+          "IME": "disabled"
+        },
+        "memory": {
+          "0xFFAA": "0x04",
+          "0xFFAD": "0x1D",
+          "0xFFAE": "0x33",
+          "0xC4F0": "0xBB",
+          "0xC4F1": "0x00",
+          "0xC4F2": "0x80"
+        },
+        "expected_next_path": "The helper saves success A=01, restores bank low bits from FFAA=04, reenables interrupts, restores AF, and jumps to fixed completion at 0x00E8."
+      }
+    ],
+    "diagnostic_status": "Confirmed root cause: the bank-0x30 gateway at 0x4000 switched the MBC bank back to 0x04 at 0x4007, then continued executing at 0x400A in the banked ROM window. The CPU therefore fetched the following instructions from bank 0x24, not from the gateway code in bank 0x30, and entered invalid control flow before reaching the fixed completion stub. Earlier breakpoints confirmed that the opening loader and dispatcher completed successfully (C4F0=BB, C4F2=80); the failure was in the gateway's bank-restore/return sequence, not the glyph loader or the repaired F7 fallback."
+  },
+  "inherited_features": [
+    "opening-scroll-dialog-chinese"
+  ],
+  "added_features": [
+    "practice-dialogue"
+  ],
+  "excluded_features": [
+    "noticeboard-dialogue",
+    "woman-dialogue",
+    "garou-dialogue",
+    "main-menu"
+  ],
+  "previous_attempt_root_cause": {
+    "version_id": "V2-opening-practice",
+    "finding": "The 32-byte generic postlude beginning at 0x00E0 overwrote the V1 non-target fallback beginning at 0x00F7. The name-screen text path had bank 0x0C and took that fallback, consistent with the observed invalid control flow.",
+    "freeze_pc": "0xA0EC",
+    "freeze_address_region": "0xA000-0xBFFF external-RAM window",
+    "ffaa": "0x0C",
+    "ffad": "0x00",
+    "ffae": "0x00",
+    "c4f0_c4f2": "00 00 00",
+    "v1_fallback_bytes": "F1 FE 60 D2 15 18 C3 07 18",
+    "v2_1_fix": "Use a 9-byte stub at 0x00E0 and a 13-byte completion at 0x00E9; preserve the fallback at 0x00F7."
+  },
+  "confirmed_root_cause": {
+    "location": "bank 0x30 gateway, CPU address 0x4000",
+    "finding": "The gateway restored bank 0x04 at 0x4007, then continued executing from 0x400A inside the banked ROM window. Subsequent opcodes were fetched from bank 0x24 instead of the gateway code in bank 0x30, causing invalid control flow before fixed completion.",
+    "evidence": [
+      "The loader and dispatcher completed successfully; C4F0=BB and C4F2=80.",
+      "The trace reached the bank-0x30 gateway, but did not reach the fixed completion stub.",
+      "SameBoy stopped at PC 0x4083 in the bank-0x24 data/pointer region."
+    ],
+    "resolution": "V2.2 calls the bank-0x30 gateway while still in fixed bank code, returns from the gateway before restoring the original bank, and handles the result in a fixed-bank return stub."
+  },
+  "source_rom": {
+    "path": "../roms/oni5_original.gb",
+    "sha256": "870f83f781c103925f206f35b71cdda6a0493e5b4c70d70b49cade145c35f127"
+  },
+  "inputs": [
+    {
+      "path": "../data/text_manifest.json",
+      "sha256": "b13f95dc8438260f9055a55031d2f9a8e94a6a6ddab078c3b9644408845a2f9e"
+    },
+    {
+      "path": "../data/chinese_glyphs_oni5_bank04_01330d.json",
+      "sha256": "1c3220f4c18dd48188a97e58df9480bb9e2b99ad20019aae427fd48bf35bcb30"
+    },
+    {
+      "path": "../data/chinese_glyphs.json",
+      "sha256": "f1c37f02f7a7de2d347c9dd657a9a4070fc0ba134440ef69139a22008781a012"
+    },
+    {
+      "path": "../data/chinese_glyphs_oni5_bank24_01348f.json",
+      "sha256": "9faacc0a76e7c3da2d16cbb52819fbdfcb8d08f9471fcee479e799745393c558"
+    },
+    {
+      "path": "../data/tile_cache_plan_candidate.json",
+      "sha256": "2941bbe87a930b1b97fd16d8b21e27c5c886e08c638584f1995c5c1f3d3564a4"
+    },
+    {
+      "path": "../data/translation_encoding_candidate.json",
+      "sha256": "e19de39100f80c6ab5cc37acac04fb22e21335c72f9a77d867c0e4bb2884be66"
+    },
+    {
+      "path": "../data/tile_cache_plan_oni5_bank0c_030ee8.json",
+      "sha256": "2f9162eb0b76f9c4aa685dca529716f1780229e9fa3de565580e257b8a94f543"
+    },
+    {
+      "path": "../data/translation_encoding_oni5_bank0c_030ee8.json",
+      "sha256": "8d81820daf4f9f875647260791423331be7492dbe6a5fb9283eb61dfba23b49d"
+    }
+  ],
+  "builder": {
+    "script": "../scripts/build_v2_opening_practice_patch.py",
+    "sha256": "fa1d45c13df407582054b6dfd193d7040cfbf0adce4198786669a6adfad9ca63",
+    "parent_builder_script": "../scripts/build_opening_dialogue_pilot.py",
+    "parent_builder_sha256": "d4587856b7078c22bb95406133d8f8bd7be71f587bedf2a8f3b13b215ee817e4",
+    "context_builder_script": "../scripts/build_text_comparison_pilot.py",
+    "context_builder_sha256": "cc80e8e59d8b23dbe212bab16cc1f1a3b5b3393cd0ad2b130c62efb52c8746ca",
+    "apply_script": "../scripts/apply_bps_patch.py",
+    "apply_script_sha256": "60c021ae803bf3eada3ebf4c2c1e042ae5e110d95e671953680d342679131390",
+    "supporting_scripts": [
+      {
+        "path": "../scripts/build_context_glyph_probe.py",
+        "sha256": "685924ba360fa5ed4679c006c4fd6a57c61dbb13dd7861eb9201903417c0865d"
+      },
+      {
+        "path": "../scripts/build_woman_glyph_probe.py",
+        "sha256": "8967c57455a47a6a28dc753862f820d157644e93e79011f4ab1a0d9a6e5e51a2"
+      },
+      {
+        "path": "../scripts/build_two_text_pilot.py",
+        "sha256": "f2d1361547ce3a286588155908acb6ec6da887082505eaa409a8a75f2d4bf66c"
+      },
+      {
+        "path": "../scripts/build_opening_text_preview_patch.py",
+        "sha256": "89a549bf35e9091e380429a873d88643d711b47ab8f823afee6e81f1a69a41a8"
+      },
+      {
+        "path": "../scripts/build_mbc1_expansion_probe.py",
+        "sha256": "b7125b16a4e8fbbbd5c35c18a560380bd59957ec79fb9240a95346b0330ddb6f"
+      },
+      {
+        "path": "../scripts/build_menu_pilot.py",
+        "sha256": "d9ca0b87345464e677440ee7257c89ce4d909e6dbbbafce3a9a3f2151f3ce78a"
+      },
+      {
+        "path": "../scripts/build_noticeboard_glyph_probe.py",
+        "sha256": "f13be5e3d332bd2029fe5c4e256b281294d3aa96ab0ad76555080fe00b1bfe2e"
+      },
+      {
+        "path": "../scripts/build_rom.py",
+        "sha256": "930d2872e070b4d4df5f17b597f893c4992a72dcffbc76a0d8ff60f2076d35ab"
+      },
+      {
+        "path": "../scripts/decode_gb_resource.py",
+        "sha256": "f6f10ba7e22703bce692d24a25f7b01b57b0518feefa4e4576395cc815aee880"
+      },
+      {
+        "path": "../scripts/rom_checksums.py",
+        "sha256": "94bdf9b7f8d237161f88ee00f0cb4344605067f31e0b7b468851ea897787cf0d"
+      }
+    ]
+  },
+  "rebuild_command": "./.venv/bin/python scripts/build_v2_opening_practice_patch.py --parent roms/oni5_v1_opening_dialog.gb --output roms/oni5_v2_1_opening_practice.bps",
+  "apply_locally_command": "./.venv/bin/python scripts/apply_bps_patch.py --source roms/oni5_v1_opening_dialog.gb --patch roms/oni5_v2_1_opening_practice.bps --output roms/oni5_v2_1_opening_practice.gb"
+}

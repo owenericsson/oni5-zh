@@ -92,6 +92,7 @@ def encode_glyph(record: dict[str, Any], character: str) -> bytes:
 def collect_required_characters(
     manifest: Any,
     record_ids: list[str] | None = None,
+    exclude_characters: list[str] | None = None,
 ) -> list[str]:
     if not isinstance(manifest, dict) or not isinstance(manifest.get("records"), list):
         raise ValueError("text manifest must contain a records list")
@@ -100,10 +101,19 @@ def collect_required_characters(
         or any(not isinstance(record_id, str) or not record_id for record_id in record_ids)
     ):
         raise ValueError("record_ids must contain at least one non-empty string")
+    excluded = exclude_characters or []
+    if any(
+        not isinstance(character, str) or len(character) != 1 or character.isspace()
+        for character in excluded
+    ):
+        raise ValueError("excluded characters must be single non-whitespace characters")
+    if len(set(excluded)) != len(excluded):
+        raise ValueError("excluded characters must be unique")
 
     selected_ids = set(record_ids) if record_ids is not None else None
     selected_records = set()
     characters = set()
+    found_excluded = set()
     confirmed_count = 0
     for index, record in enumerate(manifest["records"]):
         if not isinstance(record, dict):
@@ -138,7 +148,10 @@ def collect_required_characters(
                     raise ValueError(
                         f"unsupported whitespace U+{ord(character):04X} in confirmed text"
                     )
-                characters.add(character)
+                if character in excluded:
+                    found_excluded.add(character)
+                else:
+                    characters.add(character)
 
     if selected_ids is not None:
         missing_ids = selected_ids - selected_records
@@ -147,6 +160,10 @@ def collect_required_characters(
             raise ValueError(f"manifest is missing selected record(s): {missing}")
     if confirmed_count == 0:
         raise ValueError("text manifest contains no confirmed translations")
+    missing_excluded = set(excluded) - found_excluded
+    if missing_excluded:
+        missing = ", ".join(sorted(missing_excluded))
+        raise ValueError(f"excluded character(s) not found in selected translations: {missing}")
     return sorted(characters, key=ord)
 
 
@@ -154,8 +171,9 @@ def export_glyphs(
     font_data: bytes,
     manifest: Any,
     record_ids: list[str] | None = None,
+    exclude_characters: list[str] | None = None,
 ) -> dict[str, Any]:
-    required = collect_required_characters(manifest, record_ids)
+    required = collect_required_characters(manifest, record_ids, exclude_characters)
     bdf_glyphs = parse_bdf(font_data)
     glyphs = []
     for character in required:
@@ -214,6 +232,12 @@ def main() -> None:
         dest="record_ids",
         help="include only this confirmed translation record; may be repeated",
     )
+    parser.add_argument(
+        "--exclude-character",
+        action="append",
+        dest="exclude_characters",
+        help="omit a character preserved from the original ROM; may be repeated",
+    )
     args = parser.parse_args()
 
     try:
@@ -230,6 +254,7 @@ def main() -> None:
             font_path.read_bytes(),
             json.loads(manifest_path.read_text(encoding="utf-8")),
             args.record_ids,
+            args.exclude_characters,
         )
         output_path.write_text(
             json.dumps(asset, ensure_ascii=False, indent=2) + "\n",

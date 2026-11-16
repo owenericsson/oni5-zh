@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "font": {
+    "family": "ChillBitmap",
+    "variant": "8px Regular Proportional",
+    "source_url": "https://fontpixel.com/downloads/chill-bitmap--ChillBitmap7x-8px.bdf.gz",
+    "source_sha256": "37b51f4f2a094a952a3cb481090c2185922a65b90c228e5bdad7b4c445ca7939",
+    "license": "SIL Open Font License 1.1",
+    "license_url": "https://github.com/Warren2060/ChillBitmap/blob/main/License"
+  },
+  "glyphs": [
+    {
+      "character": "为",
+      "codepoint": "U+4E3A",
+      "tile_2bpp_hex": "48 48 28 28 7E 7E 12 12 16 16 22 22 CC CC 00 00"
+    },
+    {
+      "character": "今",
+      "codepoint": "U+4ECA",
+      "tile_2bpp_hex": "38 38 44 44 92 92 08 08 7C 7C 04 04 38 38 00 00"
+    },
+    {
+      "character": "修",
+      "codepoint": "U+4FEE",
+      "tile_2bpp_hex": "26 26 4A 4A E4 E4 6A 6A 64 64 62 62 4C 4C 00 00"
+    },
+    {
+      "character": "就",
+      "codepoint": "U+5C31",
+      "tile_2bpp_hex": "26 26 F4 F4 5E 5E 74 74 24 24 B4 B4 6A 6A 00 00"
+    },
+    {
+      "character": "日",
+      "codepoint": "U+65E5",
+      "tile_2bpp_hex": "7E 7E 42 42 42 42 7E 7E 42 42 42 42 7E 7E 00 00"
+    },
+    {
+      "character": "止",
+      "codepoint": "U+6B62",
+      "tile_2bpp_hex": "10 10 10 10 5C 5C 50 50 50 50 50 50 FE FE 00 00"
+    },
+    {
+      "character": "的",
+      "codepoint": "U+7684",
+      "tile_2bpp_hex": "48 48 EE EE A2 A2 EA EA A6 A6 E2 E2 0C 0C 00 00"
+    },
+    {
+      "character": "行",
+      "codepoint": "U+884C",
+      "tile_2bpp_hex": "5E 5E 80 80 5E 5E C4 C4 44 44 44 44 4C 4C 00 00"
+    }
+  ]
+}
