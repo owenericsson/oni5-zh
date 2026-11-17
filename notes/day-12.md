@@ -21,6 +21,11 @@
 - V1→V2.5 BPS：13,396 字节，SHA-256 `e5f0eca360f4a991864669316fef2dce26bbeb01a78204158ffe32a9c2a6f845`。
 - V2.5 构建测试 5 项通过；构建器完成 ROM checksum 和 BPS 往返验证。版本清单保存构建哈希、输入信息和运行验收状态。
 
+## 防回归约束
+
+- `test_fixed_gateway_restores_bank_from_ff_a9` 精确断言 fixed gateway 的恢复指令读取 `$FFA9`（机器码 `FA A9 FF`）；整合 ROM 测试同时核对 gateway 写入及其 bank mirror。若未来误改回读取 `$FFAA`，该测试将失败。
+- 后续修改共享 gateway 或其调用路由时，先运行 `python3 -m unittest discover -s tests -p 'test_build_v2_5_menu_patch.py'`，再重建 ROM 并核对哈希；不能只凭静态生成成功或 checksum 通过就验收开场路径。
+
 ## SameBoy 验收与基线变更
 
 用户确认上述 ROM 的全部测试通过，包括开场文本、自由活动一级菜单、菜单关闭后的图形恢复，以及通知板、女人和伽罗对话。此前 V2.4.5 是运行回归基线；从本日起，新工作以 **V2.5-main-menu**（ROM SHA-256 `a39eb8b30942f37f657bda03c806abf761d6cbbbc5d99b0697544dc25b03170f`）作为运行基线。V1 仍是构建新版本的不可变父版本。
