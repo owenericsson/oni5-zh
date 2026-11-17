@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.5-main-menu",
+  "parent_version": {
+    "version_id": "V1-opening-dialog",
+    "path": "../roms/oni5_v1_opening_dialog.gb",
+    "sha256": "5682522e20fade44c457725a66430bae13e3d6695dcc18e04d058e4ce2e910ab"
+  },
+  "runtime_regression_baseline": {
+    "version_id": "V2.4.5-roam-dialogues-return-tile-restore",
+    "sha256": "2543df09fb1dc3f83b7b197701b1f84f9ff7c7906fc39d522c2bbdb0bf239b99",
+    "status": "sameboy-confirmed-by-user"
+  },
+  "current_runtime_baseline": {
+    "version_id": "V2.5-main-menu",
+    "sha256": "a39eb8b30942f37f657bda03c806abf761d6cbbbc5d99b0697544dc25b03170f",
+    "status": "sameboy-confirmed-by-user",
+    "established_on": "2026-11-17"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_5_main_menu.bps",
+    "size_bytes": 13396,
+    "sha256": "e5f0eca360f4a991864669316fef2dce26bbeb01a78204158ffe32a9c2a6f845"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_5_main_menu.gb",
+    "size_bytes": 1048576,
+    "sha256": "a39eb8b30942f37f657bda03c806abf761d6cbbbc5d99b0697544dc25b03170f",
+    "persisted_by_builder": true
+  },
+  "runtime_validation": {
+    "status": "sameboy-confirmed-by-user",
+    "tested_rom_sha256": "a39eb8b30942f37f657bda03c806abf761d6cbbbc5d99b0697544dc25b03170f",
+    "observation": "The first candidate's bank restore was corrected from $FFAA to the bank shadow at $FFA9. The menu-close route now compares CPU return address $494A, and its restore helper checks the menu marker $C4F2 without the disproven $FFAD cursor gate. The user confirmed that all SameBoy tests passed on this ROM, including the opening text, first-level menu, menu graphics restoration, and noticeboard, woman, and Garou dialogue translations. This ROM is the current runtime regression baseline.",
+    "debug_snapshot": {
+      "registers": {
+        "AF": "0xB700",
+        "BC": "0x12B5",
+        "DE": "0x00D1",
+        "HL": "0xCD4B",
+        "SP": "0xFFFC",
+        "PC": "0x04F8",
+        "IME": "enabled"
+      },
+      "backtrace": [
+        "0x20:0x04F8",
+        "0x20:0x0170"
+      ],
+      "interpretation": "PC 0x04F8 is the byte-clear loop called at 0x0170 with HL=0xC000 and BC=0x2000. HL=0xCD4B and BC=0x12B5 match 0x0D4B bytes already cleared; this is normal startup initialization after restart, not the restart trigger."
+    },
+    "startup_entry_snapshot": {
+      "registers": {
+        "AF": "0x0080",
+        "BC": "0x2000",
+        "DE": "0x03D1",
+        "HL": "0xC000",
+        "SP": "0xFFFE",
+        "PC": "0x0170",
+        "IME": "enabled"
+      },
+      "backtrace": [
+        "0x20:0x0170"
+      ],
+      "interpretation": "This is the entry to the same WRAM-clear setup before CALL 0x04F7. It confirms startup initialization was entered again but does not identify who transferred control there."
+    },
+    "opening_gateway_snapshot": {
+      "registers": {
+        "AF": "0x3B70",
+        "BC": "0x0000",
+        "DE": "0x0100",
+        "HL": "0xD366",
+        "SP": "0xDFF3",
+        "PC": "0x1803",
+        "IME": "enabled"
+      },
+      "backtrace": [
+        "0x20:0x1803",
+        "0x20:0x194B",
+        "0x20:0x1935",
+        "0x21:0x76D2"
+      ],
+      "memory": {
+        "0xFFAA": "0x04",
+        "0xFFAD": "0x1D",
+        "0xFFAE": "0x33",
+        "0xC4F0": "0x00",
+        "0xC4F1": "0x00",
+        "0xC4F2": "0x00"
+      },
+      "interpretation": "This matches the confirmed opening-text dispatcher signature (bank 0x04, pointer high 0x33, low 0x1D) with no active cache marker. It is the opening-text gateway before dispatch, not the name-screen miss path or the reboot trigger."
+    },
+    "wrong_bank_return_snapshot": {
+      "pc": "0x24:0x76D5",
+      "caller": "0x21:0x76D2",
+      "memory": {
+        "0xFFA9": "0x01",
+        "0xFFAA": "0x04"
+      },
+      "interpretation": "The bank shadow at $FFA9 was 0x01, while the old fixed gateway loaded $FFAA and restored 0x04. Returning from the call at bank 0x21 then executed at bank 0x24, where 0x76D5 is data. The V2.5 gateway patch now loads the bank shadow from $FFA9."
+    },
+    "menu_restore_helper_snapshot": {
+      "router_hit": "0x30:0x6540",
+      "restore_helper_hit": "0x30:0x6400",
+      "memory": {
+        "0xC4F2": "0x80",
+        "0xFFAD": "0x09"
+      },
+      "interpretation": "The old helper required both the menu marker $C4F2=0x80 and cursor $FFAD=0x3D. The observed cursor was 0x09, so the helper exited before restoring glyph patterns. The new helper gates only on the menu marker because its caller is already the menu-close router branch."
+    },
+    "historical_failure_comparison": {
+      "v2_name_screen_failure": "V2 overwrote the V1 fallback at 0x00F7 with a 32-byte postlude starting at 0x00E0. V2.5's fixed gateway ends at 0x00F4, leaving that fallback intact.",
+      "v2_1_opening_failure": "V2.1 restored the ROM bank in the 0x4000-0x7FFF window and continued executing from that switched window. V2.5 restores the bank from fixed-bank code at 0x00EE and continues at fixed address 0x00F1 before jumping to 0x0061.",
+      "conclusion": "The previous V2.5 candidate's fixed-gateway restore source was one byte past the bank shadow, causing a wrong-bank return. The rebuilt candidate reads the bank shadow from $FFA9; SameBoy retesting is pending."
+    },
+    "separate_static_finding": "The menu-close hook at ROM file offset 0x8946 maps to CPU address 0x4946, so CALL 0x00E0 returns at CPU address 0x494A. The router matches high byte 0x49, and the restore helper now relies on the $C4F2 menu marker rather than an observed-invalid $FFAD cursor gate.",
+    "startup_unmatched_text_path": "Unlike V2.4.5, which filters non-target text pointers at 0x00A0 before bank switching, V2.5 sends ordinary calls at 0x1803 through the 0x00E0 fixed gateway and bank-10 dispatcher. An unmatched dispatch reaches 0x4E00, which returns A=0 on miss; fixed handler 0x0061 then routes to the preserved 0x00F7 fallback. The wrong-bank return was independently traced to the fixed gateway's restore operand; this dispatch path remains part of SameBoy regression coverage.",
+    "required_sameboy_checks": [
+      "Confirm the loaded ROM SHA-256 is a39eb8b30942f37f657bda03c806abf761d6cbbbc5d99b0697544dc25b03170f.",
+      "Confirm the opening Chinese text and mandatory battle remain correct.",
+      "Open and close the main menu, then confirm the original menu graphics restore before testing dialogue.",
+      "Confirm noticeboard, woman, and Garou dialogue translations still display and close correctly, with no stray tile, freeze, or illegal opcode.",
+      "Open and close the main menu repeatedly; confirm 状态、法术、道具、重要物品、装备 and the 盘缠 label display correctly, and the original graphics restore.",
+      "Open the main menu after closing each translated dialogue and confirm the Japanese menu text remains legible."
+    ]
+  },
+  "features": [
+    "opening-scroll-dialog-chinese",
+    "noticeboard-dialogue",
+    "woman-dialogue",
+    "garou-dialogue",
+    "main-menu-first-level"
+  ],
+  "excluded_features": [
+    "practice-dialogue",
+    "house-story-sequence",
+    "battle-menu-translation"
+  ],
+  "scope": {
+    "menu_labels": [
+      "状态",
+      "法术",
+      "道具",
+      "重要物品",
+      "装备"
+    ],
+    "menu_info_label": "盘缠",
+    "shared_gateway": "The fixed gateway routes menu-close and dialogue-restore calls by their stack return addresses; unmatched calls continue through the V2.4.5 text dispatcher.",
+    "build_parent": "Immutable V1 only; V2.4.5 is the runtime regression baseline, not the binary parent."
+  },
+  "source_rom": {
+    "path": "../roms/oni5_original.gb",
+    "sha256": "870f83f781c103925f206f35b71cdda6a0493e5b4c70d70b49cade145c35f127"
+  },
+  "inputs": [
+    {
+      "path": "../data/text_manifest.json",
+      "sha256": "b13f95dc8438260f9055a55031d2f9a8e94a6a6ddab078c3b9644408845a2f9e"
+    },
+    {
+      "path": "../data/chinese_glyphs_oni5_bank04_01330d.json",
+      "sha256": "1c3220f4c18dd48188a97e58df9480bb9e2b99ad20019aae427fd48bf35bcb30"
+    },
+    {
+      "path": "../data/chinese_glyphs.json",
+      "sha256": "f1c37f02f7a7de2d347c9dd657a9a4070fc0ba134440ef69139a22008781a012"
+    },
+    {
+      "path": "../data/chinese_glyphs_oni5_bank24_01348f.json",
+      "sha256": "9faacc0a76e7c3da2d16cbb52819fbdfcb8d08f9471fcee479e799745393c558"
+    },
+    {
+      "path": "../data/tile_cache_plan_candidate.json",
+      "sha256": "2941bbe87a930b1b97fd16d8b21e27c5c886e08c638584f1995c5c1f3d3564a4"
+    },
+    {
+      "path": "../data/translation_encoding_candidate.json",
+      "sha256": "e19de39100f80c6ab5cc37acac04fb22e21335c72f9a77d867c0e4bb2884be66"
+    },
+    {
+      "path": "../data/tile_cache_plan_oni5_bank0c_030ee8.json",
+      "sha256": "2f9162eb0b76f9c4aa685dca529716f1780229e9fa3de565580e257b8a94f543"
+    },
+    {
+      "path": "../data/translation_encoding_oni5_bank0c_030ee8.json",
+      "sha256": "8d81820daf4f9f875647260791423331be7492dbe6a5fb9283eb61dfba23b49d"
+    },
+    {
+      "path": "../data/menu_text_manifest.json",
+      "sha256": "7e75f96b7747c91452bf6f0a46c890dc04ef0a8534fe12d3bffef7f8f8d710d0"
+    },
+    {
+      "path": "../data/menu_chinese_glyphs.json",
+      "sha256": "93b9e53a3ecb4c6ee7a4ce8fade6cec297ff1ffc1a39b4eb64a664e9d0bbd6e3"
+    }
+  ],
+  "builder": {
+    "script": "../scripts/build_v2_5_menu_patch.py",
+    "sha256": "1f3fa8d1da34ab722851a7231d6a6e04c87c86a114e03734704cb81eded233ab",
+    "arguments": [
+      "--overwrite"
+    ],
+    "supporting_scripts": [
+      {
+        "path": "../scripts/build_v2_4_roam_dialogue_patch.py",
+        "sha256": "2685076b1460d1527ea520e57cc28bdd53e9d88b23511481d493489fcb45c68c"
+      },
+      {
+        "path": "../scripts/build_menu_pilot.py",
+        "sha256": "d9ca0b87345464e677440ee7257c89ce4d909e6dbbbafce3a9a3f2151f3ce78a"
+      },
+      {
+        "path": "../scripts/apply_bps_patch.py",
+        "sha256": "60c021ae803bf3eada3ebf4c2c1e042ae5e110d95e671953680d342679131390"
+      },
+      {
+        "path": "../scripts/rom_checksums.py",
+        "sha256": "94bdf9b7f8d237161f88ee00f0cb4344605067f31e0b7b468851ea897787cf0d"
+      }
+    ]
+  },
+  "automated_validation": {
+    "focused_unit_tests": "3 passed",
+    "full_unit_suite": "144 passed",
+    "python_syntax_check": "passed",
+    "checksum": "Target ROM passes the repository's ROM checksum verification.",
+    "bps_round_trip": "Applying the V1-to-V2.5 BPS patch reproduces the target ROM.",
+    "deterministic_rebuild": "ROM and BPS SHA-256 match across two builds."
+  },
+  "tests": [
+    {
+      "path": "../tests/test_build_v2_5_menu_patch.py",
+      "sha256": "08855031f24359654b895591c856e25c77b38894c802c8dfa27b018f1d1525ad",
+      "result": "3 passed; includes an exact gateway-router byte regression test."
+    }
+  ],
+  "rebuild_command": "./.venv/bin/python scripts/build_v2_5_menu_patch.py --overwrite"
+}
