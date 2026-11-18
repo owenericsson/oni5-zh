@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "font": {
+    "family": "ChillBitmap",
+    "variant": "8px Regular Proportional",
+    "source_url": "https://fontpixel.com/downloads/chill-bitmap--ChillBitmap7x-8px.bdf.gz",
+    "source_sha256": "37b51f4f2a094a952a3cb481090c2185922a65b90c228e5bdad7b4c445ca7939",
+    "license": "SIL Open Font License 1.1",
+    "license_url": "https://github.com/Warren2060/ChillBitmap/blob/main/License"
+  },
+  "glyphs": [
+    {
+      "character": "丸",
+      "codepoint": "U+4E38",
+      "tile_2bpp_hex": "20 20 F8 F8 28 28 A8 A8 48 48 4A 4A A6 A6 00 00"
+    },
+    {
+      "character": "了",
+      "codepoint": "U+4E86",
+      "tile_2bpp_hex": "FE FE 04 04 18 18 10 10 10 10 10 10 30 30 00 00"
+    },
+    {
+      "character": "你",
+      "codepoint": "U+4F60",
+      "tile_2bpp_hex": "28 28 4E 4E D2 D2 44 44 56 56 66 66 4C 4C 00 00"
+    },
+    {
+      "character": "叶",
+      "codepoint": "U+53F6",
+      "tile_2bpp_hex": "04 04 E4 E4 BE BE A4 A4 E4 E4 04 04 04 04 00 00"
+    },
+    {
+      "character": "常",
+      "codepoint": "U+5E38",
+      "tile_2bpp_hex": "54 54 FE FE AA AA 38 38 FE FE 92 92 10 10 00 00"
+    },
+    {
+      "character": "想",
+      "codepoint": "U+60F3",
+      "tile_2bpp_hex": "5C 5C F4 F4 5C 5C F4 F4 5C 5C AA AA BC BC 00 00"
+    },
+    {
+      "character": "然",
+      "codepoint": "U+7136",
+      "tile_2bpp_hex": "74 74 5E 5E B4 B4 24 24 CA CA 00 00 AA AA 00 00"
+    },
+    {
+      "character": "突",
+      "codepoint": "U+7A81",
+      "tile_2bpp_hex": "10 10 FE FE AA AA 4C 4C FE FE 10 10 EE EE 00 00"
+    },
+    {
+      "character": "见",
+      "codepoint": "U+89C1",
+      "tile_2bpp_hex": "7C 7C 44 44 54 54 54 54 18 18 2A 2A CE CE 00 00"
+    }
+  ]
+}

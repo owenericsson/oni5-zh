@@ -417,12 +417,22 @@ def build_restore_helper(
 def build_load_dispatcher(
     contexts: tuple[PilotContext, ...],
     loader_offsets: tuple[int, ...],
+    cursor_window: bool | tuple[bool, ...] = False,
 ) -> bytes:
     if len(contexts) != len(loader_offsets):
         raise ValueError("each text context must have exactly one loader")
+    if isinstance(cursor_window, bool):
+        cursor_windows = (cursor_window,) * len(contexts)
+    else:
+        if len(cursor_window) != len(contexts):
+            raise ValueError("each text context must have exactly one cursor-window setting")
+        cursor_windows = cursor_window
     code = bytearray()
-    cached_opening_branches: list[int] = []
-    for context, loader_offset in zip(contexts, loader_offsets):
+    for context, loader_offset, uses_cursor_window in zip(
+        contexts,
+        loader_offsets,
+        cursor_windows,
+    ):
         block_start = len(code)
         code.extend(bytes.fromhex("FA AA FF FE"))
         code.append(context.bank)
@@ -434,31 +444,41 @@ def build_load_dispatcher(
         code.extend((0x20, 0))
         code.extend(bytes.fromhex("FA AD FF FE"))
         code.append(context.first_cursor)
-        cursor_branch = len(code)
-        code.extend((0x20, 0))
-        if context.record_id == "opening":
-            code.extend(bytes.fromhex("FA F2 C4 B7"))
-            cached_opening_branches.append(len(code) + 1)
+        if uses_cursor_window:
+            cursor_start_branch = len(code)
+            code.extend((0x38, 0))
+            code.extend(bytes.fromhex("FA AD FF FE"))
+            code.append(context.restore_cursor)
+            cursor_end_branch = len(code)
+            code.extend((0x30, 0))
+            cursor_branches = (cursor_start_branch, cursor_end_branch)
+        else:
+            cursor_branch = len(code)
             code.extend((0x20, 0))
+            cursor_branches = (cursor_branch,)
+        if context.record_id == "opening":
+            code.extend(bytes.fromhex("FA F2 C4 B7 28 02 AF C9"))
         code.append(0xCD)
         code.extend(bank_cpu_address(loader_offset).to_bytes(2, "little"))
         code.extend(bytes.fromhex("3E 01 C9"))
         block_end = len(code)
-        for branch_offset in (bank_branch, pointer_branch, cursor_branch):
+        for branch_offset in (
+            bank_branch,
+            pointer_branch,
+            *cursor_branches,
+        ):
             displacement = block_end - (branch_offset + 2)
             if not -128 <= displacement <= 127:
                 raise ValueError("load dispatcher branch exceeds its signed range")
             code[branch_offset + 1] = displacement & 0xFF
-        expected_block_size = 33 if context.record_id == "opening" else 27
+        expected_block_size = (
+            42 if context.record_id == "opening" else 34
+        ) if uses_cursor_window else (
+            35 if context.record_id == "opening" else 27
+        )
         if len(code) - block_start != expected_block_size:
             raise ValueError("load dispatcher context block has an unexpected size")
-    miss_target = len(code)
     code.extend(bytes.fromhex("AF C9"))
-    for branch_offset in cached_opening_branches:
-        displacement = miss_target - (branch_offset + 1)
-        if not -128 <= displacement <= 127:
-            raise ValueError("opening cache guard exceeds the signed relative-jump range")
-        code[branch_offset] = displacement & 0xFF
     return bytes(code)
 
 

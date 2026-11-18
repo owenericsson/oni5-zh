@@ -122,11 +122,8 @@ class BuildTextComparisonPilotTests(unittest.TestCase):
     def test_all_five_load_and_restore_signatures_are_dispatched(self):
         contexts, _ = self.build_contexts()
         layout = build_context_bank_layout(contexts)
-        opening_cache_guard = bytes.fromhex("FA F2 C4 B7 20")
-        guard_offset = layout.load_dispatcher.index(opening_cache_guard)
-        guard_operand = guard_offset + len(opening_cache_guard)
-        guard_target = guard_operand + 1 + layout.load_dispatcher[guard_operand]
-        self.assertEqual(guard_target, len(layout.load_dispatcher) - 2)
+        opening_cache_guard = bytes.fromhex("FA F2 C4 B7 28 02 AF C9")
+        self.assertIn(opening_cache_guard, layout.load_dispatcher)
 
         for context in contexts:
             load_signature = bytes(

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6-opening-prologue-preview",
+  "parent_version": {
+    "version_id": "V2.5-main-menu",
+    "path": "../roms/oni5_v2_5_main_menu.gb",
+    "sha256": "a39eb8b30942f37f657bda03c806abf761d6cbbbc5d99b0697544dc25b03170f"
+  },
+  "source_rom": {
+    "path": "../roms/oni5_original.gb",
+    "sha256": "870f83f781c103925f206f35b71cdda6a0493e5b4c70d70b49cade145c35f127"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_opening_prologue.bps",
+    "size_bytes": 2283,
+    "sha256": "97258dba513628e593a52bc4d3af2e11b313ffcbf1cafd6e55365869ec74a675"
+  },
+  "target_rom": {
+    "size_bytes": 1048576,
+    "sha256": "ce310f3886743d19fc428aa8d515b29aafa513e6462814235c4e368744a7c94c",
+    "persisted_by_builder": false
+  },
+  "runtime_validation": {
+    "status": "pending-user-sameboy",
+    "tested_rom_sha256": null,
+    "required_sameboy_checks": [
+      "Apply this BPS to V2.5-main-menu and confirm the resulting ROM SHA-256 matches target_rom.sha256.",
+      "Start a new game and confirm 静那's prologue, the student's reply, and 静那's next line display in Chinese.",
+      "Confirm 静 is rendered with tile $81, not the native opening-quote tile $BB.",
+      "Confirm the tile above the first Chinese glyph remains blank ($CD); this was a prior first-glyph regression.",
+      "Advance across the page transition between 静那's explanation and the student reply; confirm no blank scroll, freeze, or stray tile.",
+      "Continue past the third line and confirm original Japanese dialogue glyphs restore before later conversations.",
+      "Retest the V2.5 opening, first-level menu, noticeboard, woman, and Garou dialogue features."
+    ]
+  },
+  "features": [
+    "opening-prologue-dialogue",
+    "student-reply",
+    "prologue-font-restoration"
+  ],
+  "text_records": [
+    "oni5-bank04-inline-013396",
+    "oni5-bank04-inline-0133d7"
+  ],
+  "inputs": [
+    {
+      "path": "../data/text_manifest.json",
+      "sha256": "d0055b236ab82f9a80ae927ca52e9d1a79f1a3c80383842f1dbbd8c07ac6d72b"
+    },
+    {
+      "path": "../data/chinese_glyphs_oni5_bank04_prologue_v26.json",
+      "sha256": "9a6e9d667438e26d4c0ce69e65bb96a45be5de46aa57904d93c1955ca5d154cd"
+    },
+    {
+      "path": "../data/tile_cache_plan_candidate.json",
+      "sha256": "2941bbe87a930b1b97fd16d8b21e27c5c886e08c638584f1995c5c1f3d3564a4"
+    }
+  ],
+  "builder": {
+    "script": "../scripts/build_v2_6_prologue_patch.py",
+    "arguments": []
+  },
+  "automated_validation": {
+    "checksum": "Target ROM passes the repository's ROM checksum verification.",
+    "bps_round_trip": "Applying the V2.5-to-V2.6 BPS patch reproduces the in-memory target ROM.",
+    "full_rom_persisted": false
+  },
+  "rebuild_command": "./.venv/bin/python scripts/build_v2_6_prologue_patch.py"
+}

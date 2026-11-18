@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.1-opening-dialogue",
+  "parent_version": {
+    "version_id": "V2.6-opening-prologue-preview",
+    "path": "../roms/oni5_v2_6_opening_prologue.gb",
+    "sha256": "ce310f3886743d19fc428aa8d515b29aafa513e6462814235c4e368744a7c94c"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_1_opening_prologue.bps",
+    "size_bytes": 1807,
+    "sha256": "62ded8941291bab66d6b444a2df1d09840a591735181e015bc803d887196f27e"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_1_opening_prologue.gb",
+    "size_bytes": 1048576,
+    "sha256": "3283b05800c578bae6304523fc6f0384e6df9fe63cad152a879d9a3032a2e84c",
+    "persisted_by_builder": true
+  },
+  "runtime_validation": {
+    "status": "pending-user-sameboy",
+    "tested_rom_sha256": null,
+    "required_sameboy_checks": [
+      "Apply this BPS to V2.6 and confirm the target ROM SHA-256.",
+      "Confirm the dialogue at $0133EF displays in Chinese while preserving its original $95 and $AD macro bytes.",
+      "Confirm the $013408 terminator and all other V2.6 dialogue remain unchanged.",
+      "Confirm the new glyphs restore before later original dialogue."
+    ]
+  },
+  "features": [
+    "single-confirmed-dialogue"
+  ],
+  "text_records": [
+    "oni5-bank04-inline-0133ef"
+  ],
+  "builder": {
+    "script": "../scripts/build_v2_6_1_single_dialogue.py"
+  },
+  "automated_validation": {
+    "checksum": "Target ROM passes ROM checksum verification.",
+    "bps_round_trip": "Applying the V2.6-to-V2.6.1 BPS reproduces the target ROM."
+  }
+}
