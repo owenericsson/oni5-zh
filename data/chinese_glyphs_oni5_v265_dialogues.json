@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "font": {
+    "family": "ChillBitmap",
+    "variant": "8px Regular Proportional",
+    "source_url": "https://fontpixel.com/downloads/chill-bitmap--ChillBitmap7x-8px.bdf.gz",
+    "source_sha256": "37b51f4f2a094a952a3cb481090c2185922a65b90c228e5bdad7b4c445ca7939",
+    "license": "SIL Open Font License 1.1",
+    "license_url": "https://github.com/Warren2060/ChillBitmap/blob/main/License"
+  },
+  "glyphs": [
+    {
+      "character": "一",
+      "codepoint": "U+4E00",
+      "tile_2bpp_hex": "00 00 00 00 00 00 FE FE 00 00 00 00 00 00 00 00"
+    },
+    {
+      "character": "不",
+      "codepoint": "U+4E0D",
+      "tile_2bpp_hex": "FE FE 08 08 10 10 34 34 D2 D2 10 10 10 10 00 00"
+    },
+    {
+      "character": "了",
+      "codepoint": "U+4E86",
+      "tile_2bpp_hex": "FE FE 04 04 18 18 10 10 10 10 10 10 30 30 00 00"
+    },
+    {
+      "character": "人",
+      "codepoint": "U+4EBA",
+      "tile_2bpp_hex": "10 10 10 10 10 10 28 28 28 28 44 44 82 82 00 00"
+    },
+    {
+      "character": "以",
+      "codepoint": "U+4EE5",
+      "tile_2bpp_hex": "04 04 54 54 54 54 44 44 64 64 8A 8A 32 32 00 00"
+    },
+    {
+      "character": "伽",
+      "codepoint": "U+4F3D",
+      "tile_2bpp_hex": "50 50 7E 7E DA DA DA DA 6A 6A 4E 4E 58 58 00 00"
+    },
+    {
+      "character": "你",
+      "codepoint": "U+4F60",
+      "tile_2bpp_hex": "28 28 4E 4E D2 D2 44 44 56 56 66 66 4C 4C 00 00"
+    },
+    {
+      "character": "做",
+      "codepoint": "U+505A",
+      "tile_2bpp_hex": "44 44 A6 A6 FA FA AA AA D6 D6 F4 F4 8A 8A 00 00"
+    },
+    {
+      "character": "先",
+      "codepoint": "U+5148",
+      "tile_2bpp_hex": "50 50 7C 7C 90 90 FE FE 28 28 2A 2A CE CE 00 00"
+    },
+    {
+      "character": "切",
+      "codepoint": "U+5207",
+      "tile_2bpp_hex": "5E 5E 4A 4A EA EA 4A 4A 6A 6A 52 52 26 26 00 00"
+    },
+    {
+      "character": "到",
+      "codepoint": "U+5230",
+      "tile_2bpp_hex": "F2 F2 2A 2A 5A 5A FA FA 62 62 32 32 C6 C6 00 00"
+    },
+    {
+      "character": "原",
+      "codepoint": "U+539F",
+      "tile_2bpp_hex": "7E 7E 4C 4C 52 52 5E 5E 44 44 56 56 AC AC 00 00"
+    },
+    {
+      "character": "口",
+      "codepoint": "U+53E3",
+      "tile_2bpp_hex": "00 00 FC FC 84 84 84 84 84 84 FC FC 00 00 00 00"
+    },
+    {
+      "character": "可",
+      "codepoint": "U+53EF",
+      "tile_2bpp_hex": "FE FE 04 04 74 74 54 54 74 74 04 04 18 18 00 00"
+    },
+    {
+      "character": "吃",
+      "codepoint": "U+5403",
+      "tile_2bpp_hex": "0E 0E 10 10 EE EE A4 A4 A8 A8 D2 D2 0E 0E 00 00"
+    },
+    {
+      "character": "吗",
+      "codepoint": "U+5417",
+      "tile_2bpp_hex": "1C 1C E4 E4 B4 B4 BE BE A2 A2 DA DA 04 04 00 00"
+    },
+    {
+      "character": "吧",
+      "codepoint": "U+5427",
+      "tile_2bpp_hex": "3E 3E EA EA AA AA BE BE E0 E0 22 22 1E 1E 00 00"
+    },
+    {
+      "character": "呢",
+      "codepoint": "U+5462",
+      "tile_2bpp_hex": "3E 3E E2 E2 BE BE A8 A8 EE EE 28 28 4E 4E 00 00"
+    },
+    {
+      "character": "哦",
+      "codepoint": "U+54E6",
+      "tile_2bpp_hex": "3A 3A D4 D4 BE BE B4 B4 B6 B6 DC DC 32 32 00 00"
+    },
+    {
+      "character": "啊",
+      "codepoint": "U+554A",
+      "tile_2bpp_hex": "7E 7E D2 D2 EE EE DA DA DE DE 62 62 46 46 00 00"
+    },
+    {
+      "character": "喜",
+      "codepoint": "U+559C",
+      "tile_2bpp_hex": "10 10 FE FE 7C 7C 28 28 FE FE 44 44 7C 7C 00 00"
+    },
+    {
+      "character": "嘛",
+      "codepoint": "U+561B",
+      "tile_2bpp_hex": "08 08 FE FE B4 B4 BE BE F4 F4 3E 3E 54 54 00 00"
+    },
+    {
+      "character": "回",
+      "codepoint": "U+56DE",
+      "tile_2bpp_hex": "FE FE 82 82 BA BA AA AA BA BA 82 82 FE FE 00 00"
+    },
+    {
+      "character": "在",
+      "codepoint": "U+5728",
+      "tile_2bpp_hex": "20 20 FE FE 28 28 5C 5C C8 C8 48 48 7E 7E 00 00"
+    },
+    {
+      "character": "天",
+      "codepoint": "U+5929",
+      "tile_2bpp_hex": "7C 7C 10 10 FE FE 10 10 28 28 24 24 C2 C2 00 00"
+    },
+    {
+      "character": "太",
+      "codepoint": "U+592A",
+      "tile_2bpp_hex": "10 10 FE FE 10 10 28 28 24 24 44 44 A2 A2 00 00"
+    },
+    {
+      "character": "女",
+      "codepoint": "U+5973",
+      "tile_2bpp_hex": "10 10 10 10 FE FE 24 24 44 44 38 38 C6 C6 00 00"
+    },
+    {
+      "character": "好",
+      "codepoint": "U+597D",
+      "tile_2bpp_hex": "2E 2E 22 22 F4 F4 5E 5E 64 64 34 34 CC CC 00 00"
+    },
+    {
+      "character": "妈",
+      "codepoint": "U+5988",
+      "tile_2bpp_hex": "5C 5C 44 44 D4 D4 BE BE A2 A2 5A 5A A6 A6 00 00"
+    },
+    {
+      "character": "姨",
+      "codepoint": "U+59E8",
+      "tile_2bpp_hex": "88 88 BE BE DC DC D8 D8 DE DE 4A 4A B6 B6 00 00"
+    },
+    {
+      "character": "尝",
+      "codepoint": "U+5C1D",
+      "tile_2bpp_hex": "54 54 FE FE BA BA 00 00 FE FE 24 24 7A 7A 00 00"
+    },
+    {
+      "character": "岁",
+      "codepoint": "U+5C81",
+      "tile_2bpp_hex": "92 92 FE FE 10 10 3E 3E D4 D4 08 08 70 70 00 00"
+    },
+    {
+      "character": "弥",
+      "codepoint": "U+5F25",
+      "tile_2bpp_hex": "D0 D0 5E 5E E8 E8 9C 9C DA DA 6A 6A D8 D8 00 00"
+    },
+    {
+      "character": "快",
+      "codepoint": "U+5FEB",
+      "tile_2bpp_hex": "48 48 5E 5E EA EA CA CA DE DE 48 48 56 56 00 00"
+    },
+    {
+      "character": "我",
+      "codepoint": "U+6211",
+      "tile_2bpp_hex": "EA EA 48 48 FE FE 48 48 EA EA 44 44 DA DA 00 00"
+    },
+    {
+      "character": "日",
+      "codepoint": "U+65E5",
+      "tile_2bpp_hex": "7E 7E 42 42 42 42 7E 7E 42 42 42 42 7E 7E 00 00"
+    },
+    {
+      "character": "明",
+      "codepoint": "U+660E",
+      "tile_2bpp_hex": "EE EE AA AA EE EE AA AA EE EE 12 12 26 26 00 00"
+    },
+    {
+      "character": "是",
+      "codepoint": "U+662F",
+      "tile_2bpp_hex": "7C 7C 44 44 FE FE 10 10 5C 5C 50 50 BE BE 00 00"
+    },
+    {
+      "character": "晚",
+      "codepoint": "U+665A",
+      "tile_2bpp_hex": "08 08 EC EC B4 B4 FE FE B2 B2 EC EC 16 16 00 00"
+    },
+    {
+      "character": "最",
+      "codepoint": "U+6700",
+      "tile_2bpp_hex": "7C 7C 44 44 FE FE 52 52 5A 5A F4 F4 1A 1A 00 00"
+    },
+    {
+      "character": "有",
+      "codepoint": "U+6709",
+      "tile_2bpp_hex": "20 20 FE FE 24 24 7C 7C A4 A4 3C 3C 24 24 00 00"
+    },
+    {
+      "character": "来",
+      "codepoint": "U+6765",
+      "tile_2bpp_hex": "10 10 FE FE 54 54 FE FE 38 38 54 54 92 92 00 00"
+    },
+    {
+      "character": "欢",
+      "codepoint": "U+6B22",
+      "tile_2bpp_hex": "08 08 EE EE 32 32 A4 A4 44 44 6A 6A 92 92 00 00"
+    },
+    {
+      "character": "正",
+      "codepoint": "U+6B63",
+      "tile_2bpp_hex": "FE FE 10 10 10 10 5C 5C 50 50 50 50 FE FE 00 00"
+    },
+    {
+      "character": "汤",
+      "codepoint": "U+6C64",
+      "tile_2bpp_hex": "9C 9C 04 04 BE BE 12 12 A6 A6 8A 8A B6 B6 00 00"
+    },
+    {
+      "character": "点",
+      "codepoint": "U+70B9",
+      "tile_2bpp_hex": "1C 1C 10 10 7C 7C 44 44 7C 7C 00 00 AA AA 00 00"
+    },
+    {
+      "character": "生",
+      "codepoint": "U+751F",
+      "tile_2bpp_hex": "10 10 50 50 7C 7C 90 90 7C 7C 10 10 FE FE 00 00"
+    },
+    {
+      "character": "的",
+      "codepoint": "U+7684",
+      "tile_2bpp_hex": "48 48 EE EE A2 A2 EA EA A6 A6 E2 E2 0C 0C 00 00"
+    },
+    {
+      "character": "红",
+      "codepoint": "U+7EA2",
+      "tile_2bpp_hex": "40 40 9E 9E 48 48 88 88 C8 C8 08 08 DE DE 00 00"
+    },
+    {
+      "character": "罗",
+      "codepoint": "U+7F57",
+      "tile_2bpp_hex": "FE FE AA AA FE FE 24 24 54 54 08 08 F0 F0 00 00"
+    },
+    {
+      "character": "美",
+      "codepoint": "U+7F8E",
+      "tile_2bpp_hex": "44 44 FE FE 7C 7C 10 10 FE FE 28 28 C6 C6 00 00"
+    },
+    {
+      "character": "行",
+      "codepoint": "U+884C",
+      "tile_2bpp_hex": "5E 5E 80 80 5E 5E C4 C4 44 44 44 44 4C 4C 00 00"
+    },
+    {
+      "character": "要",
+      "codepoint": "U+8981",
+      "tile_2bpp_hex": "FE FE 28 28 7C 7C 54 54 FE FE 28 28 74 74 00 00"
+    },
+    {
+      "character": "谢",
+      "codepoint": "U+8C22",
+      "tile_2bpp_hex": "9A 9A 2E 2E BA BA AE AE BA BA DA DA AA AA 00 00"
+    },
+    {
+      "character": "豆",
+      "codepoint": "U+8C46",
+      "tile_2bpp_hex": "FE FE 00 00 7C 7C 44 44 7C 7C 28 28 FE FE 00 00"
+    },
+    {
+      "character": "迎",
+      "codepoint": "U+8FCE",
+      "tile_2bpp_hex": "50 50 2E 2E EA EA 6A 6A 7E 7E 48 48 BE BE 00 00"
+    },
+    {
+      "character": "这",
+      "codepoint": "U+8FD9",
+      "tile_2bpp_hex": "88 88 3E 3E 14 14 C8 C8 54 54 40 40 BE BE 00 00"
+    },
+    {
+      "character": "阿",
+      "codepoint": "U+963F",
+      "tile_2bpp_hex": "FE FE A2 A2 DE DE B6 B6 BE BE C2 C2 86 86 00 00"
+    },
+    {
+      "character": "食",
+      "codepoint": "U+98DF",
+      "tile_2bpp_hex": "38 38 54 54 FA FA 48 48 7A 7A 54 54 6E 6E 00 00"
+    }
+  ]
+}

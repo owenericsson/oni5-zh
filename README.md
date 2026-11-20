@@ -16,7 +16,12 @@
 
 ## 当前进度
 
-- **当前完整回归基线：V2.6。** 用户已在 SameBoy 确认 V2.6.1 的 `$0133EF` 单句译文和中文字形正常显示；该候选只改这一段，仍保留 `$95` 男主可改名宏和 `$AD` 静那宏，尚未完成所有 V2.6 场景的全局回归，因此不替代 V2.6 基线。V2.6.1 ROM SHA-256 为 `3283b05800c578bae6304523fc6f0384e6df9fe63cad152a879d9a3032a2e84c`；构建和验收记录见[版本清单](versions/V2.6.1-opening-dialogue.json)。
+- **当前指定验收基线：V2.6.7。** 用户报告测试通过并指定其为后续基准；受测 ROM 哈希尚未独立确认。本地 [ROM](roms/oni5_v2_6_7_opening_dialogue.gb) SHA-256 `50c6d78d588ad87caa7dfc25aab970e586322dc568f692144a8168a9767e8dc9`。以 V2.6.6 为父版加入第一场战斗后的 16 句对白；只避让已观察到的主角名字图块。完整自动测试 204 项通过；详见 [Day 15 记录](notes/day-15.md)；[版本清单](versions/V2.6.7-opening-dialogue.json)保留生成时的待验收状态。
+- **此前指定验收基线：V2.6.6。** 用户报告测试通过并指定其为当时基准；受测 ROM 哈希尚未独立确认。本地 ROM SHA-256 `a5f22750a56839635130d19b1df787b82f930fa65676b9a995256b4507f23ae0`。以 V2.6.5 为父版加入战斗前的三句对白，保留原战斗事件；只避让已观察到的主角名字图块。完整自动测试 200 项通过；详见 [Day 15 记录](notes/day-15.md)；[版本清单](versions/V2.6.6-opening-dialogue.json)保留生成时的待验收状态。
+- **V2.6.5 用户报告测试通过。** 以 V2.6.4 为父版加入九句对白，包括自动推进的特殊句；受测 ROM 哈希尚未独立确认。只避让当前观察到的主角名字图块，其他名字暂不保证。完整自动测试 194 项通过；详见 [Day 15 记录](notes/day-15.md)；[版本清单](versions/V2.6.5-opening-dialogue.json)保留生成时的待验收状态。
+- **此前指定验收基线：V2.6.4。** 用户报告测试通过并指定其为当时基准；受测 ROM 哈希尚未独立确认。本地 ROM SHA-256 `027cc41c7ee9c672014e64840c68d1ae7094d36a9b8aeb120b169b421314c793`。从 V2.6.3 加入七句开场对白和局部字形残留修复；只针对当前主角名字避让，其他自定义名字暂不保证。完整自动测试 186 项通过。见 [Day 15 记录](notes/day-15.md)；[版本清单](versions/V2.6.4-opening-dialogue.json)记录生成时的待验收状态。
+- **上一验收基线 V2.6.3。** 用户报告验收通过；受测 ROM 哈希尚未独立确认。本地 ROM SHA-256 `1cb47f5e8ca4b62a03d4df9e2e22d6eb0625b813caeec826da33e37577663457`。从 V2.6.2 增量加入静那「常叶丸！？」；完整自动回归 172 项通过。见 [Day 14 记录](notes/day-14.md) 和 [V2.6.3 版本清单](versions/V2.6.3-opening-dialogue.json)。
+- **上一验收基线 V2.6.2：** 本地 ROM SHA-256 `6f831505dccb94d250a58b2f8098750aae51d94a0ab83cff1271fa990bbe5cf9`，BPS SHA-256 `e40d0972ac12878768a02b1e4876d80c7d061e46c307a310f71c5507e6f6fa79`。它以 V2.6.1 为父版，加入静那的「常叶丸你这家伙！」。详见 [V2.6.2 版本清单](versions/V2.6.2-opening-dialogue.json)。
 - 已建立不可变基准 **V1-opening-dialog**：[V1 ROM](roms/oni5_v1_opening_dialog.gb)、[BPS 补丁](roms/oni5_v1_opening_dialog.bps)及[版本清单](versions/V1-opening-dialog.json)。V1 只含已验证的开场中文；ROM SHA-256 `5682522e20fade44c457725a66430bae13e3d6695dcc18e04d058e4ce2e910ab`，与此前 SameBoy 验证的开场预览逐字节相同。V2/V2.1 的 gateway 问题已定位；V2.2/V2.3 的修行句尚未在确认的目标入口完成验证。V2.4 的准确哈希已在 SameBoy 确认，但必经战斗菜单乱码，故另建了增加指针高字节前置筛选的 V2.4.1。用户已报告 V2.4.1 的必经战斗可正常结束、通知板和女子译文正确，但两段首字上方分别出现异常 tile `$25`/`$14`，且本次未重新确认 ROM 哈希；V2.4.1 仍是部分验证候选。V1 保持不变；后续版本必须从指定父版本分支并一次只增加有限范围。
 - 已准备原始 ROM 和模拟器存档用于本地研究。
 - 已有 ROM 信息分析、指定区域转储和可打印 ASCII 字符扫描脚本。
@@ -62,7 +67,9 @@
 - **2026-11-16（Day 11）**：V2.5 主菜单一级列表候选已构建，静态路由器缺陷已修正；144 项全量测试、checksum、BPS 往返和双重构建一致性通过。用户确认加载 ROM 哈希正确，但报告 SameBoy 中无限重启，故 V2.5 运行验证失败，根因待调试；V2.4.5 仍为当前已验收运行基线。[查看 Day 11 详细记录](notes/day-11.md)；[V2.5 版本清单](versions/V2.5-main-menu.json)
 
 - **2026-11-17（Day 12）**：修复 V2.5 菜单关闭后对话乱码：SameBoy 证实恢复 helper 因错误 `$FFAD` 门槛提前退出；移除该门槛后，用户确认开场、菜单、通知板、女人和伽罗对话等全部测试通过。V2.5 正式成为新的运行回归基线。[查看 Day 12 详细记录](notes/day-12.md)
-- **2026-11-18（Day 13）**：完成 V2.6→V2.6.1 单句对白构建；将中文字形加载门控扩展到跨页文本指针窗口后，用户确认目标句在 SameBoy 正常显示。更正名字宏记录：`$95` 是默认常叶丸、可由玩家改名的男主，`$AD` 是固定姓名静那；伽罗对应 `$A9`，同样固定。V2.6.1 尚未完成全局回归，V2.6 仍为完整回归基线；2.6.2 将设计按对白位置限定的姓名本地化方案。[查看 Day 13 详细记录](notes/day-13.md)
+- **2026-11-18（Day 13）**：完成 V2.6→V2.6.1 单句对白构建；将中文字形加载门控扩展到跨页文本指针窗口后，用户确认目标句在 SameBoy 正常显示。名字宏 `$95` 的含义曾误记；用户后来更正常叶丸并非可改名主角，而是固定姓名。V2.6.1 尚未完成全局回归，V2.6 仍为完整回归基线。[查看 Day 13 详细记录](notes/day-13.md)
+- **2026-11-19**：根据 SameBoy 游标定位并整合 `$01342E` 静那回应和 `$013459` 常叶丸对白；将 `$0133EF` 的 `$95` 固定姓名局部替换为三个中文字形。保留 `$01346D` 翻页控制及后续暂缓处理的静那对白。用户实测发现字形错乱后，依据 `$C4F2=$85` 修复上下文缓存匹配；现以 `$85/$88/$89` 区分三处加载。14 项定向测试、checksum 与 BPS 往返通过；ROM SHA-256 `afe11e0f8aa3d035d76432652aada1c2b3dc2da0a95805783e2a869dae9300cf`，BPS SHA-256 `0571786effd6896ae825058df7051f85c9c72d188bb877b4729ec13e8530c51f`。待用户在 SameBoy 复测。[查看 Day 13 详细记录](notes/day-13.md)
+- **2026-11-19（Day 14）**：旧 V2.6.2 候选在目标句后出现持续花屏，已按用户要求放弃并从 V2.6.1 重做。新候选不改全局姓名宏，复用原版 `$D2` 标点宏；用户报告测试通过，将其作为新基准。ROM/BPS 哈希见 [V2.6.2 版本清单](versions/V2.6.2-opening-dialogue.json)。[查看 Day 14 详细记录](notes/day-14.md)
 
 ## 后续任务
 
@@ -111,6 +118,24 @@ python scripts/build_menu_pilot.py
 # 通用构建器：按字节补丁清单生成独立 ROM；默认不覆盖已存在的输出文件
 python scripts/build_rom.py roms/oni5_original.gb \
   data/rom_patch_manifest.json roms/oni5_zh.gb
+
+# 从已验收 V2.6 基线构建含开场句与修行对白的 V2.6.1 ROM/BPS
+python3 -m scripts.build_v2_6_1_single_dialogue
+
+# 从指定 V2.6.1 父版构建包含静那后页对白的 V2.6.2 ROM/BPS
+python3 -m scripts.build_v2_6_2_dialogue
+
+# 从指定 V2.6.2 父版构建静那短句的 V2.6.3 候选 ROM/BPS
+python3 -m scripts.build_v2_6_3_dialogue
+
+# 从指定 V2.6.3 父版构建七句对白的 V2.6.4 测试候选
+python3 -m scripts.build_v2_6_4_dialogue
+
+# 从指定 V2.6.4 父版构建九句对白的 V2.6.5 测试候选
+python3 -m scripts.build_v2_6_5_dialogue
+
+# 从 V2.6.5 父版构建战斗前对白的 V2.6.6 测试候选
+python3 -m scripts.build_v2_6_6_dialogue
 
 # 构建只包含开场预览改动的 BPS 补丁
 python scripts/build_opening_text_preview_patch.py

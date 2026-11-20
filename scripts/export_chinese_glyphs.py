@@ -21,10 +21,13 @@ def parse_bdf(data: bytes) -> dict[int, dict[str, Any]]:
     glyphs = {}
     current: dict[str, Any] | None = None
     reading_bitmap = False
+    font_ascent = 6
 
     for line_number, raw_line in enumerate(text.splitlines(), start=1):
         line = raw_line.strip()
-        if line.startswith("STARTCHAR "):
+        if line.startswith("FONT_ASCENT "):
+            font_ascent = int(line.split()[1])
+        elif line.startswith("STARTCHAR "):
             if current is not None:
                 raise ValueError(f"BDF line {line_number}: nested STARTCHAR")
             current = {"bitmap": []}
@@ -38,6 +41,7 @@ def parse_bdf(data: bytes) -> dict[int, dict[str, Any]]:
             if isinstance(encoding, int) and encoding >= 0:
                 if encoding in glyphs:
                     raise ValueError(f"BDF contains duplicate encoding {encoding}")
+                current["font_ascent"] = font_ascent
                 glyphs[encoding] = current
             current = None
             reading_bitmap = False
@@ -63,7 +67,7 @@ def encode_glyph(record: dict[str, Any], character: str) -> bytes:
         raise ValueError(f"{character!r}: glyph dimensions do not fit an 8x8 tile")
 
     x_end = x_offset + width
-    y_top = 7 + y_offset - height + 1
+    y_top = record.get("font_ascent", 6) - y_offset - height
     y_end = y_top + height
     if x_offset < 0 or x_end > 8 or y_top < 0 or y_end > 8:
         raise ValueError(f"{character!r}: BDF bounding box does not fit an 8x8 tile")

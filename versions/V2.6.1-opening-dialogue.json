@@ -8,13 +8,13 @@
   },
   "patch": {
     "path": "../roms/oni5_v2_6_1_opening_prologue.bps",
-    "size_bytes": 1807,
-    "sha256": "62ded8941291bab66d6b444a2df1d09840a591735181e015bc803d887196f27e"
+    "size_bytes": 5975,
+    "sha256": "0571786effd6896ae825058df7051f85c9c72d188bb877b4729ec13e8530c51f"
   },
   "target_rom": {
     "path": "../roms/oni5_v2_6_1_opening_prologue.gb",
     "size_bytes": 1048576,
-    "sha256": "3283b05800c578bae6304523fc6f0384e6df9fe63cad152a879d9a3032a2e84c",
+    "sha256": "afe11e0f8aa3d035d76432652aada1c2b3dc2da0a95805783e2a869dae9300cf",
     "persisted_by_builder": true
   },
   "runtime_validation": {
@@ -22,16 +22,22 @@
     "tested_rom_sha256": null,
     "required_sameboy_checks": [
       "Apply this BPS to V2.6 and confirm the target ROM SHA-256.",
-      "Confirm the dialogue at $0133EF displays in Chinese while preserving its original $95 and $AD macro bytes.",
-      "Confirm the $013408 terminator and all other V2.6 dialogue remain unchanged.",
-      "Confirm the new glyphs restore before later original dialogue."
+      "Confirm the dialogue at $0133EF displays 常叶丸 as fixed Chinese glyphs and renders 静那 as Chinese glyphs instead of the local $AD macro.",
+      "Confirm the $01342E dialogue displays 静那 and 「真是的，也不提前说一声，我好准备一下。」, ending at the original $013452 terminator.",
+      "At the first $01342E glyph, confirm $C4F2 is $88 rather than a stale $85; after the $013452 terminator at cursor $3453, confirm the marker clears and original glyphs are restored.",
+      "Confirm the $013459 dialogue displays 常叶丸 and 「突然想见你了。」, preserves the $01346D page transition, then restores original glyphs before the untouched Shizuna text at $01346E.",
+      "Confirm the unrelated $01348D practice dialogue matches V2.6, and that later event data and original glyphs remain unchanged."
     ]
   },
   "features": [
-    "single-confirmed-dialogue"
+    "opening-dialogue",
+    "shizuna-reply-dialogue",
+    "tokiwa-visit-dialogue"
   ],
   "text_records": [
-    "oni5-bank04-inline-0133ef"
+    "oni5-bank04-inline-0133ef",
+    "oni5-bank04-inline-01342e",
+    "oni5-bank04-inline-013459"
   ],
   "builder": {
     "script": "../scripts/build_v2_6_1_single_dialogue.py"

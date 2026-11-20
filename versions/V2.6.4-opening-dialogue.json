@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.4-opening-dialogue",
+  "parent_version": {
+    "version_id": "V2.6.3-opening-dialogue",
+    "sha256": "1cb47f5e8ca4b62a03d4df9e2e22d6eb0625b813caeec826da33e37577663457"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_4_opening_dialogue.gb",
+    "sha256": "027cc41c7ee9c672014e64840c68d1ae7094d36a9b8aeb120b169b421314c793"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_4_opening_dialogue.bps",
+    "sha256": "d118482e9db28bcb271e37058db758cd97415620c83d01c0e82c5fcb9166add6"
+  },
+  "runtime_validation": {
+    "status": "pending-sameboy",
+    "limitations": [
+      "Only the observed protagonist name tiles and voiced mark are protected.",
+      "Loading, page transitions and glyph restoration require SameBoy verification."
+    ]
+  },
+  "implementation": {
+    "glyph_components": {
+      "copy": "0x043D3E",
+      "first": "0x043D68",
+      "later": "0x043D81",
+      "restore": "0x043D9A",
+      "wrapper_end": "0x043DC7"
+    }
+  }
+}

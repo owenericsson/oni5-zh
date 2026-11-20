@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.7-opening-dialogue",
+  "parent_version": {
+    "version_id": "V2.6.6-opening-dialogue",
+    "sha256": "a5f22750a56839635130d19b1df787b82f930fa65676b9a995256b4507f23ae0"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_7_opening_dialogue.gb",
+    "sha256": "50c6d78d588ad87caa7dfc25aab970e586322dc568f692144a8168a9767e8dc9"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_7_opening_dialogue.bps",
+    "sha256": "a606c1765595bc005ab97be9c7a0c980bc9bfe5bc0aaf99768a76ffd873475cd"
+  },
+  "runtime_validation": {
+    "status": "pending-sameboy",
+    "limitations": [
+      "Only the observed protagonist name tiles and voiced mark are protected.",
+      "Glyph switching, dialogue transitions, and restoration before village movement require SameBoy verification."
+    ]
+  },
+  "implementation": {
+    "glyph_components": {
+      "restore": "0x045172",
+      "load_dispatcher": "0x0455B9",
+      "close_dispatcher": "0x04567C",
+      "component_end": "0x0456A0",
+      "load_gate": "0x0408EC",
+      "close_gate": "0x0422F0"
+    }
+  }
+}

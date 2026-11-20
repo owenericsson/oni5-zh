@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.3-opening-dialogue",
+  "parent_version": {
+    "version_id": "V2.6.2-opening-dialogue",
+    "sha256": "6f831505dccb94d250a58b2f8098750aae51d94a0ab83cff1271fa990bbe5cf9"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_3_opening_dialogue.gb",
+    "sha256": "1cb47f5e8ca4b62a03d4df9e2e22d6eb0625b813caeec826da33e37577663457"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_3_opening_dialogue.bps",
+    "sha256": "5b25503f2b0c2a855789c8c2aaf6900b6eb3010dbf1eff8ca1039ee6cbe8292e"
+  },
+  "runtime_validation": {
+    "status": "sameboy-confirmed-by-user",
+    "tested_rom_sha256": null,
+    "confirmation": "User reported that V2.6.3 passed acceptance and selected it as the new baseline; the tested ROM hash was not independently confirmed.",
+    "required_sameboy_checks": [
+      "Check the preceding Chinese dialogue and the transition to 静那「常叶丸！？」.",
+      "Check that the background and portrait remain correct while the two dialogues change.",
+      "Continue through the following V2.6.2 dialogues and check that original glyphs return."
+    ]
+  },
+  "implementation": {
+    "text_start": "0x013411",
+    "glyph_tiles": {
+      "静": "0xA9",
+      "那": "0xAF",
+      "常": "0x9D",
+      "叶": "0x8E",
+      "丸": "0xA7"
+    },
+    "loader_offset": "0x040900",
+    "pattern_offset": "0x040950",
+    "original_pattern_offset": "0x0409A0",
+    "restore_offset": "0x0409F0",
+    "wrapper_offset": "0x040A47",
+    "dispatcher_offset": "0x040A5E",
+    "helper_end": "0x040A95"
+  }
+}

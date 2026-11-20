@@ -27,7 +27,7 @@
         {"offset": "0x013542", "code": "0xCC", "kind": "macro_ref"},
         {"offset": "0x013543", "code": "0x7E", "kind": "control", "meaning": "page_transition"},
         {"offset": "0x013544", "code": "0x7C", "kind": "control", "meaning": "region_update"},
-        {"offset": "0x013545", "code": "0x95", "kind": "macro_ref", "display": "男主人公可改名（默认名：ときわまる）"},
+        {"offset": "0x013545", "code": "0x95", "kind": "macro_ref", "display": "固定姓名：常叶丸"},
         {"offset": "0x013546", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
         {"offset": "0x013547", "code": "0x3B", "kind": "glyph_code", "display": "「"},
         {"offset": "0x013548", "code": "0x1D", "kind": "glyph_code", "display": "な"},
@@ -44,10 +44,16 @@
       ],
       "observations": [
         {
+          "start": "0x01353F",
+          "end_exclusive": "0x013543",
+          "text": "[主角名字]\n「！？」",
+          "evidence": "用户提供 $FFAA=$04、$FFAE:$FFAD=$35:$44 并确认当前画面一致；保留原版 $80 名字宏及 $CC 标点宏。"
+        },
+        {
           "start": "0x013545",
           "end_exclusive": "0x013552",
           "text": "ときわまる\n「な なんだ このかんじ！？」",
-          "evidence": "用户提供的 SameBoy 页面文字；与 ROM 字节和宏表对照"
+          "evidence": "用户提供的 SameBoy 页面文字；与 ROM 字节和宏表对照。2026-11-19 用户提供 $FFAA=$04、$FFAE:$FFAD=$35:$53，再次确认当前画面一致。"
         }
       ],
       "translation": {
@@ -60,6 +66,7 @@
           }
         ],
         "review_notes": [
+          "$95 表示固定姓名常叶丸，不是玩家可改名的主角；此处译文写为常叶丸。",
           "为适配 13 字节源范围，省略迟疑词「什、」和词间空格；结尾复用原有 $CC 宏「！？」。"
         ]
       },
@@ -137,6 +144,9 @@
             "source_end_exclusive": "0x0134AA",
             "text": "「今日的修行\n就到此为止」"
           }
+        ],
+        "review_notes": [
+          "用户于 2026-11-19 确认新版译文「今天的修炼就到此为止。」；句号复用原版 Tile $BE。上方旧译文保留供已有版本重建，新译文尚未写入 ROM。"
         ]
       },
       "verification": [
@@ -144,6 +154,237 @@
         "正文从命令后的 $01348C 开始；SameBoy 曾在逻辑地址 $748F/$7490 观察到正文内的 $3B/$0F。",
         "从 $01348C 起的下一个 $7F 位于 $013516；解析器在 $7F 分支返回，因此排他终点为 $013517。",
         "用户于 2026-11-14 确认译文「今日的修行／就到此为止」。"
+      ]
+    },
+    {
+      "id": "oni5-bank04-inline-01348f-v264",
+      "source": {
+        "bank": {"logical": "0x04", "physical": "0x04", "size": "0x4000"},
+        "payload": {"start": "0x01348F", "end_exclusive": "0x0134AA", "terminator": "0x7E"}
+      },
+      "observations": [
+        {
+          "start": "0x01348F",
+          "end_exclusive": "0x0134AA",
+          "text": "「きょ□きょうのけいこは□これで\n□おしまいにします」",
+          "evidence": "用户提供 $FFAA=$04、$FFAE:$FFAD=$34:$AB 并确认当前画面一致。"
+        }
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x01348F",
+            "source_end_exclusive": "0x0134AA",
+            "text": "「今天的修炼就到此为止。」"
+          }
+        ],
+        "review_notes": [
+          "用户确认新版译文及复用原版 Tile $BE 作为句号；旧译文记录保留以重建既有版本。尚未写入 ROM。"
+        ]
+      },
+      "verification": [
+        "$0134AA=$7E 是翻页码，不是整个事件的终止符。"
+      ]
+    },
+    {
+      "id": "oni5-bank04-inline-0134ab",
+      "source": {
+        "bank": {"logical": "0x04", "physical": "0x04", "size": "0x4000"},
+        "payload": {"start": "0x0134AB", "end_exclusive": "0x0134CE", "terminator": "0x7E"}
+      },
+      "token_annotations": [
+        {"offset": "0x0134AB", "code": "0x7C", "kind": "control", "meaning": "region_update"},
+        {"offset": "0x0134AC", "code": "0x80", "kind": "macro_ref", "display": "主角名字，按运行时内容显示"},
+        {"offset": "0x0134B4", "code": "0xBF", "kind": "macro_ref", "display": "きた"},
+        {"offset": "0x0134BD", "code": "0x09", "kind": "glyph_code", "display": "[对应关系待核实；用户确认画面字形为逗号]"},
+        {"offset": "0x0134C7", "code": "0xAD", "kind": "macro_ref", "display": "しずな（静那）"},
+        {"offset": "0x0134CD", "code": "0x7E", "kind": "control", "meaning": "page_transition"}
+      ],
+      "observations": [
+        {
+          "start": "0x0134AC",
+          "end_exclusive": "0x0134CD",
+          "text": "[主角名字]\n「こいびとがきたから□はやくきり[逗号]げ\n□たいんだろ□しずなせんせい」",
+          "evidence": "用户提供 $FFAA=$04、$FFAE:$FFAD=$34:$CE，并确认其他推测字符；用户再次查看 tileset 后确认该画面字形为逗号，画面与 $09 的精确对应仍待核实。"
+        }
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x0134AE",
+            "source_end_exclusive": "0x0134CD",
+            "text": "「恋人来了，你就想赶紧结束修炼吧，静那老师？」"
+          }
+        ],
+        "review_notes": [
+          "用户确认此译文和画面中的逗号字形；画面与 $09 的精确对应仍待核实，译文基于当前上下文理解。主角姓名宏 $80 的运行时行为须保留。尚未写入 ROM。"
+        ]
+      },
+      "verification": [
+        "$0134CD 是翻页码 $7E，后面仍有同一事件的对白；不能当成整个事件终止符。"
+      ]
+    },
+    {
+      "id": "oni5-bank04-inline-0134ce",
+      "source": {
+        "bank": {"logical": "0x04", "physical": "0x04", "size": "0x4000"},
+        "payload": {"start": "0x0134CE", "end_exclusive": "0x0134FB", "terminator": "0x7E"}
+      },
+      "token_annotations": [
+        {"offset": "0x0134CE", "code": "0x7C", "kind": "control", "meaning": "region_update"},
+        {"offset": "0x0134CF", "code": "0xAD", "kind": "macro_ref", "display": "しずな（静那）"},
+        {"offset": "0x0134D8", "code": "0xCA", "kind": "macro_ref", "display": "[原版展开码 35 4D]"},
+        {"offset": "0x0134E2", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x0134F3", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x0134FA", "code": "0x7E", "kind": "control", "meaning": "page_transition"}
+      ],
+      "observations": [
+        {
+          "start": "0x0134CF",
+          "end_exclusive": "0x0134FA",
+          "text": "しずな\n「おませなくちを□きくんじゃないの！\n□かえって□きょうのふくしゅうを\n□しなさい」",
+          "evidence": "用户提供 $FFAA=$04、$FFAE:$FFAD=$34:$F4 并确认提取原文一致；末行在该游标之后，是否已显示未单独确认。"
+        }
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x0134D1",
+            "source_end_exclusive": "0x0134FA",
+            "text": "「少说这种小大人似的话！\n回去复习今天学的内容。」"
+          }
+        ],
+        "review_notes": [
+          "用户确认译文；句号复用原版 Tile $BE。尚未写入 ROM。"
+        ]
+      },
+      "verification": [
+        "$0134FA 的 $7E 是翻页码；$0134F4 在末行之前，不能视为文本结尾。"
+      ]
+    },
+    {
+      "id": "oni5-bank04-inline-0134fb",
+      "source": {
+        "bank": {"logical": "0x04", "physical": "0x04", "size": "0x4000"},
+        "payload": {"start": "0x0134FB", "end_exclusive": "0x013517", "terminator": "0x7F"}
+      },
+      "token_annotations": [
+        {"offset": "0x0134FB", "code": "0x7C", "kind": "control", "meaning": "region_update"},
+        {"offset": "0x0134FC", "code": "0x80", "kind": "macro_ref", "display": "主角名字，按运行时内容显示"},
+        {"offset": "0x013507", "code": "0x09", "kind": "glyph_code", "display": "逗号（用户确认当前画面）"},
+        {"offset": "0x01350D", "code": "0xC4", "kind": "macro_ref", "display": "さん"},
+        {"offset": "0x01350E", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x013516", "code": "0x7F", "kind": "terminator"}
+      ],
+      "observations": [
+        {
+          "start": "0x0134FC",
+          "end_exclusive": "0x013516",
+          "text": "[主角名字]\n「へへっ□てれてら、□こいびとさん\n□ごゆっくり」",
+          "evidence": "用户提供 $FFAA=$04、$FFAE:$FFAD=$35:$17，确认原文一致并确认 $09 在当前画面为逗号。"
+        }
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x0134FE",
+            "source_end_exclusive": "0x013516",
+            "text": "「嘿嘿，害羞了。\n恋人先生，请慢慢聊。」"
+          }
+        ],
+        "review_notes": [
+          "用户确认译文；「慢慢聊」为结合场景对「ごゆっくり」的意译。句号复用原版 Tile $BE，主角姓名宏 $80 的运行时行为须保留。尚未写入 ROM。"
+        ]
+      },
+      "verification": [
+        "$013516=$7F 是这段内嵌事件文本的终止符。"
+      ]
+    },
+    {
+      "id": "oni5-bank04-inline-013557",
+      "source": {
+        "bank": {"logical": "0x04", "physical": "0x04", "size": "0x4000"},
+        "event_command": {"opcode": "0x57", "rom_offset": "0x013556", "cpu_address": "0x7556"},
+        "payload": {"start": "0x013557", "end_exclusive": "0x013578", "terminator": "0x7F"}
+      },
+      "token_annotations": [
+        {"offset": "0x013557", "code": "0x7C", "kind": "control", "meaning": "region_update"},
+        {"offset": "0x013558", "code": "0x80", "kind": "macro_ref", "display": "主角名字，按运行时内容显示"},
+        {"offset": "0x01355E", "code": "0xBC", "kind": "macro_ref", "display": "おれ"},
+        {"offset": "0x013566", "code": "0xD5", "kind": "macro_ref", "display": "省略号"},
+        {"offset": "0x01356E", "code": "0x20", "kind": "glyph_code", "display": "[读法未确认；当前 VRAM 字形残留为「下」]"},
+        {"offset": "0x013572", "code": "0x16", "kind": "glyph_code", "display": "せ"},
+        {"offset": "0x013577", "code": "0x7F", "kind": "terminator"}
+      ],
+      "observations": [
+        {
+          "start": "0x013558",
+          "end_exclusive": "0x013577",
+          "text": "[主角名字]\n「いま□おれのこと□よんだ……わけ\n□ないよ[未确认$20]□きのせいかな」",
+          "evidence": "用户提供 $FFAA=$04、$FFAE:$FFAD=$35:$78 并确认 $16 为「せ」；$20 对应图案显示残留中文「下」，其日文读法未确认。"
+        }
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x01355A",
+            "source_end_exclusive": "0x013577",
+            "text": "「刚才是在叫我……不可能吧，是错觉吗？」"
+          }
+        ],
+        "review_notes": [
+          "用户确认此译文；$20 尚未确认，译文暂按上下文理解。主角姓名宏 $80 的运行时行为须保留。尚未写入 ROM。"
+        ]
+      },
+      "verification": [
+        "$013577=$7F 是该事件文本的终止符；当前场景发现 Tile $A0 字形残留，须在批量发布前追踪修复。"
+      ]
+    },
+    {
+      "id": "oni5-bank04-inline-01358a",
+      "source": {
+        "bank": {"logical": "0x04", "physical": "0x04", "size": "0x4000"},
+        "event_command": {"opcode": "0x57", "rom_offset": "0x013589", "cpu_address": "0x7589"},
+        "payload": {"start": "0x01358A", "end_exclusive": "0x0135AC", "terminator": "0x7F"}
+      },
+      "token_annotations": [
+        {"offset": "0x01358A", "code": "0x7C", "kind": "control", "meaning": "region_update"},
+        {"offset": "0x01358B", "code": "0x95", "kind": "macro_ref", "display": "固定姓名：常叶丸"},
+        {"offset": "0x013596", "code": "0xD5", "kind": "macro_ref", "display": "省略号"},
+        {"offset": "0x013597", "code": "0xD5", "kind": "macro_ref", "display": "省略号"},
+        {"offset": "0x01359C", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x0135A3", "code": "0xB7", "kind": "macro_ref", "display": "なんだ"},
+        {"offset": "0x0135AA", "code": "0xCC", "kind": "macro_ref", "display": "！？」"},
+        {"offset": "0x0135AB", "code": "0x7F", "kind": "terminator"}
+      ],
+      "observations": [
+        {
+          "start": "0x01358B",
+          "end_exclusive": "0x0135AB",
+          "text": "ときわまる\n「きのせいじゃない[省略号][省略号]いったい\n□いまのは□なんだったんだろう！？」",
+          "evidence": "用户提供 $FFAA=$04、$FFAE:$FFAD=$35:$AC 并确认提取原文一致；连续两个 $D5 的实际显示点数未单独确认。"
+        }
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x01358D",
+            "source_end_exclusive": "0x0135AB",
+            "text": "「不是错觉…………刚才那到底是什么！？」"
+          }
+        ],
+        "review_notes": [
+          "用户确认译文和两组省略号；$95 为固定姓名常叶丸。尚未写入 ROM。"
+        ]
+      },
+      "verification": [
+        "$0135AB=$7F 是该事件文本的终止符；用户此前发现的 Tile $A0 字形残留须在批量发布前追踪修复。"
       ]
     },
     {
@@ -475,7 +716,7 @@
         }
       },
       "token_annotations": [
-        {"offset": "0x0133EF", "code": "0x95", "kind": "macro_ref", "display": "男主人公可改名（默认名：ときわまる）"},
+        {"offset": "0x0133EF", "code": "0x95", "kind": "macro_ref", "display": "固定姓名：常叶丸"},
         {"offset": "0x0133F0", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
         {"offset": "0x0133F1", "code": "0x3B", "kind": "glyph_code", "display": "「"},
         {"offset": "0x0133FF", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
@@ -487,8 +728,8 @@
         {
           "start": "0x0133EF",
           "end_exclusive": "0x013408",
-          "text": "[男主人公姓名：默认常叶丸]\n「へえ□どうじょうをついだのかい\n□すごいな□[静那]」",
-          "evidence": "用户确认：$95 是可改名的男主人公（默认名常叶丸），末尾 $AD 是固定姓名静那；SameBoy 画面分别显示默认男主名和静那。"
+          "text": "[固定姓名：常叶丸]\n「へえ□どうじょうをついだのかい\n□すごいな□[静那]」",
+          "evidence": "用户更正：常叶丸并非可改名主角，$95 在此表示固定姓名常叶丸；末尾 $AD 是固定姓名静那。"
         }
       ],
       "translation": {
@@ -501,12 +742,66 @@
           }
         ],
         "review_notes": [
-          "{主人公} 在构建时编码为原有 $95 男主人公可改名宏；{静那} 编码为原有 $AD 固定姓名宏。"
+          "常叶丸不是可改名主角；V2.6.1 在本对白中将原 $95 局部替换为三个中文字形「常叶丸」。固定姓名标记「{静那}」也局部编码为两个中文字形替换原 $AD。"
         ]
       },
       "verification": [
         "事件命令 $57 位于 $0133EE；$7F 位于 $013408，翻译范围不覆盖终止码。",
-        "保留 $0133EF 的 $95 男主人公可改名宏及 $013406 的 $AD 静那宏；恢复游标为终止码之后的低字节 $09。"
+        "将 $0133EF 的固定姓名宏 $95 替换为「常叶丸」三个中文字形，并将末行静那姓名宏 $AD 替换为两个中文字形；总编码长度仍为 $19 字节，恢复游标仍为终止码之后的低字节 $09。"
+      ]
+    },
+    {
+      "id": "oni5-bank04-inline-013411",
+      "source": {
+        "bank": {
+          "logical": "0x04",
+          "physical": "0x04",
+          "size": "0x4000"
+        },
+        "event_command": {
+          "opcode": "0x57",
+          "rom_offset": "0x01340F",
+          "cpu_address": "0x740F"
+        },
+        "payload": {
+          "start": "0x013410",
+          "end_exclusive": "0x013417",
+          "terminator": "0x7F"
+        }
+      },
+      "token_annotations": [
+        {"offset": "0x013410", "code": "0x7C", "kind": "control", "meaning": "region_update"},
+        {"offset": "0x013411", "code": "0xAD", "kind": "macro_ref", "display": "しずな（静那）"},
+        {"offset": "0x013412", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x013413", "code": "0x3B", "kind": "glyph_code", "display": "「"},
+        {"offset": "0x013414", "code": "0x95", "kind": "macro_ref", "display": "ときわまる（常叶丸）"},
+        {"offset": "0x013415", "code": "0xCC", "kind": "macro_ref", "display": "！？」"},
+        {"offset": "0x013416", "code": "0x7F", "kind": "terminator"}
+      ],
+      "observations": [
+        {
+          "start": "0x013411",
+          "end_exclusive": "0x013416",
+          "text": "しずな\n「ときわまる！？」",
+          "evidence": "用户提供目标场景画面及稳定帧；原 ROM 的 $AD/$95 姓名宏和 $CC 标点宏与画面一致。"
+        }
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x013411",
+            "source_end_exclusive": "0x013416",
+            "text": "静那\n「常叶丸！？」"
+          }
+        ],
+        "review_notes": [
+          "用户同意保留原版 $CC 宏的标点顺序「！？」；常叶丸是固定姓名。"
+        ]
+      },
+      "verification": [
+        "原始五字节为 AD 7D 3B 95 CC；不覆盖前面的 $7C 和后面的 $7F。",
+        "V2.6.3 候选局部复用原版 $C6/$B6 宏及字形映射，不修改共享宏表；转场及字形恢复仍待 SameBoy 验证。"
       ]
     },
     {
@@ -676,7 +971,7 @@
           "offset": "0x013459",
           "code": "0x95",
           "kind": "macro_ref",
-          "display": "男主人公可改名（默认名：ときわまる）"
+          "display": "固定姓名：常叶丸"
         },
         {
           "offset": "0x01345A",
@@ -800,6 +1095,84 @@
           "meaning": "page_transition"
         },
         {
+          "offset": "0x01346E",
+          "code": "0x7C",
+          "kind": "control",
+          "meaning": "region_update"
+        },
+        {
+          "offset": "0x01346F",
+          "code": "0xAD",
+          "kind": "macro_ref",
+          "display": "しずな（静那）"
+        },
+        {
+          "offset": "0x013470",
+          "code": "0x7D",
+          "kind": "control",
+          "meaning": "line_advance"
+        },
+        {
+          "offset": "0x013471",
+          "code": "0x3B",
+          "kind": "glyph_code",
+          "display": "「"
+        },
+        {
+          "offset": "0x013472",
+          "code": "0x95",
+          "kind": "macro_ref",
+          "display": "ときわまる（常叶丸）"
+        },
+        {
+          "offset": "0x013473",
+          "code": "0x08",
+          "kind": "glyph_code",
+          "display": "っ"
+        },
+        {
+          "offset": "0x013474",
+          "code": "0x18",
+          "kind": "glyph_code",
+          "display": "た"
+        },
+        {
+          "offset": "0x013475",
+          "code": "0x2F",
+          "kind": "glyph_code",
+          "display": "ら"
+        },
+        {
+          "offset": "0x013476",
+          "code": "0xD5",
+          "kind": "macro_ref",
+          "display": "……"
+        },
+        {
+          "offset": "0x013477",
+          "code": "0xD5",
+          "kind": "macro_ref",
+          "display": "……"
+        },
+        {
+          "offset": "0x013478",
+          "code": "0x22",
+          "kind": "glyph_code",
+          "display": "は"
+        },
+        {
+          "offset": "0x013479",
+          "code": "0x08",
+          "kind": "glyph_code",
+          "display": "っ"
+        },
+        {
+          "offset": "0x01347A",
+          "code": "0x3C",
+          "kind": "glyph_code",
+          "display": "」"
+        },
+        {
           "offset": "0x01347B",
           "code": "0x7F",
           "kind": "terminator"
@@ -811,6 +1184,12 @@
           "end_exclusive": "0x01346D",
           "text": "ときわまる\n「きゅうに　かおがみたくなったんだ」",
           "evidence": "用户确认 SameBoy 屏幕转写；当前游标 $346E 已越过 $01346D 的页面控制，因此本屏文字起始于 $013459，而非 $01346E。"
+        },
+        {
+          "start": "0x01346E",
+          "end_exclusive": "0x01347C",
+          "text": "しずな\n「ときわまるったら…………はっ」",
+          "evidence": "用户确认所附 SameBoy 截图是常叶丸对白之后静那说的下一句；ROM 字节和已确认的 $AD/$95 宏及 $D5 省略号宏对应。译文尚未确认。"
         }
       ],
       "translation": {
@@ -820,15 +1199,108 @@
             "source_start": "0x013459",
             "source_end_exclusive": "0x01346D",
             "text": "常叶丸\n「突然想见你了。」"
+          },
+          {
+            "source_start": "0x01346F",
+            "source_end_exclusive": "0x01347B",
+            "text": "{静那}\n「{常叶丸}你这家伙！」"
           }
         ],
         "review_notes": [
-          "中文句号复用原版日文句号 Tile $BE。"
+          "$95 表示固定姓名常叶丸，不是玩家可改名的主角；此处译文写为常叶丸。",
+          "中文句号复用原版日文句号 Tile $BE。",
+          "用户确认静那下一页译为「常叶丸你这家伙！」；$AD/$95 姓名宏应只在此页上下文输出中文字形，且不保留原文省略号。"
         ]
       },
       "verification": [
         "bank $04 事件命令 $57 位于 ROM 文件偏移 $013457；正文含 $01346D 的翻页控制，终止符 $7F 位于 $01347B，排他终点为 $01347C。",
-        "当前用户提供的游标 $FFAE:$FFAD=$34:$6E 指向翻页控制之后；用户确认的可见文字从宏 $95 所在 $013459 开始。"
+        "当前用户提供的游标 $FFAE:$FFAD=$34:$6E 指向翻页控制之后；用户确认的可见文字从宏 $95 所在 $013459 开始。",
+        "$01346E–$01347B 是同一内嵌文本段的下一页；bank $0C 宏表中 $AD 指向 $0443，$95 指向 $03C9。"
+      ]
+    },
+    {
+      "id": "oni5-bank04-inline-01342e",
+      "source": {
+        "bank": {
+          "logical": "0x04",
+          "physical": "0x04",
+          "size": "0x4000"
+        },
+        "event_command": {
+          "opcode": "0x57",
+          "rom_offset": "0x01342C",
+          "cpu_address": "0x742C"
+        },
+        "payload": {
+          "start": "0x01342D",
+          "end_exclusive": "0x013453",
+          "terminator": "0x7F"
+        }
+      },
+      "token_annotations": [
+        {"offset": "0x01342D", "code": "0x7C", "kind": "control", "meaning": "region_update"},
+        {"offset": "0x01342E", "code": "0xAD", "kind": "macro_ref", "display": "しずな（静那）"},
+        {"offset": "0x01342F", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x013430", "code": "0x3B", "kind": "glyph_code", "display": "「"},
+        {"offset": "0x013431", "code": "0x0A", "kind": "glyph_code", "display": "い"},
+        {"offset": "0x013432", "code": "0x2C", "kind": "glyph_code", "display": "や"},
+        {"offset": "0x013433", "code": "0x6A", "kind": "glyph_code", "display": "だ"},
+        {"offset": "0x013434", "code": "0x34", "kind": "glyph_code", "display": "わ"},
+        {"offset": "0x013435", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]"},
+        {"offset": "0x013436", "code": "0x10", "kind": "glyph_code", "display": "く"},
+        {"offset": "0x013437", "code": "0x31", "kind": "glyph_code", "display": "る"},
+        {"offset": "0x013438", "code": "0x1D", "kind": "glyph_code", "display": "な"},
+        {"offset": "0x013439", "code": "0x2F", "kind": "glyph_code", "display": "ら"},
+        {"offset": "0x01343A", "code": "0x0D", "kind": "glyph_code", "display": "お"},
+        {"offset": "0x01343B", "code": "0x14", "kind": "glyph_code", "display": "し"},
+        {"offset": "0x01343C", "code": "0x0C", "kind": "glyph_code", "display": "え"},
+        {"offset": "0x01343D", "code": "0x1C", "kind": "glyph_code", "display": "と"},
+        {"offset": "0x01343E", "code": "0x0A", "kind": "glyph_code", "display": "い"},
+        {"offset": "0x01343F", "code": "0x1B", "kind": "glyph_code", "display": "て"},
+        {"offset": "0x013440", "code": "0x10", "kind": "glyph_code", "display": "く"},
+        {"offset": "0x013441", "code": "0x32", "kind": "glyph_code", "display": "れ"},
+        {"offset": "0x013442", "code": "0x7D", "kind": "control", "meaning": "line_advance"},
+        {"offset": "0x013443", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]"},
+        {"offset": "0x013444", "code": "0x32", "kind": "glyph_code", "display": "れ"},
+        {"offset": "0x013445", "code": "0x74", "kind": "glyph_code", "display": "ば"},
+        {"offset": "0x013446", "code": "0x4D", "kind": "special_glyph", "display": "[空白图块$4D]"},
+        {"offset": "0x013447", "code": "0x66", "kind": "glyph_code", "display": "じ"},
+        {"offset": "0x013448", "code": "0x06", "kind": "glyph_code", "display": "ゅ"},
+        {"offset": "0x013449", "code": "0x36", "kind": "glyph_code", "display": "ん"},
+        {"offset": "0x01344A", "code": "0x75", "kind": "glyph_code", "display": "び"},
+        {"offset": "0x01344B", "code": "0x14", "kind": "glyph_code", "display": "し"},
+        {"offset": "0x01344C", "code": "0x1B", "kind": "glyph_code", "display": "て"},
+        {"offset": "0x01344D", "code": "0x0D", "kind": "glyph_code", "display": "お"},
+        {"offset": "0x01344E", "code": "0x10", "kind": "glyph_code", "display": "く"},
+        {"offset": "0x01344F", "code": "0x21", "kind": "glyph_code", "display": "の"},
+        {"offset": "0x013450", "code": "0x1E", "kind": "glyph_code", "display": "に"},
+        {"offset": "0x013451", "code": "0x3C", "kind": "glyph_code", "display": "」"},
+        {"offset": "0x013452", "code": "0x7F", "kind": "terminator"}
+      ],
+      "observations": [
+        {
+          "start": "0x01342E",
+          "end_exclusive": "0x013453",
+          "text": "しずな\n「いやだわ□くるならおしえてくれ\nれば□じゅんびしておくのに」",
+          "evidence": "用户提供的 SameBoy 截图及停点游标：$FFAA=$04、$FFAE:$FFAD=$34:$53，指向 $013452 的 $7F 之后；ROM 字节和已确认假名码表对齐。"
+        }
+      ],
+      "translation": {
+        "status": "confirmed",
+        "segments": [
+          {
+            "source_start": "0x01342E",
+            "source_end_exclusive": "0x013452",
+            "text": "静那\n「真是的，也不提前说一声，\n我好准备一下。」"
+          }
+        ],
+        "review_notes": [
+          "用户确认按固定姓名「静那」局部替换 $AD；句号复用原版日文句号 Tile $BE。"
+        ]
+      },
+      "verification": [
+        "bank $04 的事件命令 $57 位于 ROM 文件偏移 $01342C；文本以 $01342D 的 $7C 区域控制开始。",
+        "正文从 $01342E 的静那宏开始，$013442 为原有换行，$013452 的 $7F 结束文本；用户提供的停点游标 $3453 紧接该终止符。"
       ]
     }
   ]

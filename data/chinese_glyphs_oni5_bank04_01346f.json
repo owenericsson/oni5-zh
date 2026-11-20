@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "font": {
+    "family": "ChillBitmap",
+    "variant": "8px Regular Proportional",
+    "source_url": "https://fontpixel.com/downloads/chill-bitmap--ChillBitmap7x-8px.bdf.gz",
+    "source_sha256": "37b51f4f2a094a952a3cb481090c2185922a65b90c228e5bdad7b4c445ca7939",
+    "license": "SIL Open Font License 1.1",
+    "license_url": "https://github.com/Warren2060/ChillBitmap/blob/main/License"
+  },
+  "glyphs": [
+    {
+      "character": "伙",
+      "codepoint": "U+4F19",
+      "tile_2bpp_hex": "28 28 48 48 DA DA 4C 4C 48 48 54 54 62 62 00 00"
+    }
+  ]
+}

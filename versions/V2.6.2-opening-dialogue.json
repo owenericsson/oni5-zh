@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.2-opening-dialogue",
+  "parent_version": {
+    "version_id": "V2.6.1-opening-dialogue",
+    "path": "../roms/oni5_v2_6_1_opening_prologue.gb",
+    "sha256": "afe11e0f8aa3d035d76432652aada1c2b3dc2da0a95805783e2a869dae9300cf"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_2_opening_dialogue.bps",
+    "size_bytes": 1779,
+    "sha256": "e40d0972ac12878768a02b1e4876d80c7d061e46c307a310f71c5507e6f6fa79"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_2_opening_dialogue.gb",
+    "size_bytes": 1048576,
+    "sha256": "6f831505dccb94d250a58b2f8098750aae51d94a0ab83cff1271fa990bbe5cf9",
+    "persisted_by_builder": true
+  },
+  "runtime_validation": {
+    "status": "sameboy-confirmed-by-user",
+    "tested_rom_sha256": null,
+    "confirmation": "User reported that V2.6.2 passed testing and selected it as the new baseline; the tested ROM hash was not independently confirmed.",
+    "required_sameboy_checks": [
+      "Check the previous V2.6.1 dialogue and the translated Shizuna page.",
+      "Advance beyond the dialogue and verify subsequent scenes and text remain normal.",
+      "Check that the original glyphs are restored after the two-page dialogue."
+    ]
+  },
+  "implementation": {
+    "followup_text_span": [
+      "0x01346F",
+      "0x01347B"
+    ],
+    "native_punctuation_macro": "0xD2",
+    "glyph_tiles": {
+      "常": "0x81",
+      "叶": "0x82",
+      "丸": "0x83",
+      "突": "0x84",
+      "然": "0x86",
+      "想": "0x8C",
+      "见": "0x8F",
+      "你": "0x91",
+      "了": "0x93",
+      "静": "0x96",
+      "那": "0x97",
+      "这": "0x99",
+      "家": "0x9A",
+      "伙": "0x9B"
+    },
+    "loader_offset": "0x042580",
+    "pattern_offset": "0x042640",
+    "original_pattern_offset": "0x042720",
+    "restore_offset": "0x042800",
+    "helper_end": "0x0428C3"
+  },
+  "automated_validation": {
+    "checksum": "Target ROM passes size and checksum verification.",
+    "bps_round_trip": "Applying the V2.6.1-to-V2.6.2 BPS reproduces the target ROM.",
+    "parent_dialogue": "The original V2.6.1 Tokiwa dialogue encoding is unchanged."
+  }
+}

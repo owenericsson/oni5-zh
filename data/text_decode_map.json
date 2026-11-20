@@ -1,6 +1,8 @@
 {
   "schema_version": 1,
   "glyph_codes": {
+    "0x03": {"text": "ぇ", "status": "confirmed", "note": "用户确认 bank $04:$36D5 对话「ちぇっ」；依据整句画面与 ROM 对照"},
+    "0x05": {"text": "ゃ", "status": "confirmed", "note": "用户确认 bank $04:$35E1 对话「じゃない」；依据整句画面与 ROM 对照"},
     "0x08": {"text": "っ", "status": "confirmed", "note": "用户确认 bank $04:$3459 对话「みたくなった」"},
     "0x07": {"text": "ょ", "status": "confirmed"},
     "0x0A": {"text": "い", "status": "confirmed"},
@@ -11,31 +13,42 @@
     "0x10": {"text": "く", "status": "confirmed", "note": "用户确认 bank $04:$3430 对话中的「くるなら／くれれば／おく」"},
     "0x11": {"text": "け", "status": "confirmed"},
     "0x12": {"text": "こ", "status": "confirmed", "note": "普通文本上下文；宏展开上下文存在不同观察"},
+    "0x13": {"text": "さ", "status": "confirmed", "note": "用户确认 bank $04:$3B37 所在句为「いきなさい」；依据整句画面与 ROM 对照"},
     "0x14": {"text": "し", "status": "confirmed"},
     "0x15": {"text": "す", "status": "confirmed"},
+    "0x16": {"text": "せ", "status": "confirmed", "note": "用户确认 bank $04:$3B46 所在句为「じんせい」；依据整句画面与 ROM 对照"},
     "0x17": {"text": "そ", "status": "confirmed", "note": "通知板「こなかむらにようこそ」末尾字节；依据用户对完整屏幕原文的确认"},
     "0x18": {"text": "た", "status": "confirmed"},
+    "0x19": {"text": "ち", "status": "confirmed", "note": "用户确认 bank $04:$3617 对话「ごちそう」；依据整句画面与 ROM 对照"},
     "0x1B": {"text": "て", "status": "confirmed", "note": "用户确认 bank $04:$3430 对话中的「おしえといて／して」"},
     "0x1C": {"text": "と", "status": "confirmed"},
     "0x1D": {"text": "な", "status": "confirmed"},
     "0x1E": {"text": "に", "status": "confirmed"},
+    "0x20": {"text": "ね", "status": "confirmed", "note": "用户确认 bank $04:$37A1 所在句为「おまえも しね！！」；依据整句画面与 ROM 对照"},
     "0x21": {"text": "の", "status": "confirmed"},
     "0x22": {"text": "は", "status": "confirmed"},
     "0x27": {"text": "ま", "status": "confirmed"},
     "0x28": {"text": "み", "status": "confirmed", "note": "用户确认 bank $04:$3459 对话「かおがみたくなった」"},
+    "0x2A": {"text": "め", "status": "confirmed", "note": "用户确认 bank $04:$36C0 对话「だめよ」；依据整句画面与 ROM 对照"},
+    "0x2B": {"text": "も", "status": "confirmed", "note": "用户确认 bank $04:$3636 对话「おしるこもあるかな」；依据整句画面与 ROM 对照"},
     "0x2C": {"text": "や", "status": "confirmed", "note": "用户确认 bank $04:$3430 对话「いやだわ」"},
     "0x2F": {"text": "ら", "status": "confirmed", "note": "用户确认 bank $04:$3430 对话「くるなら／くれれば」"},
     "0x2E": {"text": "よ", "status": "confirmed", "note": "通知板「こなかむらにようこそ」中的对应字节；依据用户对完整屏幕原文的确认"},
+    "0x30": {"text": "り", "status": "confirmed", "note": "用户确认 bank $04:$367A 对话「おかえりなさい」；依据整句画面与 ROM 对照"},
     "0x31": {"text": "る", "status": "confirmed"},
     "0x32": {"text": "れ", "status": "confirmed"},
     "0x34": {"text": "わ", "status": "confirmed"},
     "0x36": {"text": "ん", "status": "confirmed"},
+    "0x37": {"text": "—", "status": "confirmed", "note": "用户确认 bank $04:$36FB 的 $D4 宏展开字形为破折号；该宏两次展开各包含两个 $37，直接 tile $B7 的映射按普通路径推算。$04:$3BBB 所在句「おーい」中同一横线字形作长音，按上下文解读"},
     "0x3B": {"text": "「", "status": "confirmed"},
     "0x3C": {"text": "」", "status": "confirmed"},
     "0x66": {"text": "じ", "status": "confirmed", "note": "画面字形由基字「し」与位于其上方的濁点组件$B8组成；运行时写入路径尚未追踪"},
+    "0x68": {"text": "ぜ", "status": "confirmed", "note": "用户确认 bank $04:$3B0A 所在句为「いただいていくぜ」；依据整句画面与 ROM 对照"},
+    "0x6C": {"text": "づ", "status": "confirmed", "note": "用户确认 bank $04:$3B2E 所在句为「みかづきやま」；依据整句画面与 ROM 对照"},
     "0x6D": {"text": "で", "status": "confirmed", "note": "首段普通文本「これで」；画面由基字「て」与位于其上方的濁点组件$B8组成，运行时写入路径尚未追踪"},
     "0x60": {"text": "が", "status": "confirmed", "note": "由基字 tile $8E「か」与上方濁点组件 tile $B8 组成；用户确认 bank $04:$3459 对话「かおがみたくなった」"},
-    "0x74": {"text": "ば", "status": "confirmed", "note": "由基字 tile $A2「は」与上方濁点组件 tile $B8 组成；用户确认 bank $04:$3430 对话「くれれば／じゅんび」"}
+    "0x74": {"text": "ば", "status": "confirmed", "note": "由基字 tile $A2「は」与上方濁点组件 tile $B8 组成；用户确认 bank $04:$3430 对话「くれれば／じゅんび」"},
+    "0x76": {"text": "ぶ", "status": "confirmed", "note": "用户确认 bank $04:$3685 对话「こうぶつ」；依据整句画面与 ROM 对照，濁点由 $B8 组件构成"}
   },
   "special_glyphs": {
     "0x4D": {
@@ -48,12 +61,14 @@
     "0x80": {"text": "こがねまる", "status": "confirmed", "note": "用户根据对应画面辨认；展开码与普通路径映射存在差异"},
     "0x95": {"text": "ときわまる", "status": "confirmed"},
     "0xA9": {"text": "きゃら", "status": "confirmed", "note": "bank $0C:$0EE8 的前置宏；用户确认可见读法为三个字符「きゃら」，是否为人物姓名尚未确认"},
+    "0xAD": {"text": "しずな", "status": "confirmed", "note": "bank $0C 宏表相对偏移 $025A 指向展开数据 $0443：计数 $03，字符码 $14 $67 $1D"},
     "0xB7": {"text": "なんだ", "status": "confirmed"},
     "0xC3": {"text": "やま", "status": "confirmed", "note": "bank $0C:$0EE8；宏表指向 $0494，展开数据 02 2C 27，与用户的山名转写相符"},
     "0xC4": {"text": "さん", "status": "confirmed", "note": "bank $0C:$0EE8；宏表指向 $0497，展开数据 02 13 36，与用户的转写相符"},
     "0xC5": {"text": "おば", "status": "confirmed", "note": "bank $0C:$0EE8；宏表指向 $049A，展开数据 02 0D 74，与用户的转写相符"},
     "0xC6": {"text": "むら", "status": "confirmed", "note": "bank $0C:$0E33 通知板；宏表指向 $049D，展开数据 02 29 2F；用户确认完整屏幕原文「こなかむらにようこそ」"},
-    "0xCC": {"text": "！？」", "status": "confirmed"}
+    "0xCC": {"text": "！？」", "status": "confirmed"},
+    "0xD5": {"text": "……", "status": "confirmed", "note": "多个 bank $04 对话 token 注释与用户截图均将其辨认为省略号宏；连续 $D5 的实际显示数量仍需逐屏核对"}
   },
   "controls": {
     "0x7B": {

@@ -10,7 +10,8 @@ from scripts.export_chinese_glyphs import (
 
 SAMPLE_BDF = b"""STARTFONT 2.1
 FONT sample
-CHARS 2
+FONT_ASCENT 6
+CHARS 3
 STARTCHAR uni4E2D
 ENCODING 20013
 DWIDTH 8 0
@@ -23,6 +24,13 @@ FE
 FE
 10
 10
+ENDCHAR
+STARTCHAR uni4E00
+ENCODING 19968
+DWIDTH 8 0
+BBX 7 1 0 2
+BITMAP
+FE
 ENDCHAR
 STARTCHAR uniFF01
 ENCODING 65281
@@ -59,6 +67,16 @@ class ExportChineseGlyphTests(unittest.TestCase):
             encode_glyph(records[0xFF01], "！"),
             bytes.fromhex(
                 "20 20 20 20 20 20 20 20 20 20 20 20 20 20 00 00"
+            ),
+        )
+
+    def test_positions_positive_y_offset_from_font_ascent(self):
+        records = parse_bdf(SAMPLE_BDF)
+
+        self.assertEqual(
+            encode_glyph(records[0x4E00], "一"),
+            bytes.fromhex(
+                "00 00 00 00 00 00 FE FE 00 00 00 00 00 00 00 00"
             ),
         )
 

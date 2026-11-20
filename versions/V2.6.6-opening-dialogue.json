@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.6-opening-dialogue",
+  "parent_version": {
+    "version_id": "V2.6.5-opening-dialogue",
+    "sha256": "9df6947b9e8ef7d651fe205af739552255707c4396c82b47ba90fd487343c859"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_6_opening_dialogue.gb",
+    "sha256": "a5f22750a56839635130d19b1df787b82f930fa65676b9a995256b4507f23ae0"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_6_opening_dialogue.bps",
+    "sha256": "6b2e046f201ffa419ba2dcaf3d4ad6a39b516fd0886bf041e763119ca9f5cdf2"
+  },
+  "runtime_validation": {
+    "status": "pending-sameboy",
+    "limitations": [
+      "Only the observed protagonist name tiles and voiced mark are protected.",
+      "Loading, bank switching, glyph restoration and the first battle require SameBoy verification."
+    ]
+  },
+  "implementation": {
+    "glyph_components": {
+      "first_router": "0x040EC0",
+      "second_router": "0x040F99",
+      "third_router": "0x0411CD",
+      "close_router": "0x0428C3",
+      "bank_thunk": "0x043048",
+      "bank11_copy": "0x044000",
+      "bank11_loader": "0x04402A",
+      "bank11_table": "0x04403B"
+    }
+  }
+}
