@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "font": {
+    "family": "ChillBitmap",
+    "variant": "8px Regular Proportional",
+    "source_url": "https://fontpixel.com/downloads/chill-bitmap--ChillBitmap7x-8px.bdf.gz",
+    "source_sha256": "37b51f4f2a094a952a3cb481090c2185922a65b90c228e5bdad7b4c445ca7939",
+    "license": "SIL Open Font License 1.1",
+    "license_url": "https://github.com/Warren2060/ChillBitmap/blob/main/License"
+  },
+  "glyphs": [
+    {
+      "character": "一",
+      "codepoint": "U+4E00",
+      "tile_2bpp_hex": "00 00 00 00 00 00 FE FE 00 00 00 00 00 00 00 00"
+    },
+    {
+      "character": "下",
+      "codepoint": "U+4E0B",
+      "tile_2bpp_hex": "FE FE 10 10 10 10 14 14 12 12 10 10 10 10 00 00"
+    },
+    {
+      "character": "体",
+      "codepoint": "U+4F53",
+      "tile_2bpp_hex": "28 28 7E 7E C8 C8 5C 5C 6A 6A 5C 5C 48 48 00 00"
+    },
+    {
+      "character": "击",
+      "codepoint": "U+51FB",
+      "tile_2bpp_hex": "10 10 7C 7C 10 10 FE FE 10 10 54 54 7C 7C 00 00"
+    },
+    {
+      "character": "力",
+      "codepoint": "U+529B",
+      "tile_2bpp_hex": "10 10 10 10 FE FE 22 22 22 22 42 42 8C 8C 00 00"
+    },
+    {
+      "character": "度",
+      "codepoint": "U+5EA6",
+      "tile_2bpp_hex": "08 08 7E 7E 54 54 7E 7E 54 54 48 48 B6 B6 00 00"
+    },
+    {
+      "character": "御",
+      "codepoint": "U+5FA1",
+      "tile_2bpp_hex": "66 66 BE BE 56 56 DE DE 76 76 7C 7C 44 44 00 00"
+    },
+    {
+      "character": "抗",
+      "codepoint": "U+6297",
+      "tile_2bpp_hex": "48 48 FE FE 40 40 5C 5C D4 D4 54 54 E6 E6 00 00"
+    },
+    {
+      "character": "捷",
+      "codepoint": "U+6377",
+      "tile_2bpp_hex": "44 44 DE DE 46 46 5C 5C C6 C6 54 54 EE EE 00 00"
+    },
+    {
+      "character": "攻",
+      "codepoint": "U+653B",
+      "tile_2bpp_hex": "08 08 EE EE 5A 5A 4A 4A 6A 6A C4 C4 1A 1A 00 00"
+    },
+    {
+      "character": "敏",
+      "codepoint": "U+654F",
+      "tile_2bpp_hex": "74 74 EE EE AA AA F6 F6 A4 A4 EA EA 6A 6A 00 00"
+    },
+    {
+      "character": "智",
+      "codepoint": "U+667A",
+      "tile_2bpp_hex": "70 70 AE AE FA FA 56 56 BC BC 24 24 3C 3C 00 00"
+    },
+    {
+      "character": "神",
+      "codepoint": "U+795E",
+      "tile_2bpp_hex": "E8 E8 3E 3E EA EA 7E 7E EA EA FE FE 48 48 00 00"
+    },
+    {
+      "character": "等",
+      "codepoint": "U+7B49",
+      "tile_2bpp_hex": "76 76 AA AA 7C 7C 10 10 FE FE 44 44 2C 2C 00 00"
+    },
+    {
+      "character": "精",
+      "codepoint": "U+7CBE",
+      "tile_2bpp_hex": "A8 A8 5C 5C C8 C8 7E 7E D4 D4 DC DC 54 54 00 00"
+    },
+    {
+      "character": "级",
+      "codepoint": "U+7EA7",
+      "tile_2bpp_hex": "7C 7C 94 94 56 56 92 92 DA DA 14 14 EA EA 00 00"
+    },
+    {
+      "character": "耐",
+      "codepoint": "U+8010",
+      "tile_2bpp_hex": "F2 F2 2E 2E F2 F2 DA DA D6 D6 D2 D2 D6 D6 00 00"
+    },
+    {
+      "character": "距",
+      "codepoint": "U+8DDD",
+      "tile_2bpp_hex": "DE DE B0 B0 FE FE 52 52 FE FE D0 D0 EE EE 00 00"
+    },
+    {
+      "character": "速",
+      "codepoint": "U+901F",
+      "tile_2bpp_hex": "88 88 7E 7E AA AA 3E 3E DC DC 6A 6A BE BE 00 00"
+    },
+    {
+      "character": "量",
+      "codepoint": "U+91CF",
+      "tile_2bpp_hex": "7C 7C 44 44 FE FE 54 54 7C 7C 10 10 FE FE 00 00"
+    },
+    {
+      "character": "防",
+      "codepoint": "U+9632",
+      "tile_2bpp_hex": "E4 E4 BE BE C8 C8 AE AE AA AA CA CA 96 96 00 00"
+    },
+    {
+      "character": "魔",
+      "codepoint": "U+9B54",
+      "tile_2bpp_hex": "08 08 7E 7E 54 54 7E 7E 5C 5C 5C 5C A6 A6 00 00"
+    }
+  ]
+}

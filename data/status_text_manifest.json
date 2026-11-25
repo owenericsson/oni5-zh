@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "scope": "oni5-status-details",
+  "parent_rom_sha256": "4134619459f2b779d864ef7796b5c0eff995ac4bd4fcf204e9ff528371dad38c",
+  "records": [
+    {
+      "id": "status-level",
+      "source": {"start": "0x008D97", "end_exclusive": "0x008D99", "raw_hex": "0E 10"},
+      "position": {"column": 13, "row": 1},
+      "translation": {"status": "confirmed", "segments": [{"text": "等级"}]}
+    },
+    {
+      "id": "status-next-level",
+      "source": {"start": "0x008D9E", "end_exclusive": "0x008DA5", "raw_hex": "1A 61 21 0E 10 27 6D"},
+      "position": {"column": 5, "row": 3},
+      "translation": {"status": "confirmed", "segments": [{"text": "距下一级"}]}
+    },
+    {
+      "id": "status-health",
+      "source": {"start": "0x008DAD", "end_exclusive": "0x008DB2", "raw_hex": "18 0A 30 07 10"},
+      "position": {"column": 1, "row": 5},
+      "translation": {"status": "confirmed", "segments": [{"text": "体力"}]}
+    },
+    {
+      "id": "status-spirit",
+      "source": {"start": "0x008DBF", "end_exclusive": "0x008DC6", "raw_hex": "16 0A 14 36 30 07 10"},
+      "position": {"column": 1, "row": 7},
+      "translation": {"status": "confirmed", "segments": [{"text": "精神力"}]}
+    },
+    {
+      "id": "status-strength",
+      "source": {"start": "0x008DD1", "end_exclusive": "0x008DD6", "raw_hex": "34 36 30 07 10"},
+      "position": {"column": 0, "row": 9},
+      "translation": {"status": "confirmed", "segments": [{"text": "力量"}]}
+    },
+    {
+      "id": "status-attack",
+      "source": {"start": "0x008DDB", "end_exclusive": "0x008DDF", "raw_hex": "12 0B 63 0F"},
+      "position": {"column": 10, "row": 9},
+      "translation": {"status": "confirmed", "segments": [{"text": "攻击力"}]}
+    },
+    {
+      "id": "status-endurance",
+      "source": {"start": "0x008DE3", "end_exclusive": "0x008DE8", "raw_hex": "18 0A 0F 06 0B"},
+      "position": {"column": 0, "row": 11},
+      "translation": {"status": "confirmed", "segments": [{"text": "耐力"}]},
+      "note": "The translation is provisional; the attribute's game mechanics are unverified."
+    },
+    {
+      "id": "status-defense",
+      "source": {"start": "0x008DED", "end_exclusive": "0x008DF1", "raw_hex": "78 0B 61 07"},
+      "position": {"column": 10, "row": 11},
+      "translation": {"status": "confirmed", "segments": [{"text": "防御力"}]}
+    },
+    {
+      "id": "status-agility",
+      "source": {"start": "0x008DF6", "end_exclusive": "0x008DFB", "raw_hex": "75 36 14 07 0B"},
+      "position": {"column": 0, "row": 13},
+      "translation": {"status": "confirmed", "segments": [{"text": "敏捷"}]}
+    },
+    {
+      "id": "status-speed",
+      "source": {"start": "0x008E00", "end_exclusive": "0x008E04", "raw_hex": "15 74 2C 13"},
+      "position": {"column": 10, "row": 13},
+      "translation": {"status": "confirmed", "segments": [{"text": "速度"}]}
+    },
+    {
+      "id": "status-magic-resistance",
+      "source": {"start": "0x008E08", "end_exclusive": "0x008E0D", "raw_hex": "27 1B 0A 12 0B"},
+      "position": {"column": 0, "row": 15},
+      "translation": {"status": "confirmed", "segments": [{"text": "魔抗"}]}
+    },
+    {
+      "id": "status-intelligence",
+      "source": {"start": "0x008E12", "end_exclusive": "0x008E16", "raw_hex": "19 30 07 10"},
+      "position": {"column": 10, "row": 15},
+      "translation": {"status": "confirmed", "segments": [{"text": "智力"}]}
+    }
+  ]
+}

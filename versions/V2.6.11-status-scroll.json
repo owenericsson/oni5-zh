@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.11-status-scroll",
+  "parent_version": {
+    "version_id": "V2.6.10-status-timing",
+    "sha256": "7d15aa75c524130f62c60383a398ea524988b7ab36e544d3fdd338b56966d578"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_11_status_scroll.gb",
+    "sha256": "d541bb0af526d76a708a7c709a4bc062014becf84710a1feab0f5d38c4e8202c"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_11_status_scroll.bps",
+    "sha256": "6672e6950ac4bebb68b908a61fb30801a11802a53c5be1539d822e3b03a5667e"
+  },
+  "runtime_validation": {
+    "status": "pending-sameboy",
+    "limitations": [
+      "Experimental: initial status entry only, with tile-aligned scrolling.",
+      "An exclamation mark indicates that scene-specific safety checks did not pass.",
+      "Skill-window return, other characters and scenes remain unverified."
+    ]
+  },
+  "implementation": {
+    "bank11": {
+      "dispatch": "0x7060",
+      "entry_status": "0x708B",
+      "draw": "0x7095",
+      "check_backup": "0x70BB",
+      "check_map": "0x70D3",
+      "map_safe": "0x70E4",
+      "draw_ready": "0x7107",
+      "draw_error": "0x72B8",
+      "draw_done": "0x72C3",
+      "exit_status": "0x72C8",
+      "bad_exit": "0x72DD",
+      "restore": "0x72E2",
+      "restore_done": "0x730A",
+      "patterns": "0x730F",
+      "mask_dispatch": "0x746F",
+      "mask_enter": "0x7485",
+      "check_window_map": "0x74BA",
+      "check_visible_tiles": "0x74D2",
+      "visible_tile_safe": "0x74E3",
+      "mask_open_active": "0x75C4",
+      "mask_open_vblank": "0x75CB",
+      "mask_fail": "0x75D9",
+      "mask_skip": "0x75DE",
+      "previous_dispatch": "0x75EB",
+      "previous_dispatch_tail": "0x7063",
+      "unmask": "0x75F5",
+      "mask_close_active": "0x75FC",
+      "mask_close_vblank": "0x7603",
+      "unmask_done": "0x761D",
+      "restore_dispatch": "0x7622",
+      "previous_restore": "0x7638",
+      "previous_restore_tail": "0x72E5",
+      "scroll_mask_enter": "0x7642",
+      "scroll_check_window_map": "0x7677",
+      "scroll_check_visible_tiles": "0x768F",
+      "scroll_visible_tile_safe": "0x76A0",
+      "snapshot_row": "0x76B6",
+      "snapshot_tile": "0x76C6",
+      "snapshot_no_column_wrap": "0x76DA",
+      "snapshot_no_row_wrap": "0x76EB"
+    }
+  }
+}

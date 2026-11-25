@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.8-status-fix",
+  "parent_version": {
+    "version_id": "V2.6.7-opening-dialogue",
+    "sha256": "50c6d78d588ad87caa7dfc25aab970e586322dc568f692144a8168a9767e8dc9"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_8_status_fix.gb",
+    "sha256": "4134619459f2b779d864ef7796b5c0eff995ac4bd4fcf204e9ff528371dad38c"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_8_status_fix.bps",
+    "sha256": "841636729786a35815a435103ef063c88c9aec6f37b917f7137ab3c53d5e7944"
+  },
+  "runtime_validation": {
+    "status": "pending-sameboy",
+    "limitations": [
+      "The fix targets the observed character status details path only.",
+      "Status display, return to the menu, and other paths require SameBoy verification."
+    ]
+  }
+}

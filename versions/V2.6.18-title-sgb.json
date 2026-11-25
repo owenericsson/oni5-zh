@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.18-title-sgb",
+  "parent_version": {
+    "version_id": "V2.6.17-status-snapshot",
+    "sha256": "cc3851e1fe9bc3b5140447fd31e77503da05b9dc413c08da2cf00031402fb38b"
+  },
+  "title_source": {
+    "version_id": "V2.6.7-opening-dialogue",
+    "sha256": "50c6d78d588ad87caa7dfc25aab970e586322dc568f692144a8168a9767e8dc9"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_18_title_sgb.gb",
+    "sha256": "a2edf9b7e89d510f21776935476938e039df2ae0be30c274821e41bb9ae476e3"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_18_title_sgb.bps",
+    "sha256": "4d4382965ca101726b3420f2c6f563de3ba1c7316754f13e4aebe6412695a298"
+  },
+  "runtime_validation": {
+    "status": "pending-sameboy",
+    "limitations": [
+      "The original attribute block is relocated for the observed title transfer only.",
+      "Status wrappers remain in the original bank; other possible consumers remain unverified.",
+      "Party-list name corruption is not fixed; other scenes and characters remain unverified."
+    ]
+  },
+  "implementation": {
+    "title_copy_hook": "0x7CFA",
+    "bank11_helper": "0x7C00",
+    "bank11_attribute_data": "0x7C0D",
+    "attribute_size": 180
+  }
+}

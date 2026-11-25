@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.9-status-probe",
+  "parent_version": {
+    "version_id": "V2.6.8-status-fix",
+    "sha256": "4134619459f2b779d864ef7796b5c0eff995ac4bd4fcf204e9ff528371dad38c"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_9_status_probe.gb",
+    "sha256": "5da692b9debd72eccbaf269084392e3540a40b8e26a338e3e7223015f93ba0de"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_9_status_probe.bps",
+    "sha256": "b4688db8b1178e2c7acddb88e917fdbc779a7b87e059ddab5757ddaefc0647dc"
+  },
+  "runtime_validation": {
+    "status": "pending-sameboy",
+    "limitations": [
+      "Experimental: use only the observed village, current character, and empty skill window.",
+      "A visible exclamation mark next to the level indicates the VRAM safety checks failed.",
+      "Other characters, learned skills, scenes, transitions, and dynamic tile updates are unverified."
+    ]
+  },
+  "implementation": {
+    "bank11": {
+      "dispatch": "0x7060",
+      "entry_status": "0x708B",
+      "draw": "0x7095",
+      "check_backup": "0x70BB",
+      "check_map": "0x70D3",
+      "map_safe": "0x70E4",
+      "draw_ready": "0x7107",
+      "draw_error": "0x72B8",
+      "draw_done": "0x72C3",
+      "exit_status": "0x72C8",
+      "bad_exit": "0x72DD",
+      "restore": "0x72E2",
+      "restore_done": "0x730A",
+      "patterns": "0x730F"
+    }
+  }
+}

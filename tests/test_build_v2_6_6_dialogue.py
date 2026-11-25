@@ -40,9 +40,9 @@ def run_helper(rom, offset, memory, upper_bank=0):
             a = memory[word()]
         elif op == 0xFE:
             zero = a == byte()
-        elif op == 0x20:
+        elif op in (0x20, 0x28):
             delta = byte()
-            if not zero:
+            if zero == (op == 0x28):
                 pc += delta if delta < 128 else delta - 256
         elif op == 0x3E:
             a = byte()
