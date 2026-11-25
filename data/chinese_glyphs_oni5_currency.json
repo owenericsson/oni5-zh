@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "font": {
+    "family": "ChillBitmap",
+    "variant": "8px Regular Proportional",
+    "source_url": "https://fontpixel.com/downloads/chill-bitmap--ChillBitmap7x-8px.bdf.gz",
+    "source_sha256": "37b51f4f2a094a952a3cb481090c2185922a65b90c228e5bdad7b4c445ca7939",
+    "license": "SIL Open Font License 1.1",
+    "license_url": "https://github.com/Warren2060/ChillBitmap/blob/main/License"
+  },
+  "glyphs": [
+    {
+      "character": "金",
+      "codepoint": "U+91D1",
+      "tile_2bpp_hex": "38 38 44 44 BA BA 10 10 BA BA 54 54 FE FE 00 00"
+    },
+    {
+      "character": "币",
+      "codepoint": "U+5E01",
+      "tile_2bpp_hex": "06 06 F8 F8 10 10 FE FE 92 92 96 96 10 10 00 00"
+    }
+  ]
+}

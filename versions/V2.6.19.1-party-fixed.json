@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.19.1-party-fixed",
+  "parent_version": {
+    "version_id": "V2.6.19-currency",
+    "sha256": "231d55ddc843b3922996bfce1d4dba0c23177adec7cc9b847668cac2e4e13072"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_19_1_party_fixed.gb",
+    "sha256": "234db289886dd4585190a4060d01b17cd48ecd196fb149218dd6840271bf0a9e"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_19_1_party_fixed.bps",
+    "sha256": "eefe5887e1d7f29fdd4f807e6b7ecd2f299bfda441f7bb3e217fbcbd53001dd0"
+  },
+  "runtime_validation": {
+    "status": "pending-sameboy",
+    "limitations": [
+      "Fixed tiles A2 and A3 replace native glyphs while the menu font is loaded.",
+      "Fixed slots and restored currency are not collision-scanned; other names, sprites and scenes may be corrupted.",
+      "Real party, menu, status, transitions and title-screen behavior require user verification."
+    ]
+  }
+}

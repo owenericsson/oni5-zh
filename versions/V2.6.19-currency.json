@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "version_id": "V2.6.19-currency",
+  "parent_version": {
+    "version_id": "V2.6.18-title-sgb",
+    "sha256": "a2edf9b7e89d510f21776935476938e039df2ae0be30c274821e41bb9ae476e3"
+  },
+  "target_rom": {
+    "path": "../roms/oni5_v2_6_19_currency.gb",
+    "sha256": "231d55ddc843b3922996bfce1d4dba0c23177adec7cc9b847668cac2e4e13072"
+  },
+  "patch": {
+    "path": "../roms/oni5_v2_6_19_currency.bps",
+    "sha256": "612fc8674c77cb8aa21c461390e266fa3310983827359c372e15fc9761cf0206"
+  },
+  "runtime_validation": {
+    "status": "pending-sameboy",
+    "limitations": [
+      "Currency glyphs replace 盘缠 with 金币 in the existing menu tile slots.",
+      "Party-list name corruption is not fixed; real menu and status transitions require verification."
+    ]
+  }
+}
